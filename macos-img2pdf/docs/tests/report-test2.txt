@@ -1,0 +1,47 @@
+sys:1: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+
+ERROR conda.cli.main_run:execute(127): `conda run python -m pytest tests/test_conversion.py -q --cov=image_to_pdf --cov-report=term-missing --cov-report=xml:output/coverage-core.xml` failed. (See above for error)
+..................F...                                                   [100%]
+=================================== FAILURES ===================================
+___________________________ test_output_path_is_file ___________________________
+
+tmp_path = PosixPath('/private/var/folders/63/fddmfp_n1b9fr0zyjzg08bc00000gn/T/pytest-of-wangshupeng/pytest-330/test_output_path_is_file0')
+
+    def test_output_path_is_file(tmp_path: Path) -> None:
+        """输出目录误选为文件时返回失败原因。"""
+        source = makeImage(tmp_path / "source.png")
+        output = tmp_path / "output"
+        output.write_text("occupied")
+>       assert convertBatch([source], output)[0].status == "failed"
+E       AssertionError: assert 'skipped' == 'failed'
+E         
+E         - failed
+E         + skipped
+
+tests/test_conversion.py:125: AssertionError
+=============================== warnings summary ===============================
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================================ tests coverage ================================
+______________ coverage: platform darwin, python 3.12.12-final-0 _______________
+
+Name              Stmts   Miss  Cover   Missing
+-----------------------------------------------
+image_to_pdf.py      92      1    99%   130
+-----------------------------------------------
+TOTAL                92      1    99%
+Coverage XML written to file output/coverage-core.xml
+=========================== short test summary info ============================
+FAILED tests/test_conversion.py::test_output_path_is_file - AssertionError: a...
+1 failed, 21 passed, 5 warnings in 0.92s
+

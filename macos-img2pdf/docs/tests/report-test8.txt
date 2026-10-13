@@ -1,0 +1,10 @@
+
+> local-image-to-pdf-miniprogram@0.1.0 test
+> jest --runInBand --coverage --testPathPatterns=(pdf|converter).test.js --coverage=false
+
+
+Test Suites: 2 passed, 2 total
+Tests:       17 passed, 17 total
+Snapshots:   0 total
+Time:        0.169 s
+Ran all test suites matching (pdf|converter).test.js.

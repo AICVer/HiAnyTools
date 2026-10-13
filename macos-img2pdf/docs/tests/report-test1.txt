@@ -1,0 +1,5 @@
+环境检查：通过
+解释器: /Users/wangshupeng/miniforge3/bin/python
+Pillow: 10.4.0 PyMuPDF: 1.27.2.3
+Tk: 8.6 pytest: 9.0.2
+桌面检查：已在本机桌面会话中完成 Tk 初始化与关闭，退出码 0。

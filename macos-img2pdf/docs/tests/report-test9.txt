@@ -1,0 +1,20 @@
+
+> local-image-to-pdf-miniprogram@0.1.0 test
+> jest --runInBand --coverage
+
+---------------|---------|----------|---------|---------|-------------------
+File           | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+---------------|---------|----------|---------|---------|-------------------
+All files      |     100 |    98.66 |     100 |     100 |                   
+ pages/index   |     100 |       98 |     100 |     100 |                   
+  index.js     |     100 |       98 |     100 |     100 | 25                
+ utils         |     100 |      100 |     100 |     100 |                   
+  converter.js |     100 |      100 |     100 |     100 |                   
+  pdf.js       |     100 |      100 |     100 |     100 |                   
+---------------|---------|----------|---------|---------|-------------------
+
+Test Suites: 3 passed, 3 total
+Tests:       32 passed, 32 total
+Snapshots:   0 total
+Time:        0.284 s, estimated 1 s
+Ran all test suites.

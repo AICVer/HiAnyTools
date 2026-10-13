@@ -1,0 +1,56 @@
+.........................Fatal Python error: Aborted
+
+Current thread 0x0000000307973000 (most recent call first):
+  Garbage-collecting
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/logging/__init__.py", line 988 in format
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/logging/__init__.py", line 1160 in emit
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/logging/__init__.py", line 1280 in emit
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/logging/__init__.py", line 1028 in handle
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/logging/__init__.py", line 1762 in callHandlers
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/logging/__init__.py", line 1700 in handle
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/logging/__init__.py", line 1684 in _log
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/logging/__init__.py", line 1551 in warning
+  File "/Users/wangshupeng/Desktop/\u56fe\u50cf\u8f6c PDF/image_to_pdf.py", line 112 in convertBatch
+  File "/Users/wangshupeng/Desktop/\u56fe\u50cf\u8f6c PDF/image_to_pdf_gui.py", line 133 in runConversion
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/threading.py", line 1012 in run
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/threading.py", line 1075 in _bootstrap_inner
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/threading.py", line 1032 in _bootstrap
+
+Thread 0x00000001f299e180 (most recent call first):
+  File "/Users/wangshupeng/Desktop/\u56fe\u50cf\u8f6c PDF/tests/test_gui.py", line 91 in test_real_background_conversion
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/_pytest/python.py", line 166 in pytest_pyfunc_call
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/pluggy/_callers.py", line 121 in _multicall
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/pluggy/_manager.py", line 120 in _hookexec
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/pluggy/_hooks.py", line 512 in __call__
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/_pytest/python.py", line 1720 in runtest
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/_pytest/runner.py", line 179 in pytest_runtest_call
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/pluggy/_callers.py", line 121 in _multicall
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/pluggy/_manager.py", line 120 in _hookexec
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/pluggy/_hooks.py", line 512 in __call__
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/_pytest/runner.py", line 245 in <lambda>
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/_pytest/runner.py", line 353 in from_call
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/_pytest/runner.py", line 244 in call_and_report
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/_pytest/runner.py", line 137 in runtestprotocol
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/_pytest/runner.py", line 118 in pytest_runtest_protocol
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/pluggy/_callers.py", line 121 in _multicall
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/pluggy/_manager.py", line 120 in _hookexec
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/pluggy/_hooks.py", line 512 in __call__
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/_pytest/main.py", line 396 in pytest_runtestloop
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/pluggy/_callers.py", line 121 in _multicall
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/pluggy/_manager.py", line 120 in _hookexec
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/pluggy/_hooks.py", line 512 in __call__
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/_pytest/main.py", line 372 in _main
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/_pytest/main.py", line 318 in wrap_session
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/_pytest/main.py", line 365 in pytest_cmdline_main
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/pluggy/_callers.py", line 121 in _multicall
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/pluggy/_manager.py", line 120 in _hookexec
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/pluggy/_hooks.py", line 512 in __call__
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/_pytest/config/__init__.py", line 199 in main
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/_pytest/config/__init__.py", line 223 in console_main
+  File "/Users/wangshupeng/miniforge3/lib/python3.12/site-packages/pytest/__main__.py", line 9 in <module>
+  File "<frozen runpy>", line 88 in _run_code
+  File "<frozen runpy>", line 198 in _run_module_as_main
+
+Extension modules: yaml._yaml, numpy._core._multiarray_umath, numpy.linalg._umath_linalg, pymupdf._extra, pymupdf._mupdf, PIL._imaging, PIL._imagingmath, PIL._webp (total: 8)
+/var/folders/63/fddmfp_n1b9fr0zyjzg08bc00000gn/T/tmpjra_zcys: line 3: 67623 Abort trap: 6           python -m pytest -q --cov=image_to_pdf --cov=image_to_pdf_gui --cov-branch --cov-fail-under=80 --cov-report=term-missing --cov-report=xml:output/coverage.xml
+ERROR conda.cli.main_run:execute(127): `conda run python -m pytest -q --cov=image_to_pdf --cov=image_to_pdf_gui --cov-branch --cov-fail-under=80 --cov-report=term-missing --cov-report=xml:output/coverage.xml` failed. (See above for error)

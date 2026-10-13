@@ -1,0 +1,4 @@
+v25.2.1
+local-image-to-pdf-miniprogram@0.1.0 /Users/wangshupeng/Desktop/图像转 PDF/wechat-miniprogram
+└── jest@30.4.2
+
