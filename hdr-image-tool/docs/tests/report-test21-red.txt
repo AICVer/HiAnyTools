@@ -1,0 +1,313 @@
+FFFFFFFFF.FF                                                             [100%]
+=================================== FAILURES ===================================
+____ test_negative_source_rgb_is_clamped_before_conversion[rgb0-sRGB-sRGB] _____
+
+probe = <function probe.<locals>.runProbe at 0x110a70860>, name = 'sRGB'
+reference = 'sRGB', rgb = [0.02, 0.01, -0.004]
+
+    @pytest.mark.parametrize("name,reference", [
+        ("sRGB", "sRGB"), ("Display P3", "Display P3"), ("BT.2020", "ITU-R BT.2020")])
+    @pytest.mark.parametrize("rgb", [[.02, .01, -.004], [-.02, -.01, -.004], [3, 2, -.1]])
+    def test_negative_source_rgb_is_clamped_before_conversion(probe, name, reference, rgb):
+        result = probe("distribution-float", name, ",".join(map(str, [*rgb, 1])))
+        point = result["points"][0]
+        space = colour.RGB_COLOURSPACES[reference]
+        expected = np.maximum(rgb, 0)
+        matrix = colour.normalised_primary_matrix(space.primaries, space.whitepoint)
+        xyz = matrix @ expected
+>       np.testing.assert_allclose(point["lab"], colour.XYZ_to_Lab(xyz, illuminant=space.whitepoint), atol=.03)
+E       AssertionError: 
+E       Not equal to tolerance rtol=1e-07, atol=0.03
+E       
+E       Mismatched elements: 3 / 3 (100%)
+E       Mismatch at indices:
+E        [0]: 9.888359630145427 (ACTUAL), 10.110567973864462 (DESIRED)
+E        [1]: 1.857374815807236 (ACTUAL), 3.308167471103976 (DESIRED)
+E        [2]: 20.229268611576938 (ACTUAL), 15.174587515845284 (DESIRED)
+E       Max absolute difference among violations: 5.054681095731654
+E       Max relative difference among violations: 0.43854873369291447
+E        ACTUAL: array([  9.88836 ,   1.857375,  20.229269])
+E        DESIRED: array([ 10.110568,   3.308167,  15.174588])
+
+tests/test_distribution_clamp.py:19: AssertionError
+_ test_negative_source_rgb_is_clamped_before_conversion[rgb0-Display P3-Display P3] _
+
+probe = <function probe.<locals>.runProbe at 0x110a70860>, name = 'Display P3'
+reference = 'Display P3', rgb = [0.02, 0.01, -0.004]
+
+    @pytest.mark.parametrize("name,reference", [
+        ("sRGB", "sRGB"), ("Display P3", "Display P3"), ("BT.2020", "ITU-R BT.2020")])
+    @pytest.mark.parametrize("rgb", [[.02, .01, -.004], [-.02, -.01, -.004], [3, 2, -.1]])
+    def test_negative_source_rgb_is_clamped_before_conversion(probe, name, reference, rgb):
+        result = probe("distribution-float", name, ",".join(map(str, [*rgb, 1])))
+        point = result["points"][0]
+        space = colour.RGB_COLOURSPACES[reference]
+        expected = np.maximum(rgb, 0)
+        matrix = colour.normalised_primary_matrix(space.primaries, space.whitepoint)
+        xyz = matrix @ expected
+>       np.testing.assert_allclose(point["lab"], colour.XYZ_to_Lab(xyz, illuminant=space.whitepoint), atol=.03)
+E       AssertionError: 
+E       Not equal to tolerance rtol=1e-07, atol=0.03
+E       
+E       Mismatched elements: 3 / 3 (100%)
+E       Mismatch at indices:
+E        [0]: 9.93783559141746 (ACTUAL), 10.180902376028175 (DESIRED)
+E        [1]: 3.3016201133692635 (ACTUAL), 4.819957786671047 (DESIRED)
+E        [2]: 22.46042973553296 (ACTUAL), 16.908135887739782 (DESIRED)
+E       Max absolute difference among violations: 5.552293847793177
+E       Max relative difference among violations: 0.328380010940129
+E        ACTUAL: array([  9.937836,   3.30162 ,  22.46043 ])
+E        DESIRED: array([ 10.180902,   4.819958,  16.908136])
+
+tests/test_distribution_clamp.py:19: AssertionError
+_ test_negative_source_rgb_is_clamped_before_conversion[rgb0-BT.2020-ITU-R BT.2020] _
+
+probe = <function probe.<locals>.runProbe at 0x110a70860>, name = 'BT.2020'
+reference = 'ITU-R BT.2020', rgb = [0.02, 0.01, -0.004]
+
+    @pytest.mark.parametrize("name,reference", [
+        ("sRGB", "sRGB"), ("Display P3", "Display P3"), ("BT.2020", "ITU-R BT.2020")])
+    @pytest.mark.parametrize("rgb", [[.02, .01, -.004], [-.02, -.01, -.004], [3, 2, -.1]])
+    def test_negative_source_rgb_is_clamped_before_conversion(probe, name, reference, rgb):
+        result = probe("distribution-float", name, ",".join(map(str, [*rgb, 1])))
+        point = result["points"][0]
+        space = colour.RGB_COLOURSPACES[reference]
+        expected = np.maximum(rgb, 0)
+        matrix = colour.normalised_primary_matrix(space.primaries, space.whitepoint)
+        xyz = matrix @ expected
+>       np.testing.assert_allclose(point["lab"], colour.XYZ_to_Lab(xyz, illuminant=space.whitepoint), atol=.03)
+E       AssertionError: 
+E       Not equal to tolerance rtol=1e-07, atol=0.03
+E       
+E       Mismatched elements: 3 / 3 (100%)
+E       Mismatch at indices:
+E        [0]: 10.406598105652307 (ACTUAL), 10.582417659342369 (DESIRED)
+E        [1]: 7.2965551669175595 (ACTUAL), 8.524706070974442 (DESIRED)
+E        [2]: 23.610005354264118 (ACTUAL), 17.84409404595721 (DESIRED)
+E       Max absolute difference among violations: 5.765911308306908
+E       Max relative difference among violations: 0.3231271530769164
+E        ACTUAL: array([ 10.406598,   7.296555,  23.610005])
+E        DESIRED: array([ 10.582418,   8.524706,  17.844094])
+
+tests/test_distribution_clamp.py:19: AssertionError
+____ test_negative_source_rgb_is_clamped_before_conversion[rgb1-sRGB-sRGB] _____
+
+probe = <function probe.<locals>.runProbe at 0x110a70860>, name = 'sRGB'
+reference = 'sRGB', rgb = [-0.02, -0.01, -0.004]
+
+    @pytest.mark.parametrize("name,reference", [
+        ("sRGB", "sRGB"), ("Display P3", "Display P3"), ("BT.2020", "ITU-R BT.2020")])
+    @pytest.mark.parametrize("rgb", [[.02, .01, -.004], [-.02, -.01, -.004], [3, 2, -.1]])
+    def test_negative_source_rgb_is_clamped_before_conversion(probe, name, reference, rgb):
+        result = probe("distribution-float", name, ",".join(map(str, [*rgb, 1])))
+        point = result["points"][0]
+        space = colour.RGB_COLOURSPACES[reference]
+        expected = np.maximum(rgb, 0)
+        matrix = colour.normalised_primary_matrix(space.primaries, space.whitepoint)
+        xyz = matrix @ expected
+>       np.testing.assert_allclose(point["lab"], colour.XYZ_to_Lab(xyz, illuminant=space.whitepoint), atol=.03)
+E       AssertionError: 
+E       Not equal to tolerance rtol=1e-07, atol=0.03
+E       
+E       Mismatched elements: 3 / 3 (100%)
+E       Mismatch at indices:
+E        [0]: -10.562543831598676 (ACTUAL), 0.0 (DESIRED)
+E        [1]: -5.863601177997828 (ACTUAL), 0.0 (DESIRED)
+E        [2]: -10.516916569265403 (ACTUAL), 0.0 (DESIRED)
+E       Max absolute difference among violations: 10.562543831598676
+E       Max relative difference among violations: inf
+E        ACTUAL: array([-10.562544,  -5.863601, -10.516917])
+E        DESIRED: array([ 0.,  0.,  0.])
+
+tests/test_distribution_clamp.py:19: AssertionError
+_ test_negative_source_rgb_is_clamped_before_conversion[rgb1-Display P3-Display P3] _
+
+probe = <function probe.<locals>.runProbe at 0x110a70860>, name = 'Display P3'
+reference = 'Display P3', rgb = [-0.02, -0.01, -0.004]
+
+    @pytest.mark.parametrize("name,reference", [
+        ("sRGB", "sRGB"), ("Display P3", "Display P3"), ("BT.2020", "ITU-R BT.2020")])
+    @pytest.mark.parametrize("rgb", [[.02, .01, -.004], [-.02, -.01, -.004], [3, 2, -.1]])
+    def test_negative_source_rgb_is_clamped_before_conversion(probe, name, reference, rgb):
+        result = probe("distribution-float", name, ",".join(map(str, [*rgb, 1])))
+        point = result["points"][0]
+        space = colour.RGB_COLOURSPACES[reference]
+        expected = np.maximum(rgb, 0)
+        matrix = colour.normalised_primary_matrix(space.primaries, space.whitepoint)
+        xyz = matrix @ expected
+>       np.testing.assert_allclose(point["lab"], colour.XYZ_to_Lab(xyz, illuminant=space.whitepoint), atol=.03)
+E       AssertionError: 
+E       Not equal to tolerance rtol=1e-07, atol=0.03
+E       
+E       Mismatched elements: 3 / 3 (100%)
+E       Mismatch at indices:
+E        [0]: -10.671541194752173 (ACTUAL), 0.0 (DESIRED)
+E        [1]: -7.997327924218624 (ACTUAL), 0.0 (DESIRED)
+E        [2]: -11.782398936486087 (ACTUAL), 0.0 (DESIRED)
+E       Max absolute difference among violations: 11.782398936486087
+E       Max relative difference among violations: inf
+E        ACTUAL: array([-10.671541,  -7.997328, -11.782399])
+E        DESIRED: array([ 0.,  0.,  0.])
+
+tests/test_distribution_clamp.py:19: AssertionError
+_ test_negative_source_rgb_is_clamped_before_conversion[rgb1-BT.2020-ITU-R BT.2020] _
+
+probe = <function probe.<locals>.runProbe at 0x110a70860>, name = 'BT.2020'
+reference = 'ITU-R BT.2020', rgb = [-0.02, -0.01, -0.004]
+
+    @pytest.mark.parametrize("name,reference", [
+        ("sRGB", "sRGB"), ("Display P3", "Display P3"), ("BT.2020", "ITU-R BT.2020")])
+    @pytest.mark.parametrize("rgb", [[.02, .01, -.004], [-.02, -.01, -.004], [3, 2, -.1]])
+    def test_negative_source_rgb_is_clamped_before_conversion(probe, name, reference, rgb):
+        result = probe("distribution-float", name, ",".join(map(str, [*rgb, 1])))
+        point = result["points"][0]
+        space = colour.RGB_COLOURSPACES[reference]
+        expected = np.maximum(rgb, 0)
+        matrix = colour.normalised_primary_matrix(space.primaries, space.whitepoint)
+        xyz = matrix @ expected
+>       np.testing.assert_allclose(point["lab"], colour.XYZ_to_Lab(xyz, illuminant=space.whitepoint), atol=.03)
+E       AssertionError: 
+E       Not equal to tolerance rtol=1e-07, atol=0.03
+E       
+E       Mismatched elements: 3 / 3 (100%)
+E       Mismatch at indices:
+E        [0]: -11.084521890523897 (ACTUAL), 0.0 (DESIRED)
+E        [1]: -13.098997076918563 (ACTUAL), 0.0 (DESIRED)
+E        [2]: -12.640742544375074 (ACTUAL), 0.0 (DESIRED)
+E       Max absolute difference among violations: 13.098997076918563
+E       Max relative difference among violations: inf
+E        ACTUAL: array([-11.084522, -13.098997, -12.640743])
+E        DESIRED: array([ 0.,  0.,  0.])
+
+tests/test_distribution_clamp.py:19: AssertionError
+____ test_negative_source_rgb_is_clamped_before_conversion[rgb2-sRGB-sRGB] _____
+
+probe = <function probe.<locals>.runProbe at 0x110a70860>, name = 'sRGB'
+reference = 'sRGB', rgb = [3, 2, -0.1]
+
+    @pytest.mark.parametrize("name,reference", [
+        ("sRGB", "sRGB"), ("Display P3", "Display P3"), ("BT.2020", "ITU-R BT.2020")])
+    @pytest.mark.parametrize("rgb", [[.02, .01, -.004], [-.02, -.01, -.004], [3, 2, -.1]])
+    def test_negative_source_rgb_is_clamped_before_conversion(probe, name, reference, rgb):
+        result = probe("distribution-float", name, ",".join(map(str, [*rgb, 1])))
+        point = result["points"][0]
+        space = colour.RGB_COLOURSPACES[reference]
+        expected = np.maximum(rgb, 0)
+        matrix = colour.normalised_primary_matrix(space.primaries, space.whitepoint)
+        xyz = matrix @ expected
+>       np.testing.assert_allclose(point["lab"], colour.XYZ_to_Lab(xyz, illuminant=space.whitepoint), atol=.03)
+E       AssertionError: 
+E       Not equal to tolerance rtol=1e-07, atol=0.03
+E       
+E       Mismatched elements: 3 / 3 (100%)
+E       Mismatch at indices:
+E        [0]: 131.6228231623541 (ACTUAL), 131.79485183385236 (DESIRED)
+E        [1]: -2.6825819313776034 (ACTUAL), -1.4555289597940613 (DESIRED)
+E        [2]: 140.59994085571574 (ACTUAL), 125.21115799067071 (DESIRED)
+E       Max absolute difference among violations: 15.38878286504503
+E       Max relative difference among violations: 0.8430288956649509
+E        ACTUAL: array([ 131.622823,   -2.682582,  140.599941])
+E        DESIRED: array([ 131.794852,   -1.455529,  125.211158])
+
+tests/test_distribution_clamp.py:19: AssertionError
+_ test_negative_source_rgb_is_clamped_before_conversion[rgb2-Display P3-Display P3] _
+
+probe = <function probe.<locals>.runProbe at 0x110a70860>, name = 'Display P3'
+reference = 'Display P3', rgb = [3, 2, -0.1]
+
+    @pytest.mark.parametrize("name,reference", [
+        ("sRGB", "sRGB"), ("Display P3", "Display P3"), ("BT.2020", "ITU-R BT.2020")])
+    @pytest.mark.parametrize("rgb", [[.02, .01, -.004], [-.02, -.01, -.004], [3, 2, -.1]])
+    def test_negative_source_rgb_is_clamped_before_conversion(probe, name, reference, rgb):
+        result = probe("distribution-float", name, ",".join(map(str, [*rgb, 1])))
+        point = result["points"][0]
+        space = colour.RGB_COLOURSPACES[reference]
+        expected = np.maximum(rgb, 0)
+        matrix = colour.normalised_primary_matrix(space.primaries, space.whitepoint)
+        xyz = matrix @ expected
+>       np.testing.assert_allclose(point["lab"], colour.XYZ_to_Lab(xyz, illuminant=space.whitepoint), atol=.03)
+E       AssertionError: 
+E       Not equal to tolerance rtol=1e-07, atol=0.03
+E       
+E       Mismatched elements: 3 / 3 (100%)
+E       Mismatch at indices:
+E        [0]: 131.65658034538356 (ACTUAL), 131.84595956989884 (DESIRED)
+E        [1]: 1.1828184418710697 (ACTUAL), 2.4971368590767096 (DESIRED)
+E        [2]: 247.22565163116013 (ACTUAL), 167.7185383928515 (DESIRED)
+E       Max absolute difference among violations: 79.50711323830862
+E       Max relative difference among violations: 0.526330149838722
+E        ACTUAL: array([ 131.65658 ,    1.182818,  247.225652])
+E        DESIRED: array([ 131.84596 ,    2.497137,  167.718538])
+
+tests/test_distribution_clamp.py:19: AssertionError
+_ test_negative_source_rgb_is_clamped_before_conversion[rgb2-BT.2020-ITU-R BT.2020] _
+
+probe = <function probe.<locals>.runProbe at 0x110a70860>, name = 'BT.2020'
+reference = 'ITU-R BT.2020', rgb = [3, 2, -0.1]
+
+    @pytest.mark.parametrize("name,reference", [
+        ("sRGB", "sRGB"), ("Display P3", "Display P3"), ("BT.2020", "ITU-R BT.2020")])
+    @pytest.mark.parametrize("rgb", [[.02, .01, -.004], [-.02, -.01, -.004], [3, 2, -.1]])
+    def test_negative_source_rgb_is_clamped_before_conversion(probe, name, reference, rgb):
+        result = probe("distribution-float", name, ",".join(map(str, [*rgb, 1])))
+        point = result["points"][0]
+        space = colour.RGB_COLOURSPACES[reference]
+        expected = np.maximum(rgb, 0)
+        matrix = colour.normalised_primary_matrix(space.primaries, space.whitepoint)
+        xyz = matrix @ expected
+>       np.testing.assert_allclose(point["lab"], colour.XYZ_to_Lab(xyz, illuminant=space.whitepoint), atol=.03)
+E       AssertionError: 
+E       Not equal to tolerance rtol=1e-07, atol=0.03
+E       
+E       Mismatched elements: 3 / 3 (100%)
+E       Mismatch at indices:
+E        [0]: 133.44171289948275 (ACTUAL), 133.57974345609313 (DESIRED)
+E        [1]: 15.57293935435522 (ACTUAL), 16.674676101577248 (DESIRED)
+E        [2]: 301.5073968553856 (ACTUAL), 183.45987700299702 (DESIRED)
+E       Max absolute difference among violations: 118.04751985238858
+E       Max relative difference among violations: 0.6434514280768876
+E        ACTUAL: array([ 133.441713,   15.572939,  301.507397])
+E        DESIRED: array([ 133.579743,   16.674676,  183.459877])
+
+tests/test_distribution_clamp.py:19: AssertionError
+____________ test_positive_hdr_highlight_and_gray_are_not_truncated ____________
+
+probe = <function probe.<locals>.runProbe at 0x110a70860>
+
+    def test_positive_hdr_highlight_and_gray_are_not_truncated(probe):
+        result = probe("distribution-float", "BT.2020", "5,5,5,1,0.18,0.18,0.18,1")
+        assert result["points"][0]["lab"][0] > 180
+        np.testing.assert_allclose(result["points"][0]["ictcp"],
+            colour.RGB_to_ICtCp(np.array([1015., 1015., 1015.]), method="ITU-R BT.2100-2 PQ"), atol=1e-6)
+>       assert result["negativeClampedCount"] == 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'negativeClampedCount'
+
+tests/test_distribution_clamp.py:40: KeyError
+__________ test_alpha_is_unpremultiplied_and_transparent_not_counted ___________
+
+probe = <function probe.<locals>.runProbe at 0x110a70860>
+
+    def test_alpha_is_unpremultiplied_and_transparent_not_counted(probe):
+        result = probe("distribution-float", "sRGB", "-0.01,0.05,0.1,0.5,-1,-1,-1,0")
+        assert len(result["points"]) == 1
+        assert result["transparentCount"] == 1
+>       assert result["negativeClampedCount"] == 1
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'negativeClampedCount'
+
+tests/test_distribution_clamp.py:47: KeyError
+=========================== short test summary info ============================
+FAILED tests/test_distribution_clamp.py::test_negative_source_rgb_is_clamped_before_conversion[rgb0-sRGB-sRGB]
+FAILED tests/test_distribution_clamp.py::test_negative_source_rgb_is_clamped_before_conversion[rgb0-Display P3-Display P3]
+FAILED tests/test_distribution_clamp.py::test_negative_source_rgb_is_clamped_before_conversion[rgb0-BT.2020-ITU-R BT.2020]
+FAILED tests/test_distribution_clamp.py::test_negative_source_rgb_is_clamped_before_conversion[rgb1-sRGB-sRGB]
+FAILED tests/test_distribution_clamp.py::test_negative_source_rgb_is_clamped_before_conversion[rgb1-Display P3-Display P3]
+FAILED tests/test_distribution_clamp.py::test_negative_source_rgb_is_clamped_before_conversion[rgb1-BT.2020-ITU-R BT.2020]
+FAILED tests/test_distribution_clamp.py::test_negative_source_rgb_is_clamped_before_conversion[rgb2-sRGB-sRGB]
+FAILED tests/test_distribution_clamp.py::test_negative_source_rgb_is_clamped_before_conversion[rgb2-Display P3-Display P3]
+FAILED tests/test_distribution_clamp.py::test_negative_source_rgb_is_clamped_before_conversion[rgb2-BT.2020-ITU-R BT.2020]
+FAILED tests/test_distribution_clamp.py::test_positive_hdr_highlight_and_gray_are_not_truncated
+FAILED tests/test_distribution_clamp.py::test_alpha_is_unpremultiplied_and_transparent_not_counted
+11 failed, 1 passed in 7.50s
+ERROR conda.cli.main_run:execute(127): `conda run python -m pytest -q tests/test_distribution_clamp.py` failed. (See above for error)

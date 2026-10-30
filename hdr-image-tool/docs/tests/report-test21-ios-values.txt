@@ -1,0 +1,6 @@
+iPhone17 / iOS27 simulator; actual updated Swift engine
+Negative source fixture: correctedCount= 1 xy= [0.4766307552849662, 0.4597455512404496]
+P3 red: xy= [0.6799944963356096, 0.32000398790308754]
+HDR gray: L*= 182.35720981449685 I= 0.7534501764859693
+Real JPEG: samples= 1792 correctedCount= 0 negativeXYZ= 0
+All numerical assertions passed. UI inspection blocked because macOS is locked; physical iPhone app not updated.

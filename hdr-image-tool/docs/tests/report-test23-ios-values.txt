@@ -1,0 +1,3 @@
+iPhone17 / iOS27 simulator; updated core Swift binary, same sources as build4.
+{'maxLUTAbsoluteError': 1.0713686215968465e-07, 'negativeLUTOutputs': 8, 'hullDimension': 3, 'hullVolume': 73.32143448466118, 'hullVertices': 17, 'originalSamples': 1792, 'enhancedSamples': 1792, 'enhancedNegativeClamped': 1}
+All iOS numerical assertions passed. No physical iPhone installation or raw pixel export.

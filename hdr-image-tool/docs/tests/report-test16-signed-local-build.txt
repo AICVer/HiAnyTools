@@ -1,0 +1,572 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project HDRImageLab.xcodeproj -scheme HDRImageLab -configuration Debug -destination id=00008140-000160EE3440801C -derivedDataPath /private/tmp/HDRImageLab-phone.Q89DLq -allowProvisioningUpdates -allowProvisioningDeviceRegistration build
+
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (1 target)
+    Target 'HDRImageLab' in project 'HDRImageLab' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc --version
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+Build description signature: ce36ae328182663f652aa23c1761cc0f
+Build description path: /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/XCBuildData/ce36ae328182663f652aa23c1761cc0f.xcbuilddata
+CreateBuildDirectory /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/HDRImageLab.xcodeproj
+    builtin-create-build-directory /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules
+
+CreateBuildDirectory /tmp/HDRImageLab-phone.Q89DLq/ModuleCache.noindex
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/HDRImageLab.xcodeproj
+    builtin-create-build-directory /tmp/HDRImageLab-phone.Q89DLq/ModuleCache.noindex
+
+CreateBuildDirectory /tmp/HDRImageLab-phone.Q89DLq/CompilationCache.noindex
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/HDRImageLab.xcodeproj
+    builtin-create-build-directory /tmp/HDRImageLab-phone.Q89DLq/CompilationCache.noindex
+
+CreateBuildDirectory /tmp/HDRImageLab-phone.Q89DLq/Build/Products
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/HDRImageLab.xcodeproj
+    builtin-create-build-directory /tmp/HDRImageLab-phone.Q89DLq/Build/Products
+
+CreateBuildDirectory /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/HDRImageLab.xcodeproj
+    builtin-create-build-directory /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex
+
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk /tmp/HDRImageLab-phone.Q89DLq/SDKStatCaches.noindex/iphoneos27.0-24A430-6c78b3cbc238196c85e1bf6c792c5915.sdkstatcache
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/HDRImageLab.xcodeproj
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk -o /tmp/HDRImageLab-phone.Q89DLq/SDKStatCaches.noindex/iphoneos27.0-24A430-6c78b3cbc238196c85e1bf6c792c5915.sdkstatcache
+
+CreateBuildDirectory /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/HDRImageLab.xcodeproj
+    builtin-create-build-directory /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules
+
+CreateBuildDirectory /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/PrecompiledHeaders
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/HDRImageLab.xcodeproj
+    builtin-create-build-directory /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/PrecompiledHeaders
+
+CreateBuildDirectory /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/ExplicitPrecompiledModules
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/HDRImageLab.xcodeproj
+    builtin-create-build-directory /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/ExplicitPrecompiledModules
+
+CreateBuildDirectory /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphoneos
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/HDRImageLab.xcodeproj
+    builtin-create-build-directory /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphoneos
+
+CreateBuildDirectory /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/HDRImageLab.xcodeproj
+    builtin-create-build-directory /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos
+
+WriteAuxiliaryFile /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab-7c485e1efa7403604fcba6ba905abba8-VFS-iphoneos/all-product-headers.yaml
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/HDRImageLab.xcodeproj
+    write-file /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab-7c485e1efa7403604fcba6ba905abba8-VFS-iphoneos/all-product-headers.yaml
+
+WriteAuxiliaryFile /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/empty-HDRImageLab.plist (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/empty-HDRImageLab.plist
+
+WriteAuxiliaryFile /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-project-headers.hmap (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-project-headers.hmap
+
+WriteAuxiliaryFile /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-generated-files.hmap (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-generated-files.hmap
+
+WriteAuxiliaryFile /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab.hmap (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab.hmap
+
+WriteAuxiliaryFile /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-all-target-headers.hmap (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-all-target-headers.hmap
+
+WriteAuxiliaryFile /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-own-target-headers.hmap (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-own-target-headers.hmap
+
+WriteAuxiliaryFile /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab.DependencyStaticMetadataFileList (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab.DependencyMetadataFileList (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab.DependencyMetadataFileList
+
+WriteAuxiliaryFile /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab_const_extract_protocols.json (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab_const_extract_protocols.json
+
+WriteAuxiliaryFile /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.SwiftFileList (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.SwiftFileList
+
+WriteAuxiliaryFile /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.LinkFileList (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.LinkFileList
+
+WriteAuxiliaryFile /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.SwiftConstValuesFileList (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.SwiftConstValuesFileList
+
+WriteAuxiliaryFile /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab-OutputFileMap.json (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab-OutputFileMap.json
+
+WriteAuxiliaryFile /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-all-non-framework-target-headers.hmap (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-all-non-framework-target-headers.hmap
+
+WriteAuxiliaryFile /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-DebugDylibPath-normal-arm64.txt (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-DebugDylibPath-normal-arm64.txt
+
+WriteAuxiliaryFile /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-DebugDylibInstallName-normal-arm64.txt (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-DebugDylibInstallName-normal-arm64.txt
+
+MkDir /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    /bin/mkdir -p /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app
+
+WriteAuxiliaryFile /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources/Entitlements.plist (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources/Entitlements.plist
+
+ProcessProductPackaging /Users/wangshupeng/Library/Developer/Xcode/UserData/Provisioning\ Profiles/55e67b09-a935-4827-a034-477f9bbe0616.mobileprovision /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/embedded.mobileprovision (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-productPackagingUtility /Users/wangshupeng/Library/Developer/Xcode/UserData/Provisioning\ Profiles/55e67b09-a935-4827-a034-477f9bbe0616.mobileprovision -o /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/embedded.mobileprovision
+
+ProcessProductPackaging "" /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab.app.xcent (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    
+    Entitlements:
+    
+    {
+    "application-identifier" = "BCVP74Y9F4.local.hdrimagelab";
+    "com.apple.developer.team-identifier" = BCVP74Y9F4;
+    "get-task-allow" = 1;
+}
+    
+    builtin-productPackagingUtility -entitlements -format xml -o /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab.app.xcent
+
+ProcessProductPackagingDER /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab.app.xcent /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab.app.xcent.der (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    /usr/bin/derq query -f xml -i /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab.app.xcent -o /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab.app.xcent.der --raw
+
+Ld /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/__preview.dylib normal (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios18.0 -dynamiclib -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk -Os -Xlinker -no_warn_duplicate_libraries -L/tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos -F/tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos -install_name @rpath/HDRImageLab.debug.dylib -Xlinker -dead_strip -Xlinker -dependency_info -Xlinker /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab_dependency_info.dat -Xlinker -no_adhoc_codesign -o /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/__preview.dylib
+
+ProcessInfoPlistFile /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/Info.plist /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/empty-HDRImageLab.plist (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-infoPlistUtility /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/empty-HDRImageLab.plist -producttype com.apple.product-type.application -genpkginfo /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/PkgInfo -expandbuildsettings -format binary -platform iphoneos -requiredArchitecture arm64 -o /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/Info.plist
+
+SwiftDriver HDRImageLab normal arm64 com.apple.xcode.tools.swift.compiler (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftDriver -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name HDRImageLab -Onone @/tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.SwiftFileList -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk -target arm64-apple-ios18.0 -g -module-cache-path /tmp/HDRImageLab-phone.Q89DLq/ModuleCache.noindex -Xfrontend -serialize-debugging-options -index-store-path /tmp/HDRImageLab-phone.Q89DLq/Index.noindex/DataStore -swift-version 5 -I /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos -F /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos -c -j14 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /tmp/HDRImageLab-phone.Q89DLq/SDKStatCaches.noindex/iphoneos27.0-24A430-6c78b3cbc238196c85e1bf6c792c5915.sdkstatcache -output-file-map /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab-OutputFileMap.json -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /tmp/HDRImageLab-phone.Q89DLq/ModuleCache.noindex -sdk-module-cache-path /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules -emit-dependencies -emit-module -emit-module-path /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.swiftmodule -serialize-diagnostics -dependency-scan-serialize-diagnostics-path /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab-dependency-scan.dia -validate-clang-modules-once -clang-build-session-file /tmp/HDRImageLab-phone.Q89DLq/ModuleCache.noindex/Session.modulevalidation -Xcc -fmodules-prune-interval\=86400 -Xcc -fmodules-prune-after\=345600 -emit-const-values -const-gather-protocols-list /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab_const_extract_protocols.json -Xcc -iquote -Xcc /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-generated-files.hmap -Xcc -I/tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-own-target-headers.hmap -Xcc -I/tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-all-target-headers.hmap -Xcc -iquote -Xcc /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-project-headers.hmap -Xcc -I/tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/include -Xcc -I/tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources-normal/arm64 -Xcc -I/tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources/arm64 -Xcc -I/tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources -emit-objc-header -emit-objc-header-path /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab-Swift.h -working-directory /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool -experimental-emit-module-separately -disable-cmo
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/ptrcheck-E04XKEWPR4I5CDUE31QDCR3VH.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/_Builtin_stdbool-5IZBCA1XKR1GF00Y3DPYRKG4T.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/_Builtin_float-5A1NGMZCT5JGGNWMK1W7IWDM7.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/_SwiftConcurrencyShims-ES4PDNGDI4TSWJMJP6HDIVBBA.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/_Builtin_stddef-4TBH0F7LV0MODIMF8TX19N417.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/ptrauth-7NXSWK4K4DRLA8CA81OLOIPGL.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/_AvailabilityInternal-E8CXR6UT6AC9EVHYBV6FDY96B.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/SwiftShims-D7042E3JFJG47LM4ILNP6PW4P.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/DeveloperToolsSupport-5J7P70SZDHUU606G76J4RLRMH.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/_Builtin_stdarg-CP67XUHEV2FXXNYE4H9UPI401.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/_DarwinFoundation1-DQPX7V0M55908WD939C7N1KGW.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/_Builtin_limits-EON8UF09BGEVBPMB3JR2RGJM4.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/ExtensionFoundation-DQUYVOY1OF3RLWHV71I4Z4E46.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/_DarwinFoundation2-5TX0NBON6MLK6CRRFWEKREUTA.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/sys_types-CIUENDH1FYOCEZN1RS75LMEW8.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/string_h-SI3T1Z6QIICJKC9F82HV20K6.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/_Builtin_tgmath-DARY2WCRJYBKIRX3B7FHHSRJ2.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/_Builtin_stdint-C0L1044GZZO0ODUIKIVRL82FJ.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/_DarwinFoundation3-CX3G67AR5ZBR8VN9S6E8AAU3J.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/_Builtin_intrinsics-9VY820WCAL58BAKF06XTHH074.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/_Builtin_stdatomic-3XEQHO4SD4OX4W65YTUBHQQ3C.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/zlib-AU9D2EI8AJ1U36OJAN8EVPUVW.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/_Builtin_inttypes-34PFA10EJYG6F5TBLJMKB27DT.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/Darwin-8FGSESBHSDXDM58GS9RETZZ8I.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/simd-DKWHJ1Z3LNAPELHAUTJ65JK7R.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/ObjectiveC-1I84VJJ1GSN4E9P8S0QZSEIOZ.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/MachO-CX0MU2DNJW08NKXJZPUZ4ION4.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/os_object-8EUOK1RU9T7S59LVH940KUAV5.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/os_workgroup-NJD8TDO4V8NCCAXU0ZRQFDI6.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/Spatial-AO08IYYF8YM28HHNFUD3G0Z08.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/Dispatch-4B7IB7DOU3FZCFYAE7TSNEI43.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/CoreFoundation-46U6TXLPM5R47MZOMZDOOF0MM.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/XPC-1KWW46W0WQXAUMHC0JR62WSH2.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/dnssd-C2SW75Y84AG5XXU0XTMBS69N7.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/os-8YW91KMWJSE1734IE0K8QXSE4.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/CoreAudioTypes-82EBZES4C9AJH3Y36XH35LNJL.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/Security-4FYL5O7KTYKZ2HLUVH0BV2XWN.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/CoreGraphics-6TND5WQJ63FFP6MN0O8DW51DY.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/CFNetwork-8ZO252G2P1IOAWD4WXUDH4QIE.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/CoreAudio-2NJSUKDLZEO5LI9BSTT5T8D2V.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/Foundation-8S2IFIC1XH7E7UPQUD5MCU6JZ.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/CoreText-2BBGC9FLQMYEQCENIP617F14Q.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/ImageIO-Y2DF4UVZN2PCSQ6WTXK8UYEQ.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/Network-8RG51NRH7KUNC947E4V2BK68V.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/UniformTypeIdentifiers-LHFEKC2N3YTYHBH2KYE0JSUF.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/IOSurface-840DCI64P2XO6292WHMCLSLLS.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/FileProvider-5M00WMG8XLFP8WSDBIXLY28TJ.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/CoreTransferable-896X7UJP1GEV658VBNAEPLOMD.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/UserNotifications-5H77NECXSJW2W85HPA1E20APJ.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/CoreData-5C1HMPS59XRNY7MXG1AHVRL3A.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/DataDetection-1OH6DM1LOW46FKXCHVQLAJ01E.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/UIUtilities-5SF1LAISWBQQ1A4YQ97CBGMNZ.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/Symbols-C254J2CYYVOLD6VAQ17DGPF1U.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/CoreMIDI-B5Z3NIDAY9A4QYI9CBUO8U1MD.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/_LocationEssentials-CWB64TAVWKAW812BCF9SMXBJP.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/OSLog-4RG5IE5RW1RPKNQVYTXUG1XRR.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/Accessibility-CKG5BQKWS7DSNOYL9YHYXD20S.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/CoreLocation-3LGOMWYMB4IJP2701M8PTJ25Z.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/OpenGLES-5INXA200AYMLBZ9C0U4ZDAK0B.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/Metal-10QWOEJHV4I6ZXMBFGFDDLKEZ.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/AVRouting-CYVXYZO40IY0952708L0IKKR0.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/AudioToolbox-4LAUPDKP9IPVGYOKFHS90F83F.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/CoreMotion-1PHHCP95WN2U62RP7FHHPXYIR.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/CloudKit-EX3EQ6G51BZKIDHOJYXN4GBU7.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/CoreVideo-1PFZTGZHDGMUSQ70VYXHLMZSB.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/QuartzCore-1DDOOL7LFYBBXVLS3YNYU52NR.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/CoreImage-89IUEYR1V0CG1P545ZPX3EE5K.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/CoreMedia-F30LOFPJYDE5E379M2JZ9LY3E.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/SwiftUICore-BQFILCB6BGOVQOC35WOTJAPMM.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/MediaToolbox-382NB9ZRR3CTUSKXRVT9ABGC5.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/AVFAudio-EWX9F5EN64X1Y3DW395PNEZ4Q.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/VideoToolbox-3S1MTEWPHXMVW5HJE7MQVSRTI.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/UIKit-315L0UJDJT8MBAM2EPNL9AT41.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/AVFoundation-6LTT5ZQHO0X9O47077156N0QQ.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/Photos-1JSCJV6YHC4R5QBZLSGQ7DMAC.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/SwiftUI-E4Z4I0GPA8Q3746VMMDCYRQEI.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules/PhotosUI-E43ZODCFX1DCKIKR3GM9FWJWN.pcm
+
+SwiftCompile normal arm64 Compiling\ SpectralLocus.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/SpectralLocus.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/SpectralLocus.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile SpectralLocus.swift
+
+SwiftCompile normal arm64 Compiling\ JPEGPrimary.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/JPEGPrimary.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/JPEGPrimary.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile JPEGPrimary.swift
+
+SwiftEmitModule normal arm64 Emitting\ module\ for\ HDRImageLab (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftCompile normal arm64 (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    
+
+SwiftCompile normal arm64 Compiling\ PixelDistribution.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/PixelDistribution.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/PixelDistribution.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile PixelDistribution.swift
+
+SwiftCompile normal arm64 Compiling\ ImageEngine.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/ImageEngine.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/ImageEngine.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile ImageEngine.swift
+
+/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/Sources/ImageEngine.swift:169:28: warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+167 |         }
+168 |         """
+169 |         guard let kernel = CIColorKernel(source: source),
+    |                            `- warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+170 |               let result = kernel.apply(extent: image.extent, arguments: [image, peak / 203])
+171 |         else { throw ImageFailure.renderFailed }
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+SwiftCompile normal arm64 Compiling\ ReferenceGamut.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/ReferenceGamut.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/ReferenceGamut.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile ReferenceGamut.swift
+
+SwiftCompile normal arm64 Compiling\ PixelVisualizationView.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/PixelVisualizationView.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/PixelVisualizationView.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile PixelVisualizationView.swift
+
+SwiftCompile normal arm64 Compiling\ HDRImageLabApp.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/HDRImageLabApp.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/HDRImageLabApp.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile HDRImageLabApp.swift
+
+SwiftCompile normal arm64 Compiling\ GainMapComposition.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/GainMapComposition.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/Sources/GainMapComposition.swift:32:32: warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+ 30 |         }
+ 31 |         """
+ 32 |         guard let grayKernel = CIColorKernel(source: grayCode),
+    |                                `- warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+ 33 |               let gainKernel = CIColorKernel(source: gainCode),
+ 34 |               let gray = grayKernel.apply(extent: target, arguments: [aligned]),
+
+/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/Sources/GainMapComposition.swift:33:32: warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+ 31 |         """
+ 32 |         guard let grayKernel = CIColorKernel(source: grayCode),
+ 33 |               let gainKernel = CIColorKernel(source: gainCode),
+    |                                `- warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+ 34 |               let gray = grayKernel.apply(extent: target, arguments: [aligned]),
+ 35 |               let hdr = gainKernel.apply(extent: target, arguments: [base.sdr, gray, maximumGain])
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/GainMapComposition.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile GainMapComposition.swift
+
+SwiftCompile normal arm64 Compiling\ ColorOptions.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/ColorOptions.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/ColorOptions.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile ColorOptions.swift
+
+SwiftCompile normal arm64 Compiling\ ExportOptions.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/ExportOptions.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/ExportOptions.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile ExportOptions.swift
+
+SwiftCompile normal arm64 Compiling\ HDRPNG.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/HDRPNG.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/HDRPNG.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile HDRPNG.swift
+
+SwiftCompile normal arm64 Compiling\ Histogram.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/Histogram.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/Histogram.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile Histogram.swift
+
+SwiftDriverJobDiscovery normal arm64 Emitting module for HDRImageLab (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftDriver\ Compilation\ Requirements HDRImageLab normal arm64 com.apple.xcode.tools.swift.compiler (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-Swift-Compilation-Requirements -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name HDRImageLab -Onone @/tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.SwiftFileList -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk -target arm64-apple-ios18.0 -g -module-cache-path /tmp/HDRImageLab-phone.Q89DLq/ModuleCache.noindex -Xfrontend -serialize-debugging-options -index-store-path /tmp/HDRImageLab-phone.Q89DLq/Index.noindex/DataStore -swift-version 5 -I /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos -F /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos -c -j14 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /tmp/HDRImageLab-phone.Q89DLq/SDKStatCaches.noindex/iphoneos27.0-24A430-6c78b3cbc238196c85e1bf6c792c5915.sdkstatcache -output-file-map /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab-OutputFileMap.json -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /tmp/HDRImageLab-phone.Q89DLq/ModuleCache.noindex -sdk-module-cache-path /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules -emit-dependencies -emit-module -emit-module-path /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.swiftmodule -serialize-diagnostics -dependency-scan-serialize-diagnostics-path /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab-dependency-scan.dia -validate-clang-modules-once -clang-build-session-file /tmp/HDRImageLab-phone.Q89DLq/ModuleCache.noindex/Session.modulevalidation -Xcc -fmodules-prune-interval\=86400 -Xcc -fmodules-prune-after\=345600 -emit-const-values -const-gather-protocols-list /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab_const_extract_protocols.json -Xcc -iquote -Xcc /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-generated-files.hmap -Xcc -I/tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-own-target-headers.hmap -Xcc -I/tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-all-target-headers.hmap -Xcc -iquote -Xcc /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-project-headers.hmap -Xcc -I/tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/include -Xcc -I/tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources-normal/arm64 -Xcc -I/tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources/arm64 -Xcc -I/tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources -emit-objc-header -emit-objc-header-path /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab-Swift.h -working-directory /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool -experimental-emit-module-separately -disable-cmo
+
+SwiftDriverJobDiscovery normal arm64 Compiling SpectralLocus.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftMergeGeneratedHeaders /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources/HDRImageLab-Swift.h /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab-Swift.h (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-swiftHeaderTool -arch arm64 /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab-Swift.h -o /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources/HDRImageLab-Swift.h
+
+Copy /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.swiftmodule/arm64-apple-ios.swiftmodule /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.swiftmodule (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -strip-unsigned-binaries -strip-deterministic -strip-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip -resolve-src-symlinks -rename /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.swiftmodule /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.swiftmodule/arm64-apple-ios.swiftmodule
+
+Copy /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.swiftmodule/arm64-apple-ios.swiftdoc /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.swiftdoc (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -strip-unsigned-binaries -strip-deterministic -strip-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip -resolve-src-symlinks -rename /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.swiftdoc /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.swiftmodule/arm64-apple-ios.swiftdoc
+
+Copy /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.swiftmodule/arm64-apple-ios.abi.json /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.abi.json (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -strip-unsigned-binaries -strip-deterministic -strip-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip -resolve-src-symlinks -rename /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.abi.json /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.swiftmodule/arm64-apple-ios.abi.json
+
+Copy /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.swiftsourceinfo (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -strip-unsigned-binaries -strip-deterministic -strip-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip -resolve-src-symlinks -rename /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.swiftsourceinfo /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo
+
+SwiftDriverJobDiscovery normal arm64 Compiling JPEGPrimary.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftDriverJobDiscovery normal arm64 Compiling ExportOptions.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftDriverJobDiscovery normal arm64 Compiling HDRPNG.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftDriverJobDiscovery normal arm64 Compiling ReferenceGamut.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftDriverJobDiscovery normal arm64 Compiling ColorOptions.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftDriverJobDiscovery normal arm64 Compiling GainMapComposition.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftDriverJobDiscovery normal arm64 Compiling Histogram.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftDriverJobDiscovery normal arm64 Compiling PixelDistribution.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftDriverJobDiscovery normal arm64 Compiling ImageEngine.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftDriverJobDiscovery normal arm64 Compiling PixelVisualizationView.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftDriverJobDiscovery normal arm64 Compiling HDRImageLabApp.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftDriver\ Compilation HDRImageLab normal arm64 com.apple.xcode.tools.swift.compiler (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-Swift-Compilation -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name HDRImageLab -Onone @/tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.SwiftFileList -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk -target arm64-apple-ios18.0 -g -module-cache-path /tmp/HDRImageLab-phone.Q89DLq/ModuleCache.noindex -Xfrontend -serialize-debugging-options -index-store-path /tmp/HDRImageLab-phone.Q89DLq/Index.noindex/DataStore -swift-version 5 -I /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos -F /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos -c -j14 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /tmp/HDRImageLab-phone.Q89DLq/SDKStatCaches.noindex/iphoneos27.0-24A430-6c78b3cbc238196c85e1bf6c792c5915.sdkstatcache -output-file-map /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab-OutputFileMap.json -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /tmp/HDRImageLab-phone.Q89DLq/ModuleCache.noindex -sdk-module-cache-path /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules -emit-dependencies -emit-module -emit-module-path /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.swiftmodule -serialize-diagnostics -dependency-scan-serialize-diagnostics-path /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab-dependency-scan.dia -validate-clang-modules-once -clang-build-session-file /tmp/HDRImageLab-phone.Q89DLq/ModuleCache.noindex/Session.modulevalidation -Xcc -fmodules-prune-interval\=86400 -Xcc -fmodules-prune-after\=345600 -emit-const-values -const-gather-protocols-list /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab_const_extract_protocols.json -Xcc -iquote -Xcc /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-generated-files.hmap -Xcc -I/tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-own-target-headers.hmap -Xcc -I/tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-all-target-headers.hmap -Xcc -iquote -Xcc /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-project-headers.hmap -Xcc -I/tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/include -Xcc -I/tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources-normal/arm64 -Xcc -I/tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources/arm64 -Xcc -I/tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources -emit-objc-header -emit-objc-header-path /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab-Swift.h -working-directory /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool -experimental-emit-module-separately -disable-cmo
+
+Ld /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/HDRImageLab.debug.dylib normal (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios18.0 -dynamiclib -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk -Os -Xlinker -no_warn_duplicate_libraries -L/tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphoneos -L/tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos -F/tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphoneos -F/tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos -filelist /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.LinkFileList -install_name @rpath/HDRImageLab.debug.dylib -Xlinker -rpath -Xlinker /usr/lib/swift -Xlinker -dead_strip -Xlinker -object_path_lto -Xlinker /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab_lto.o -rdynamic -Xlinker -dependency_info -Xlinker /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab_dependency_info.dat -fobjc-link-runtime -L/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos -L/usr/lib/swift -Xlinker -add_ast_path -Xlinker /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.swiftmodule -Xlinker -alias -Xlinker _main -Xlinker ___debug_main_executable_dylib_entry_point -Xlinker -no_adhoc_codesign -o /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/HDRImageLab.debug.dylib
+
+ConstructStubExecutorLinkFileList /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-ExecutorLinkFileList-normal-arm64.txt (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    construct-stub-executor-link-file-list /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/HDRImageLab.debug.dylib /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/libPreviewsJITStubExecutor_no_swift_entry_point.a /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/libPreviewsJITStubExecutor.a --output /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-ExecutorLinkFileList-normal-arm64.txt
+note: Using stub executor library with Swift entry point. (in target 'HDRImageLab' from project 'HDRImageLab')
+
+Ld /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/HDRImageLab normal (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios18.0 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk -Os -Xlinker -no_warn_duplicate_libraries -L/tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos -F/tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos -Xlinker -rpath -Xlinker @executable_path -rdynamic -e ___debug_blank_executor_main -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_dylib -Xlinker /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-DebugDylibPath-normal-arm64.txt -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_instlnm -Xlinker /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-DebugDylibInstallName-normal-arm64.txt -Xlinker -filelist -Xlinker /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-ExecutorLinkFileList-normal-arm64.txt /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/HDRImageLab.debug.dylib -Xlinker -no_adhoc_codesign -o /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/HDRImageLab
+
+CopySwiftLibs /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-swiftStdLibTool --copy --verbose --sign 526AEDAFE944FF72CC360AB5E56E2E9E76FED4E7 --scan-executable /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/HDRImageLab.debug.dylib --scan-folder /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/Frameworks --scan-folder /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/PlugIns --scan-folder /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/SystemExtensions --scan-folder /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/Extensions --platform iphoneos --toolchain /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --destination /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/Frameworks --strip-bitcode --strip-bitcode-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip --emit-dependency-info /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/SwiftStdLibToolInputDependencies.dep --filter-for-swift-os
+
+ExtractAppIntentsMetadata (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsmetadataprocessor --toolchain-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --module-name HDRImageLab --sdk-root /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk --xcode-version 27A266a --platform-family iOS --deployment-target 18.0 --bundle-identifier local.hdrimagelab --output /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app --target-triple arm64-apple-ios18.0 --binary-file /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/HDRImageLab --dependency-file /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab_dependency_info.dat --stringsdata-file /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/ExtractedAppShortcutsMetadata.stringsdata --source-file-list /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.SwiftFileList --metadata-file-list /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab.DependencyMetadataFileList --static-metadata-file-list /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab.DependencyStaticMetadataFileList --swift-const-vals-list /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.SwiftConstValuesFileList --compile-time-extraction --deployment-aware-processing --no-app-shortcuts-localization
+2026-10-30 14:51:31.789 appintentsmetadataprocessor[24847:78815611] Starting appintentsmetadataprocessor export
+2026-10-30 14:51:31.790 appintentsmetadataprocessor[24847:78815611] warning: Metadata extraction skipped, no AppIntents.framework dependency found
+
+AppIntentsSSUTraining (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsnltrainingprocessor --infoplist-path /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/Info.plist --temp-dir-path /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/ssu --bundle-id local.hdrimagelab --product-path /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app --extracted-metadata-path /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/Metadata.appintents --metadata-file-list /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab.DependencyMetadataFileList --source-file /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/Info.plist --archive-ssu-assets
+2026-10-30 14:51:31.805 appintentsnltrainingprocessor[24848:78815613] Parsing options for appintentsnltrainingprocessor
+2026-10-30 14:51:31.805 appintentsnltrainingprocessor[24848:78815613] Starting AppIntents SSU YAML Generation
+2026-10-30 14:51:31.805 appintentsnltrainingprocessor[24848:78815613] No AppShortcuts found - Skipping.
+
+CodeSign /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/HDRImageLab.debug.dylib (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    
+    Signing Identity:     "Apple Development: miv_wsp@icloud.com (362RHDNQW9)"
+    Provisioning Profile: "iOS Team Provisioning Profile: local.hdrimagelab"
+                          (55e67b09-a935-4827-a034-477f9bbe0616)
+    
+    /usr/bin/codesign --force --sign 526AEDAFE944FF72CC360AB5E56E2E9E76FED4E7 --timestamp\=none --generate-entitlement-der /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/HDRImageLab.debug.dylib
+
+CodeSign /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/__preview.dylib (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    
+    Signing Identity:     "Apple Development: miv_wsp@icloud.com (362RHDNQW9)"
+    Provisioning Profile: "iOS Team Provisioning Profile: local.hdrimagelab"
+                          (55e67b09-a935-4827-a034-477f9bbe0616)
+    
+    /usr/bin/codesign --force --sign 526AEDAFE944FF72CC360AB5E56E2E9E76FED4E7 --timestamp\=none --generate-entitlement-der /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app/__preview.dylib
+
+CodeSign /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    
+    Signing Identity:     "Apple Development: miv_wsp@icloud.com (362RHDNQW9)"
+    Provisioning Profile: "iOS Team Provisioning Profile: local.hdrimagelab"
+                          (55e67b09-a935-4827-a034-477f9bbe0616)
+    
+    /usr/bin/codesign --force --sign 526AEDAFE944FF72CC360AB5E56E2E9E76FED4E7 --entitlements /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab.app.xcent --timestamp\=none --generate-entitlement-der /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app
+
+RegisterExecutionPolicyException /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-RegisterExecutionPolicyException /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app
+
+Validate /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-validationUtility /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app -shallow-bundle -infoplist-subpath Info.plist
+
+Touch /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    /usr/bin/touch -c /tmp/HDRImageLab-phone.Q89DLq/Build/Products/Debug-iphoneos/HDRImageLab.app
+
+PruneExplicitPrecompiledModules /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules
+
+PruneExplicitPrecompiledModules /tmp/HDRImageLab-phone.Q89DLq/SDKExplicitPrecompiledModules
+
+PruneExplicitPrecompiledModules /tmp/HDRImageLab-phone.Q89DLq/Build/Intermediates.noindex/ExplicitPrecompiledModules
+
+** BUILD SUCCEEDED **
+

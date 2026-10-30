@@ -1,0 +1,26 @@
+日期：2026-10-29
+范围：为用户启动 macOS 上的 iOS 模拟测试。
+
+构建：
+xcodebuild -project HDRImageLab.xcodeproj -scheme HDRImageLab -configuration Debug -destination 'platform=iOS Simulator,id=ADA3A538-F53C-4F1C-B79B-9D734FAFAB49' -derivedDataPath output/DerivedDataSimulator CODE_SIGNING_ALLOWED=NO build
+结果：BUILD SUCCEEDED。
+原始日志：docs/tests/report-test6-build.txt。
+
+运行：
+- 使用已有 iOS 27.0 运行时，没有安装或下载新包。
+- iPhone 17：安装当前模拟器构建成功；launch --terminate-running-process 返回 local.hdrimagelab: 63872。
+- Device Hub 路径：/Applications/Xcode.app/Contents/Applications/DeviceHub.app。
+- CUA 实际看到 iPhone 18 Pro/iOS 27.0 窗口、HDR Image Lab 应用、已加载 SDR 图像、600 nit 峰值、生成 PQ PNG 按钮。
+- 实际显示 EDR headroom：1.00×。
+- 用户正在操作 iPhone 18 Pro，未重置其已加载图像和滑块。
+
+测试数据：
+- output/manual-test-images/01-SDR-chart.png。
+- output/manual-test-images/02-ISO-GainMap.jpg（生产引擎测试生成样本）。
+- output/manual-test-images/03-PQ-1000nit.png（数值样本）。
+- simctl addmedia 在 iPhone 17 和 iPhone 18 Pro 均成功退出。
+
+限制：
+- 本轮未改生产代码，没有重复运行 pytest 或重测覆盖率。
+- 确认可见设备窗口和应用在运行；完整交互验收由用户手动进行。
+- 未验证 iPhone 16 真实 XDR/物理亮度及真实相机 GainMap 画质。

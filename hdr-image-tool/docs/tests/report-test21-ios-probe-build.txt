@@ -1,0 +1,27 @@
+Sources/ImageEngine.swift:169:28: warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+167 |         }
+168 |         """
+169 |         guard let kernel = CIColorKernel(source: source),
+    |                            `- warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+170 |               let result = kernel.apply(extent: image.extent, arguments: [image, peak / 203])
+171 |         else { throw ImageFailure.renderFailed }
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+Sources/GainMapComposition.swift:32:32: warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+ 30 |         }
+ 31 |         """
+ 32 |         guard let grayKernel = CIColorKernel(source: grayCode),
+    |                                `- warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+ 33 |               let gainKernel = CIColorKernel(source: gainCode),
+ 34 |               let gray = grayKernel.apply(extent: target, arguments: [aligned]),
+
+Sources/GainMapComposition.swift:33:32: warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+ 31 |         """
+ 32 |         guard let grayKernel = CIColorKernel(source: grayCode),
+ 33 |               let gainKernel = CIColorKernel(source: gainCode),
+    |                                `- warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+ 34 |               let gray = grayKernel.apply(extent: target, arguments: [aligned]),
+ 35 |               let hdr = gainKernel.apply(extent: target, arguments: [base.sdr, gray, maximumGain])
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+clang: warning: using sysroot for 'macOS 27.0' but targeting 'arm64-apple-ios18.0.0-simulator' [-Wincompatible-sysroot]

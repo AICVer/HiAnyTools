@@ -1,0 +1,34 @@
+test22 — 2026-10-30 方案A更新版真机安装
+
+用户明确要求安装已完成更新到已连接真机。更新安装，未卸载原App，无Git提交/推送。
+设备：USB连接iPhone16 / iOS26.6.1；bundle local.hdrimagelab。
+版本：0.1.0（构建3），区别旧构建2。只修改构建号，Swift源码保持test21冻结版本。
+
+构建：本机Xcode、现有Personal Team与Apple Development证书。
+命令：xcodebuild -project HDRImageLab.xcodeproj -scheme HDRImageLab -configuration Debug -destination id=00008140-000160EE3440801C -derivedDataPath /private/tmp/HDRImageLab-phone.Q89DLq build
+结果：BUILD SUCCEEDED，report-test22-signed-build.txt。
+没有开启描述文件自动更新、设备注册或新建证书，未上传代码或图像。
+
+本地验证：
+codesign --verify --deep --strict通过；report-test22-codesign.txt。
+Info.plist确认bundle与版本0.1.0(3)，entitlements/application-identifier与既有Team一致，get-task-allow=true。
+描述文件包含当前iPhone，有效期至2026-11-06 14:48（Asia/Shanghai）。
+test21六个冻结源码/测试文件SHA一致。更新算法的320项回归与94.69%核心行覆盖率引用test21，不冒充本轮新执行。
+摘要output/iphone-clamp-verification.json。
+
+更新安装：
+devicectl device install app成功，outcome=success；report-test22-install.txt / output/iphone-clamp-install.json。
+设备应用清单确认HDR Image Lab 0.1.0 / Bundle Version3；report-test22-app-list.txt / output/iphone-clamp-app-list.json。
+更新后只读列出旧测试JPEG缓存元数据，文件仍存在、547352字节，证据report-test22-data-preserved.txt。未导出图像或像素。
+
+启动：
+首次失败，CoreDeviceError10002，底层FBSOpenApplicationErrorDomain7/Locked。
+系统明确要求手机解锁才能启动，不是安装或签名失败。
+原始日志report-test22-launch.txt / output/iphone-clamp-launch.json；已请用户解锁并保持亮屏，等待重试。
+
+用户回复“已解锁”后重试：启动成功，outcome=success、activatedWhenStarted=true，PID3117。
+日志report-test22-launch-unlocked.txt / output/iphone-clamp-launch-unlocked.json。
+再次读取设备应用清单：0.1.0(3)，report-test22-app-list-final.txt；实际进程PID3117且路径属于本次安装目录，report-test22-process-final.txt / output/iphone-clamp-process-final.json。
+
+状态：签名验证、更新安装、设备版本与实际启动全部通过。首次锁屏失败已解除，证据保留。画质/UI/XDR实测不由安装结论替代。
+重要文件：HDRImageLab.xcodeproj/project.pbxproj（构建号2→3），docs/agent/tasks/2026-10-30-clamp-iphone-install/progress.md、context与changelog。

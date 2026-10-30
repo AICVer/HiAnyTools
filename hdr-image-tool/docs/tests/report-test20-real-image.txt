@@ -1,0 +1,22 @@
+.F..                                                                     [100%]
+=================================== FAILURES ===================================
+__________ test_low_quality_sampling_should_not_yield_nonphysical_xyz __________
+
+samples = {'default': [0.004601479973644018, 0.004597846884280443, 0.004624563734978437, 1, 0.005140240304172039, 0.005115532316...70365906], 'minRGB': [0.001887272228486836, 0.0018482477171346545, 0.0019083963707089424], 'negativeRGB': 0, ...}, ...}
+
+    def test_low_quality_sampling_should_not_yield_nonphysical_xyz(samples: dict) -> None:
+        """预期失败：该sRGB图的低质量路径实际传入了负XYZ。"""
+        rgb = np.asarray(samples["low"]).reshape(-1, 4)[:, :3]
+        xyz = rgb @ RGB_TO_XYZ.T
+        bad = np.any(xyz < -1e-8, axis=1)
+>       assert not np.any(bad), f"{np.count_nonzero(bad)}/1792 samples have negative XYZ"
+E       AssertionError: 11/1792 samples have negative XYZ
+E       assert not np.True_
+E        +  where np.True_ = <function any at 0x10327dd70>(array([False, False, False, ..., False, False, False], shape=(1792,)))
+E        +    where <function any at 0x10327dd70> = np.any
+
+output/gamut-image3920/test_real_image_sampling.py:45: AssertionError
+=========================== short test summary info ============================
+FAILED output/gamut-image3920/test_real_image_sampling.py::test_low_quality_sampling_should_not_yield_nonphysical_xyz
+1 failed, 3 passed in 10.12s
+ERROR conda.cli.main_run:execute(127): `conda run python -m pytest -q output/gamut-image3920/test_real_image_sampling.py` failed. (See above for error)

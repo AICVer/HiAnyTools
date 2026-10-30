@@ -1,0 +1,21 @@
+App图标与iPhone更新验收
+日期：2026-10-30
+
+图标：本地SVG设计，参考用户提供的HiMagic icon.png视觉风格；深色满版背景、光谱轨道/三色节点、HDR高光星芒。参考图只读且SHA前后相同；无上传、无远程生成、无依赖安装。
+源文件：artwork/AppIcon.svg。
+成品：Sources/Assets.xcassets/AppIcon.appiconset/AppIcon.png。
+
+资源验证：1024×1024、8位RGB、无alpha、无白边，1024和64像素均已实际查看。output/icon-validation.json。
+渲染：系统Quick Look正确处理SVG渐变；ImageMagick仅做PNG24整理与缩略预览。当前ImageMagick SVG后端的初版错误渲染未用于最终构建。
+工程：配置AppIcon主图标，构建号1→2，保持0.1.0版本与原bundle identifier/Personal Team。
+
+构建：BUILD SUCCEEDED，report-test17-icon-build.txt。
+包内CFBundleIcons声明AppIcon，Assets.car和编译后AppIcon PNG存在；codesign --verify --deep --strict通过，描述文件包含当前iPhone。output/icon-build-validation.json。
+安装：成功，report-test17-install.txt。
+设备清单：iPhone16 / iOS26.6.1，HDR Image Lab 0.1.0 (2)，local.hdrimagelab，report-test17-app-list.txt。
+启动：成功，PID1382，report-test17-launch.txt、output/iphone-icon-launch.json。
+本次为更新安装，不卸载原App；原应用数据保留。
+
+仅图标资源、构建配置和文档发生变化；Swift源码与304项测试冻结SHA一致。未重复运行无变化的算法测试，未为静态图标新增镜像pytest。
+主屏幕最终系统渲染未另行截图；已验证设计图、编译图标引用、手机构建版本与实际启动。
+没有修改.env、原始图像、其他项目，没有Git提交或推送。

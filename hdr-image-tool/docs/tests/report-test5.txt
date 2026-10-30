@@ -1,0 +1,29 @@
+日期：2026-10-29
+范围：本机查看器互通、模拟器启动与未验证内容。
+
+macOS 预览：
+- sw_vers -productVersion：26.6.2。
+- 使用 CUA 在本机 Preview 实际打开 output/HDR-F66A9907-7E4A-4052-B492-4C9C465A8325.png。
+- 该文件由实际 Swift 引擎从 SDR 灰阶生成，输出峰值参数 600 nit。
+- 检查器 AX 文本：颜色模式，Value: RGB 16 1 1 5 Rec. ITU-R BT.2100 PQ。
+- 通过：文件可打开，查看器识别 16 位 RGB 和 BT.2100 PQ。
+- 未测：屏幕实际 nit、用户其他 Mac 或外接屏的 HDR 输出。
+
+模拟器：
+- 已有运行时：iOS 27.0；没有下载或安装运行时。
+- 设备：iPhone 17，ADA3A538-F53C-4F1C-B79B-9D734FAFAB49。
+- simctl boot/bootstatus 完成。
+- simctl install 应用成功；addmedia 导入 output/sdr-chart.png 成功。
+- simctl launch local.hdrimagelab 返回 PID 77250。
+- 通过：本机模拟器版本构建、安装、应用进程启动。
+- 未测：CUA getApp('Simulator') 及默认路径未能定位可操作应用窗口；未完成相册点选、模式切换、滑块、导出/分享界面点击。此处不声称 UI 端到端通过。
+
+真机：
+- xctrace 设备清单没有连接的 iPhone；用户 iPhone 16 的 iOS 版本未知。
+- 设备构建使用 CODE_SIGNING_ALLOWED=NO；没有为用户选择开发团队或生成签名。
+- 未测：iPhone 16 XDR、真实 Apple 相机 GainMap、真机内存/速度、iOS 18 实际运行、照片导入是否保留所有来源原件。
+- 生成 ISO GainMap 的模块测试已通过，但不能替代原始手机样图验收。
+
+覆盖率范围：
+- 只统计共享 Sources/ImageEngine.swift 的真实执行；不把 SwiftUI/UI 和物理显示纳入 94.92% 行覆盖率。
+- Swift llvm-cov 未提供本次 branch 口径，报告行/区域/函数口径，不虚报分支覆盖率。

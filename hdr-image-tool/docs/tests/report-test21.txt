@@ -1,0 +1,49 @@
+test21 — 2026-10-30 源线性RGB负值截断（用户选择方案A）
+
+实现：只修正分析副本源原色线性RGB的负值，转换回BT.2020后共用二维/三维坐标；统计negativeClampedCount。正向高光、未修正采样、alpha、原图/预览/直方图/导出保留。P3合法负BT.2020分量与参考包络不做全局截断。包络默认10000nit，参考白仍203nit。
+
+环境：本机Miniforge base /Users/wangshupeng/miniforge3/bin/python，colour-science0.4.7，pytest9.0.2，Xcode/Core Image。所有数据本机处理，无依赖安装、环境变量或云服务。
+
+分层验证：
+1. 先红：新增浮点源夹具的12项初轮回归，11 failed / 1 passed in 7.50s；负源RGB坐标独立对照失败，新统计字段缺失。report-test21-red.txt。
+2. 修复后源RGB、原坐标、包络模块48 passed in 17.53s；补充真实JPEG/灰度/合成P3/输入不变后52 passed in 18.85s。report-test21-module.txt / report-test21-module-final.txt。
+3. 常规完整回归215 passed in 82.45s。report-test21-all.txt；收集清单output/negative-clamp/collection.txt确认包括16项新增用例，未包含独立门禁。
+4. 单独运行四组既有独立门禁：105 passed in 40.51s。report-test21-independent.txt。合计320项，模块用例包含在常规215中，不重复计数。
+命令均使用/Users/wangshupeng/miniforge3/bin/conda run --no-capture-output -n base python -m pytest -q，模块指定tests/test_distribution_clamp.py tests/test_pixel_distribution.py tests/test_reference_gamut.py；常规指定tests；独立指定tests/red_team_r1_r2.py tests/red_team_r3_r4.py tests/red_team_r5_r6.py tests/red_team_r7_r8.py。
+初次完整命令组合目录与显式门禁模块时pytest只收集常规215，已据收集清单补单独执行105，未误报未经执行的门禁为通过。
+
+覆盖率：
+仅合并本轮完整常规回归新建449个runs目录的profraw，llvm-profdata/llvm-cov读取当前实际Swift二进制。
+核心行94.69%（1112行/59未覆盖），区域83.92%，函数90.12%。
+PixelDistribution.swift行91.71%，区域80.72%，函数85.29%。
+UI/静态光谱数据不计入，未提供分支指标。见report-test21-coverage.txt。
+
+真实JPEG修复复算：
+命令：output/tests/hdr-probe distribution /Users/wangshupeng/Downloads/IMG_3920.JPG 203 64 false。
+使用与异常相同的低质量缩采样，不以高质量平均掩盖故障。
+源sRGB负值采样修正80/1792，1792点保留；无负XYZ、无定义xy0，CAM16和ICtCp均有定义。
+80与修复前14不同，前者是源sRGB域负值采样数，后者是工作BT.2020域负值数。
+截图三个离群坐标修正为：
+765: (0.4902569330589744,0.44892487628950356)
+793: (0.6399872467600421,0.3300226544480836)
+1036: (0.5440276744986307,0.4062250364795665)
+结果output/negative-clamp/real-after.json。源文件SHA256保持72c4e37cbca0c2711112727050a4153788a62c30128e8a93cd894c5b5972a2fe。
+
+iOS构建与数值：
+xcodebuild -project HDRImageLab.xcodeproj -scheme HDRImageLab -configuration Debug -destination 'generic/platform=iOS' -derivedDataPath output/DerivedDataClampDevice CODE_SIGNING_ALLOWED=NO build
+设备：BUILD SUCCEEDED，report-test21-device-build.txt。
+模拟器使用generic/platform=iOS Simulator和output/DerivedDataClampSimulator：BUILD SUCCEEDED，report-test21-simulator-build.txt。
+模拟器安装并启动新App，PID55019；未安装真机。
+同一生产引擎另编译iOS模拟器数值探针并通过：合成负值修正1点；P3红xy约(0.6799945,0.3200040)；HDR灰L*=182.3572/I=0.7534502；真实JPEG1792点负XYZ0。
+iOS27模拟器真实JPEG本来无这批源负值，因此修正计数0；不能把它当作iOS26真机故障的重复复现。合成夹具实际覆盖iOS修正路径。
+报告report-test21-ios-values.txt，构建report-test21-ios-probe-build.txt；数据output/negative-clamp/ios-*.json。
+
+未验证/限制：
+CUA返回Mac锁屏且不能自动解锁，未做新UI文案与默认峰值的界面实测；构建和启动不替代UI验收。
+真机未更新，未做修复后真机验证；test20的真机数据仅为修复前证据。
+非矩阵型RGB ICC无法生成源线性空间，明确不支持该图的分析；不影响其预览和导出。
+分面外壳近似误差仍存在，合法P3颜色可能超BT.2020参考，未将其裁零。
+
+重要文件：Sources/PixelDistribution.swift、Sources/PixelVisualizationView.swift、tests/Probe.swift、tests/test_distribution_clamp.py；README、requirements、hdr-output-contract、context、changelog和任务进度同步。
+ImageEngine.swift与ReferenceGamut.swift源码SHA与修复前一致。未修改原图、签名设置或构建号，无Git提交/推送。
+任务：docs/agent/tasks/2026-10-30-source-rgb-clamp/progress.md。

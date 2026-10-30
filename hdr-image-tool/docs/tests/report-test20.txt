@@ -1,0 +1,62 @@
+test20 — 2026-10-30 IMG_3920.JPG / IMG_4456.HEIC 实图离群点诊断
+
+范围：本机读取用户给定原图/截图，复现并定位异常。无App源码变更、重装、提交或上传。
+
+输入：1080×2400、8位sRGB JPEG，无Apple/ISO GainMap，isHDR=false。
+SHA256：72c4e37cbca0c2711112727050a4153788a62c30128e8a93cd894c5b5972a2fe。
+测试iPhone上App导入缓存的SHA256完全一致，排除输入转码差异。
+
+环境：Miniforge base；Xcode；macOS Core Image；iOS27模拟器。初轮真机锁屏，仅读取导入缓存；用户后续解锁后已补充iPhone16/iOS26.6.1的Core Image运行时汇总和三个色度计算结果，见末尾补证。
+
+1. 生产探针
+macOS默认distribution及iOS27模拟器默认distribution：同图均未复现截图远离群点。
+产物output/gamut-image3920/distribution-203.json、distribution-600.json、distribution-ios-203.json。
+
+2. 单变量缩采样与原尺寸对照
+诊断编译当前生产引擎及PixelColorMath，采样配置在output中的独立Swift入口设置，未改App。
+命令：output/gamut-image3920/sampling-mac /Users/wangshupeng/Downloads/IMG_3920.JPG
+macOS显式低质量采样：1792个样本，14个含负BT.2020 RGB、11个含负XYZ；xy无定义1、视窗外4；CAM16均返回有限值，ICtCp排除10。
+高质量采样：负RGB/负XYZ/xy无定义均0；先8位SDR光栅解码再低质量采样：同样均0。
+最近邻低质量仍含20个负RGB/15个负XYZ，不能作为本问题修复。
+原尺寸浮点解码：2592000像素，39947个负RGB、33054个负XYZ；负值在缩采样前已存在。
+
+3. 截图坐标复现
+同一生产Swift坐标函数返回：
+索引765：xy=(0.677496582,0.662948211)，Y=0.234230nit。
+索引793：xy=(0.832018721,0.416708974)，Y=0.069907nit。
+索引1036：xy=(0.675589537,0.521827099)，Y=0.743271nit。
+与截图三个明显离群点位置吻合；xy无定义1亦吻合。
+
+4. 诊断pytest
+命令：/Users/wangshupeng/miniforge3/bin/conda run --no-capture-output -n base python -m pytest -q output/gamut-image3920/test_real_image_sampling.py
+初轮：1 failed, 3 passed in 10.12s；report-test20-real-image.txt。
+补齐原尺寸/8位光栅检查后独立重跑：1 failed, 5 passed in 10.57s；report-test20-real-image-final.txt。
+失败断言：低质量路径不应把非物理XYZ当作正常样本，实际有11/1792个负XYZ。
+通过：真机输入SHA一致、截图三点生产公式复算、高质量无负XYZ、原尺寸已经有负XYZ、8位SDR解码对照无负XYZ。
+这是保留的诊断红色断言，不是已修复后的测试通过。
+最终比较sampling-mac.json与独立重跑sampling-repeat.json：low/high/raster8Low三组原始浮点RGBA逐项最大差均0，结果可重复。
+
+5. 独立JPEG与图形证据
+命令：/Users/wangshupeng/miniforge3/bin/conda run --no-capture-output -n base python output/gamut-image3920/analyze.py analyze
+结果退出0。Pillow直接YCbCr解码、不裁切矩阵重建也有范围外RGB，支持JPEG重建值来源；不将Pillow与Apple逐像素数量等同。
+分析：output/gamut-image3920/analysis.json。
+对照图：output/gamut-image3920/sampling-comparison.png，已目视检查。
+
+SDK本地依据：CIContext.h的kCIContextHighQualityDownsample默认值macOS=true、其他平台=false；CIImage.h显式变换参数覆盖context默认。iOS27模拟器低质量未出现同样负值，后端/系统版本差异单列。
+
+结论：JPEG浮点解码的范围外值被低质量采样保留，当前xy/CAM16只检查部分分母/有限性，未单列负XYZ，造成二维和三维暗部离群。10000nit包络或更密外壳不能解决这种上游非物理输入。
+建议：统一显式采样、区分非物理XYZ与参考色域越界；不能把所有负BT.2020 RGB一律裁零。高质量只证明本图对照改善，不保证所有图，也不是App修复已完成。
+
+完整进度：docs/agent/tasks/2026-10-30-image3920-diagnosis/progress.md。
+最终检查：四个相关生产Swift文件及两张用户原始图像SHA256均与排查开始一致。
+
+6. 用户“已解锁”后的真机补证
+LLDB成功附加既有App进程1382；内部类型未能解析，未直接读取App的UI缓存分布。
+在真机进程使用公开Core Image API按App相同解码/工作域/浮点格式/28×64采样配置复算。
+仅设备内统计，取回汇总：samples=1792, negativeRGB=14, negativeXYZ=11, undefinedXY=1。
+三个样本的xy与上述本机复现逐项最大差=0；device-summary.json记录来源和方法。
+实际结果日志：output/gamut-image3920/device-runtime-session.txt。
+完整像素数组Base64导出被自动审批拒绝，理由是授权限散点计算结果；未导出数组，改用以上汇总与三个坐标完成验证。
+设备内高质量渲染执行成功，但汇总命令在终端输入时被截断、语法错误，未取得其计数；已脱离后补读遇手机重新锁定，高质量真机结果不标通过。
+日志明确Process 1382 detached；之后devicectl仍查到同PID，见device-process-after.txt/json。
+未修改/重装App；真机默认路径的异常已确认，修复及其真机回归仍未实施。

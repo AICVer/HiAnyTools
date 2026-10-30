@@ -1,0 +1,42 @@
+全屏、合成、色域导出与像素可视化扩展验收
+日期：2026-10-30
+
+软件结果：最终283项pytest通过（原232项+新增51项），96.91s。
+日志：report-test13-all-final.txt。初始失败与阶段回归保留在report-test13-core*、features、p3-clli、all等日志。
+命令：/Users/wangshupeng/miniforge3/bin/conda run --no-capture-output -n base python -m pytest -q tests/test_hdr_engine.py tests/test_sdr_formats.py tests/test_export_options.py tests/test_hdr_display.py tests/test_hdr_conversion.py tests/test_histogram.py tests/test_jpeg_primary.py tests/test_color_exports.py tests/test_pixel_distribution.py tests/red_team_r1_r2.py tests/red_team_r3_r4.py tests/red_team_r5_r6.py tests/red_team_r7_r8.py
+现有红军脚本在新版重跑；本轮没有将其冒称为新一轮独立人工红军审阅。
+
+覆盖率：共享Swift核心行94.08%、区域82.66%、函数89.80%。
+报告：report-test13-coverage.txt；数据：output/tests/extension-coverage.profdata。
+SwiftUI界面与静态光谱轨迹表不计入分母；工具链未提供分支指标。
+源码冻结：output/tests/extension-source-sha256.txt。
+
+构建：最终设备与模拟器目标均BUILD SUCCEEDED。
+日志：report-test13-device-final.txt、report-test13-simulator-final.txt。
+产物：output/DerivedData/Build/Products/Debug-iphoneos/HDRImageLab.app（无签名），output/DerivedDataSimulator/Build/Products/Debug-iphonesimulator/HDRImageLab.app。
+最终模拟器版已通过simctl安装到iPhone17（ADA3A538-F53C-4F1C-B79B-9D734FAFAB49），启动返回PID61808；这是安装/进程证据，不代表锁屏期间完成UI操作。
+收尾：更新文档的本地链接检查与空白检查通过，git diff --check无报错；未提交或推送Git。
+Core Image源码kernel API保留已知弃用警告，当前SDK编译与数值测试正常。
+
+新增验证：
+- 灰度Y/指数增益公式、1/4/16倍、非法增益、中心裁切、透明来源不增益、基础alpha保持。
+- JPEG/HEIC两种ISO GainMap、P3/BT.2020两种原色的辅助图/实际HDR数值/DPI/缩放/体积上限。
+- P3 PQ PNG/TIFF、cICP与P3饱和色cLLI，光级按输出原色分量计算。
+- SDR三空间四容器的能力边界，P3→Adobe RGB编码直通保留源值，等XYZ用独立LittleCMS比较。
+- CIE1931 xy、1976 u′v′、Lab/CAM16-UCS/ICtCp以colour-science独立对照，含主色/灰/黑/超白；采样尺寸、透明及非法参数。
+- HDR输入的SDR RGB直通另做实际CLI抽查，成功生成文件。
+
+已知能力限制：
+- 系统BMP编码器不保留宽色域ICC；标准V5 ICC实验经本机ImageIO读取失败。生产仅允许BMP sRGB，界面说明，宽色域可用PNG/JPEG/HEIC；实验实现保存在output/BMPProfile-investigation.swift。
+- 系统对不超过SDR参考白的结果不写GainMap，生产明确报错；可增加增益或导出普通SDR/PQ，未伪造辅助图。
+- 三维图是最长边64的采样点云，不是全像素或设备色域容积；固定观察条件与模型无定义点在界面标明。
+
+界面主要交互已于用户解锁后完成，结果与两处显示修复见report-test14.txt。双指缩放及其他未覆盖边界在该报告单列。
+原界面验收清单（实际覆盖见test14）：
+1. 导入色阶图，双击预览进全屏、关闭退出，检查HDR/SDR模式保持。
+2. 当前图灰度应用合成，查看HDR/SDR/GainMap，再选另图灰度应用、恢复源图。
+3. HDR选P3+GainMap JPEG/HEIC生成，SDR选Adobe RGB并切换两种映射；BMP只能选sRGB。
+4. 打开像素分布，切换xy/u′v′和三个独立色域开关；切换三种三维空间，自动旋转、拖动、双指缩放与重置。
+5. 更换主图后确认统计、全屏和导出入口不混用旧图；检查无透明/全透明/大图的可读提示。
+
+真实iPhone16签名安装、XDR物理效果及真机性能仍待用户账号/设备条件具备后验收。

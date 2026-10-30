@@ -1,0 +1,81 @@
+F......F.........                                                        [100%]
+=================================== FAILURES ===================================
+___________ test_encoded_input_and_linear_output_not_double_decoded ____________
+
+probe = <function probe.<locals>.runProbe at 0x12463bc40>
+imageDirectory = PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/9cae78b5087f444cb50c0e7385478026')
+
+    def test_encoded_input_and_linear_output_not_double_decoded(probe, imageDirectory):
+        cube = writeCube(imageDirectory/'affine.cube', 2, lambda p: p*[2,3,4] - [.1,.2,.3])
+        colors = np.array([[.4,.6,.8,1], [.8,.2,.1,.5], [0,0,0,1], [1,1,1,1]])
+        # 半透明输入必须预乘，色表值仍是直通色。
+        inputs = colors.copy()
+        inputs[:, :3] *= inputs[:, 3:]
+        actual = np.array(probe('lut-sample', cube, ','.join(map(str,inputs.ravel())))['pixels']).reshape(-1,4)
+        expected = colors.copy()
+        expected[:,:3] = (colors[:,:3]*[2,3,4]-[.1,.2,.3])*colors[:,3:]
+>       np.testing.assert_allclose(actual, expected, atol=.002)
+E       AssertionError: 
+E       Not equal to tolerance rtol=1e-07, atol=0.002
+E       
+E       Mismatched elements: 11 / 16 (68.8%)
+E       First 5 mismatches are at indices:
+E        [0, 0]: 0.39852941036224365 (ACTUAL), 0.7000000000000001 (DESIRED)
+E        [0, 1]: 0.6014705896377563 (ACTUAL), 1.5999999999999999 (DESIRED)
+E        [0, 2]: 0.800000011920929 (ACTUAL), 2.9000000000000004 (DESIRED)
+E        [1, 0]: 0.4003676474094391 (ACTUAL), 0.75 (DESIRED)
+E        [1, 1]: 0.09963235259056091 (ACTUAL), 0.20000000000000004 (DESIRED)
+E       Max absolute difference among violations: 2.7000100135803224
+E       Max relative difference among violations: 1.0000333333324913
+E        ACTUAL: array([[  3.985294e-01,   6.014706e-01,   8.000000e-01,   1.000000e+00],
+E              [  4.003676e-01,   9.963235e-02,   5.000000e-02,   5.000000e-01],
+E              [  0.000000e+00,   0.000000e+00,   1.000000e-05,   1.000000e+00],
+E              [  1.000000e+00,   1.000000e+00,   9.999900e-01,   1.000000e+00]])
+E        DESIRED: array([[ 0.7 ,  1.6 ,  2.9 ,  1.  ],
+E              [ 0.75,  0.2 ,  0.05,  0.5 ],
+E              [-0.1 , -0.2 , -0.3 ,  1.  ],
+E              [ 1.9 ,  2.8 ,  3.7 ,  1.  ]])
+
+tests/test_lut.py:31: AssertionError
+_______________ test_real_user_lut_matches_hi_enhance_trilinear ________________
+
+probe = <function probe.<locals>.runProbe at 0x12463bc40>
+
+    def test_real_user_lut_matches_hi_enhance_trilinear(probe):
+        root = Path('/Users/wangshupeng/Downloads/HueTools/HiEnhance')
+        cube = root/'results/bt709_to_bt2020_catd65_linear.cube'
+        if not cube.exists():
+            pytest.skip('本机指定LUT不可用')
+        sys.path.insert(0, str(root))
+        from hienhance.lutio import parseCubeFile, buildLutGrid
+        from hienhance.interp import applyLutTrilinear
+        size, values = parseCubeFile(cube)
+        rgb = np.random.default_rng(23).uniform(.02,.98,(50,3))
+        rgba = np.column_stack([rgb,np.ones(len(rgb))])
+        actual = np.array(probe('lut-sample', cube, ','.join(map(str,rgba.ravel())))['pixels']).reshape(-1,4)
+>       np.testing.assert_allclose(actual[:,:3], applyLutTrilinear(buildLutGrid(values,size),rgb), atol=.003)
+E       AssertionError: 
+E       Not equal to tolerance rtol=1e-07, atol=0.003
+E       
+E       Mismatched elements: 8 / 150 (5.33%)
+E       First 5 mismatches are at indices:
+E        [8, 1]: 0.0 (ACTUAL), -0.01609474349802681 (DESIRED)
+E        [25, 1]: 0.0 (ACTUAL), -0.02775697230113672 (DESIRED)
+E        [29, 1]: 0.0030426587909460068 (ACTUAL), -0.0025793293740956355 (DESIRED)
+E        [30, 1]: 0.0 (ACTUAL), -0.025153149977137995 (DESIRED)
+E        [34, 1]: 7.125501724658534e-05 (ACTUAL), -0.0060578340118387 (DESIRED)
+E       Max absolute difference among violations: 0.031524887853337624
+E       Max relative difference among violations: 2.179631737421214
+E        ACTUAL: array([[  6.462531e-01,   5.418744e-01,   2.128620e-02],
+E              [  1.165267e-01,   4.261203e-01,   8.149226e-01],
+E              [  9.730392e-02,   1.101972e-02,   7.904485e-01],...
+E        DESIRED: array([[ 0.645476,  0.542002,  0.02184 ],
+E              [ 0.116665,  0.426839,  0.816346],
+E              [ 0.096877,  0.009586,  0.78973 ],...
+
+tests/test_lut.py:60: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_lut.py::test_encoded_input_and_linear_output_not_double_decoded
+FAILED tests/test_lut.py::test_real_user_lut_matches_hi_enhance_trilinear - A...
+2 failed, 15 passed in 11.96s
+ERROR conda.cli.main_run:execute(127): `conda run python -m pytest -q tests/test_lut.py tests/test_pixel_hull.py` failed. (See above for error)

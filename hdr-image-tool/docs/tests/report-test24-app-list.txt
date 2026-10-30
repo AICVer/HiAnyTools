@@ -1,0 +1,4 @@
+Apps installed:
+Name            Bundle Identifier   Version   Bundle Version
+-------------   -----------------   -------   --------------
+HDR Image Lab   local.hdrimagelab   0.1.1     5             

@@ -1,0 +1,12 @@
+# Local builds, signatures, fixtures and diagnostics.
+/output/
+*.profraw
+*.profdata
+
+# Xcode user state.
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+.DS_Store
+__pycache__/
+.pytest_cache/

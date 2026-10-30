@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="background" cx="36%" cy="25%" r="90%">
+      <stop offset="0" stop-color="#2d414c"/>
+      <stop offset=".56" stop-color="#1d2935"/>
+      <stop offset="1" stop-color="#101722"/>
+    </radialGradient>
+    <linearGradient id="spectrumA" x1="230" y1="720" x2="810" y2="320" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0768ff"/><stop offset=".28" stop-color="#25d8f2"/>
+      <stop offset=".62" stop-color="#b8ffce"/><stop offset="1" stop-color="#ffbd36"/>
+    </linearGradient>
+    <linearGradient id="spectrumB" x1="510" y1="215" x2="550" y2="840" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#a5fa16"/><stop offset=".30" stop-color="#e4ff93"/>
+      <stop offset=".66" stop-color="#e798ed"/><stop offset="1" stop-color="#9636ff"/>
+    </linearGradient>
+    <linearGradient id="spectrumC" x1="290" y1="360" x2="760" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2bff9e"/><stop offset=".30" stop-color="#53e9ef"/>
+      <stop offset=".65" stop-color="#bf8dff"/><stop offset="1" stop-color="#f40a92"/>
+    </linearGradient>
+    <linearGradient id="highlight" x1="470" y1="450" x2="558" y2="575" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffffff"/><stop offset="1" stop-color="#a7f4ff"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#background)" d="M0 0h1024v1024H0z"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M252 696C248 549 438 375 670 316C805 282 837 351 798 457" stroke="#172430" stroke-width="67"/>
+    <path d="M252 696C248 549 438 375 670 316C805 282 837 351 798 457" stroke="url(#spectrumA)" stroke-width="46"/>
+    <path d="M509 224C650 295 724 579 646 751C583 891 504 847 461 752" stroke="#172430" stroke-width="67"/>
+    <path d="M509 224C650 295 724 579 646 751C583 891 504 847 461 752" stroke="url(#spectrumB)" stroke-width="46"/>
+    <path d="M756 707C608 741 347 653 288 505C241 386 329 331 416 353" stroke="#172430" stroke-width="67"/>
+    <path d="M756 707C608 741 347 653 288 505C241 386 329 331 416 353" stroke="url(#spectrumC)" stroke-width="46"/>
+    <circle cx="252" cy="696" r="39" fill="#1c2a37" stroke="url(#spectrumA)" stroke-width="25"/>
+    <circle cx="509" cy="224" r="39" fill="#243743" stroke="url(#spectrumB)" stroke-width="25"/>
+    <circle cx="756" cy="707" r="39" fill="#172430" stroke="url(#spectrumC)" stroke-width="25"/>
+  </g>
+  <path d="M512 435C523 489 535 501 589 512C535 523 523 535 512 589C501 535 489 523 435 512C489 501 501 489 512 435Z" fill="url(#highlight)"/>
+  <circle cx="512" cy="512" r="12" fill="#ffffff"/>
+</svg>

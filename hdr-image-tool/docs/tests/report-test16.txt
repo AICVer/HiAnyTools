@@ -1,0 +1,23 @@
+iPhone16签名与安装记录
+日期：2026-10-30
+
+设备：用户USB连接并配对的iPhone16，iOS26.6.1。
+源码：与test15冻结SHA一致；安装阶段没有更改算法或界面，未重复运行无变更回归。
+签名：沿用用户已在Xcode选择的Personal Team。开发者模式初检Disabled，用户开启并重启后devicectl确认Enabled。
+
+签名构建：成功，report-test16-signed-local-build.txt。
+先前失败：手机未就绪时无法找到目标/无设备描述文件；随后桌面文件提供程序附加FinderInfo导致codesign拒绝。清理该生成产物属性后仍被重新附加，改用独立本机临时构建目录后成功。不关闭签名验证，不改原始文件。
+构建位置：output/iphone-build-location.txt；签名摘要：output/iphone-signature-verification.json。
+
+签名验证：codesign --verify --deep --strict通过；embedded.mobileprovision包含当前iPhone，get-task-allow为true。
+描述文件有效期：2026-11-06 14:48:00 Asia/Shanghai。
+
+安装：成功，report-test16-install.txt、output/iphone-install.json。
+设备应用清单确认：HDR Image Lab，bundle local.hdrimagelab，版本0.1.0，构建1。report-test16-app-list.txt、output/iphone-installed-app.json。
+
+启动：成功。首次及重试曾返回FBSOpenApplicationErrorDomain Security；用户完成手机开发者信任后，再次devicectl启动返回outcome=success、processIdentifier=1207、activatedWhenStarted=true。
+日志：report-test16-launch.txt、report-test16-launch-retry.txt。
+成功日志：report-test16-launch-trusted.txt；结构化结果：output/iphone-launch-trusted.json。安装与启动已完成；不将该结果作为真机XDR效果或画质验收。
+
+后续：用户可直接在手机打开HDR Image Lab测试；真机显示、性能、双指缩放和XDR属于独立功能验收。
+本轮无新增依赖、无.env改动、无代码/图像上传、无Git提交推送。

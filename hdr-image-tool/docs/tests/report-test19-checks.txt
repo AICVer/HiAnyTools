@@ -1,0 +1,96 @@
+/Users/wangshupeng/.matplotlib is not a writable directory
+Matplotlib created a temporary cache directory at /var/folders/63/fddmfp_n1b9fr0zyjzg08bc00000gn/T/matplotlib-gl3otdin because there was an issue with the default path (/Users/wangshupeng/.matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+
+Fontconfig error: No writable cache directories
+	/opt/homebrew/var/cache/fontconfig
+	/Users/wangshupeng/.cache/fontconfig
+	/Users/wangshupeng/.fontconfig
+
+Fontconfig error: No writable cache directories
+	/opt/homebrew/var/cache/fontconfig
+	/Users/wangshupeng/.cache/fontconfig
+	/Users/wangshupeng/.fontconfig
+Matplotlib is building the font cache; this may take a moment.
+{
+    'nearBoundarySamples': [
+        {
+            'peakNits': 203,
+            'divisions': 8,
+            'samples': 180,
+            'labOutsideMesh': 40,
+            'cam16OutsideMesh': 163,
+            'ictcpOutsideMesh': 62
+        },
+        {
+            'peakNits': 203,
+            'divisions': 16,
+            'samples': 180,
+            'labOutsideMesh': 37,
+            'cam16OutsideMesh': 166,
+            'ictcpOutsideMesh': 49
+        },
+        {
+            'peakNits': 10000,
+            'divisions': 8,
+            'samples': 180,
+            'labOutsideMesh': 31,
+            'cam16OutsideMesh': 167,
+            'ictcpOutsideMesh': 60
+        },
+        {
+            'peakNits': 10000,
+            'divisions': 16,
+            'samples': 180,
+            'labOutsideMesh': 30,
+            'cam16OutsideMesh': 167,
+            'ictcpOutsideMesh': 34
+        }
+    ],
+    'neutralNitsAnchors': {
+        '203': {
+            'cam16': [
+                99.99999999999999,
+                1.0939066950003944e-12,
+                -6.482410044446782e-13
+            ],
+            'displayRGB': [0, 0, 0],
+            'ictcp': [
+                0.5806888810416109,
+                1.1102230246251565e-16,
+                2.914335439641036e-16
+            ],
+            'lab': [100, 0, 0],
+            'uv': [0.19783000664283684, 0.468319994938791],
+            'xy': [0.3127, 0.32899999999999996]
+        },
+        '1000': {
+            'cam16': [
+                150.79536107065957,
+                -7.129886830295795e-13,
+                8.731593085004613e-29
+            ],
+            'displayRGB': [0, 0, 0],
+            'ictcp': [
+                0.751827096247041,
+                2.220446049250313e-16,
+                -2.914335439641036e-16
+            ],
+            'lab': [181.3752273453421, 1.1102230246251565e-13, 0],
+            'uv': [0.19783000664283684, 0.46831999493879095],
+            'xy': [0.31270000000000003, 0.329]
+        },
+        '10000': {
+            'cam16': [
+                203.82003168176317,
+                6.094319756299368e-12,
+                -1.3542932791776373e-12
+            ],
+            'displayRGB': [0, 0, 0],
+            'ictcp': [1, 0, 0],
+            'lab': [409.23203674573466, 0, 0],
+            'uv': [0.19783000664283684, 0.468319994938791],
+            'xy': [0.3127, 0.32899999999999996]
+        }
+    },
+    'note': '180个刻意靠近边界的样本，不是照片越界率或全色域误差率'
+}

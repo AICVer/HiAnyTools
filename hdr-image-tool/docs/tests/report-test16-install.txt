@@ -1,0 +1,7 @@
+App installed:
+• bundleID: local.hdrimagelab
+• installationURL: file:///private/var/containers/Bundle/Application/76D7A4F2-7910-4E11-9E8B-1E701BB63FD5/HDRImageLab.app/
+• launchServicesIdentifier: unknown
+• databaseUUID: 4976028F-CF5A-4B30-BB15-BE8CB4ECCD6F
+• databaseSequenceNumber: 4016
+• options: 

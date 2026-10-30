@@ -1,0 +1,59 @@
+test23 — 2026-10-30 SDR 3D LUT增强、前后散点与像素凸包
+
+用户确认范围：指定LUT；预览/分析/SDR导出使用结果且原图可恢复；二维凸包边线、三维凸包外壳，原图/增强散点与包络四个独立开关。
+指定文件：/Users/wangshupeng/Downloads/HueTools/HiEnhance/results/bt709_to_bt2020_catd65_linear.cube。
+文件及来源文档确认：sRGB编码码值0～1输入、线性BT.2020输出，17³/R最快；负值和>1保留。使用共同203nit白，参考包络默认10000nit。
+源文件与内置资源SHA256均9c0d6ff8507695fa932bf6ee5cfd3f01262b619bcd80972ae4cf9c57867072eb，未修改来源工程或LUT。没有上传图像/代码、安装依赖、添加环境变量或Git提交。
+
+实现：
+CubeLUT.swift解析UTF-8 .cube、2～65阶、DOMAIN及数据校验；显式GPU三线性查表，输出线性BT.2020和alpha。HDR输入拒绝。预览/分析/导出使用结果；加载新图清空LUT；重新应用从original出发，不累积；恢复后可重新应用。
+PixelHull.swift实现二维单调链、三维增量凸包，处理空/点/线/共面数据。凸包仅取最多4096个有效采样，填平凹陷，不等于设备边界或全分辨率精确色域。
+界面独立原图/LUT散点及各自凸包，参考外壳另行开关；异步凸包缓存跟随revision/峰值/三维空间失效。
+源负值分析继续采用方案A；工作数据保留正向扩展值，标准SDR预览/导出受目标范围限制。新增BT.2020 SDR编码目标。
+
+分层数值验证：
+1. 新模块首轮：2 failed / 15 passed in 11.96s，report-test23-core-first.txt。内置CIColorCube执行方式未保留扩展输出，与HiEnhance不一致。
+2. 显式数值纹理首轮：3 failed / 14 passed in 12.08s，report-test23-core-second.txt。定位位图首行与Core Image y坐标方向差异，翻转B纹理索引后通过。
+3. 修正后17 passed in 12.98s，report-test23-core-third.txt。
+4. 扩充真实图六组点云、退化数据、HDR拒绝、BOM/DOMAIN等并关联方案A：41 passed in 21.22s，report-test23-module.txt。
+5. 最终常规回归：240 passed in 164.85s，report-test23-all.txt。
+6. 既有四组独立门禁：105 passed in 71.22s，report-test23-independent.txt。
+合计345项，41项模块已包含在240中，不重复计数。最终源码快照与完整测试期间一致。
+命令均为/Users/wangshupeng/miniforge3/bin/conda run --no-capture-output -n base python -B -m pytest -q；常规指定tests，独立指定tests/red_team_r1_r2.py tests/red_team_r3_r4.py tests/red_team_r5_r6.py tests/red_team_r7_r8.py。
+
+独立对照：
+读取已有HiEnhance parseCubeFile/buildLutGrid/applyLutTrilinear，只读参考，-B关闭字节码写入。50个固定随机非节点输入，最大绝对误差1.0713686216e-7，平均1.7719568657e-8；8个负输出仍保留。实际表最小RGB=(0,-0.03467119,0)，最大=(1,1.041706674,1)，不是将表值静默裁0～1。
+实际Shader还通过有负值/>1的仿射LUT、DOMAIN边界和半透明预乘alpha断言，数值容差2e-5。
+凸包与SciPy独立核对体积、所有样本在壳内、闭合边共享、Euler特征；共面/共线无假体积。真实IMG_3920增强前后Lab/CAM16-UCS/ICtCp六组点云均通过体积与包含性检查。
+指标output/lut/independent-comparison.json。
+
+覆盖率：
+仅合并本轮240项常规回归新建483个运行目录profraw；不混入旧源码/模块轮次。
+核心行95.65%（1356行，59未覆盖），区域86.29%，函数92.49%。
+CubeLUT行100%、区域94.23%、函数100%；PixelHull行100%、区域98.67%、函数100%。
+UI、测试探针和静态光谱表不计入；未提供分支指标。report-test23-coverage.txt。
+
+构建：
+设备与模拟器构建4均BUILD SUCCEEDED，report-test23-device-build.txt / report-test23-simulator-build.txt。
+xcodebuild本机、CODE_SIGNING_ALLOWED=NO、分别使用output/DerivedDataLUTDevice和output/DerivedDataLUTSimulator，无云服务。
+资源包已包含原始17³ cube；模拟器实际安装Info.plist CFBundleVersion=4，最终明确重启PID34978。
+最初独立iOS探针误包含SwiftUI文件，受沙箱swift-plugin-server宏服务限制而失败；实际Xcode UI构建成功。后仅编译核心文件的独立数值探针成功，分别保留report-test23-ios-probe-build.txt与report-test23-ios-probe-core-build.txt，不将宏环境错误算为产品代码通过。
+
+iOS数值与界面：
+iPhone17/iOS27模拟器，实际同一生产核心：50点LUT最大误差1.0713686216e-7、8个负输出；随机180点凸包维数3、体积73.3214344847，与SciPy一致；原图/增强图同为28×64、1792点，增强负值分析修正1个。report-test23-ios-values.txt。
+Device Hub/CUA实际检查：
+- IMG_3920导入、指定17³内置示例应用成功，预览显示LUT增强，SDR目标变为BT.2020。
+- 开启分布后原图/LUT各1792点，三维共3584点；关闭原图散点后为1792，两个凸包仍可保持显示；最终构建4的二维可访问描述明确记录源散点0/LUT1792与两个凸包显示。
+- 实际看到青色/粉色二维凸包边线及三维面/边，与参考壳独立；选择203nit参考后保留前后包络。默认10000nit仍正常。
+- 恢复原图变为未应用、增强比较层消失；重新应用恢复LUT结果和相同计数；生成BT.2020 SDR JPEG后出现“保存或分享SDR文件”，导出引擎已回读通过，未点击向外分享。
+- 自定义.cube文件选择器实际打开；未在Files中选择另一份外部文件完成整个回调。内置提供文件的Data读取/解析/应用路径已实际通过。
+- 最终构建4重新导入测试图、应用LUT和开关复核通过；保留前后散点与两个凸包开启的演示状态。最终构建4“源文件格式”和前后有效点描述已确认。
+CUA首次连接缓慢，部分滚动超时导致工具重置；重连后完成上述检查。没有用旧界面截图替代最终代码确认。
+
+未验证/限制：
+真机仍构建3，未安装或在iPhone16上验证本轮新功能；真机GPU/交互性能/XDR未实测。
+没有遍历xy/u′v′及三种三维空间的全部开关UI组合；相应坐标与六组凸包数值已验证。
+首版只支持所声明sRGB码值→线性BT.2020 .cube，不从文件名推断其他LUT编码；非凸边界、全图全部像素精确包络不在本轮范围。
+
+重要文件：Sources/CubeLUT.swift、Sources/PixelHull.swift、Sources/PixelVisualizationView.swift、Sources/HDRImageLabApp.swift、Sources/PixelDistribution.swift、Sources/ColorOptions.swift、Sources/Resources/bt709_to_bt2020_catd65_linear.cube、tests/test_lut.py、tests/test_pixel_hull.py、tests/Probe.swift、Xcode构建号及相关文档。
+任务进度：docs/agent/tasks/2026-10-30-lut-distribution/progress.md。

@@ -1,0 +1,14 @@
+Current regular regression only; UI/static spectral table excluded. No branch metric.
+Filename                      Regions    Missed Regions     Cover   Functions  Missed Functions  Executed       Lines      Missed Lines     Cover    Branches   Missed Branches     Cover
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ColorOptions.swift                 25                 2    92.00%           8                 0   100.00%          35                 0   100.00%           0                 0         -
+ExportOptions.swift                37                 0   100.00%          24                 0   100.00%          57                 0   100.00%           0                 0         -
+GainMapComposition.swift           50                16    68.00%           6                 1    83.33%         121                12    90.08%           0                 0         -
+HDRPNG.swift                       23                 4    82.61%           8                 0   100.00%          49                 0   100.00%           0                 0         -
+Histogram.swift                    66                13    80.30%          15                 2    86.67%         120                 9    92.50%           0                 0         -
+ImageEngine.swift                 208                34    83.65%          48                 8    83.33%         327                17    94.80%           0                 0         -
+JPEGPrimary.swift                  52                 7    86.54%          12                 0   100.00%         122                 4    96.72%           0                 0         -
+PixelDistribution.swift            83                16    80.72%          34                 5    85.29%         205                17    91.71%           0                 0         -
+ReferenceGamut.swift               28                 0   100.00%           7                 0   100.00%          76                 0   100.00%           0                 0         -
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+TOTAL                             572                92    83.92%         162                16    90.12%        1112                59    94.69%           0                 0         -

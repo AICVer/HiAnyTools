@@ -1,0 +1,10 @@
+Date: 2026-10-29
+Xcode 27.0 (27A266a), SDK 27.0, deployment target iOS 18.0
+Command: xcodebuild -project HDRImageLab.xcodeproj -scheme HDRImageLab -configuration Debug -destination 'generic/platform=iOS' -derivedDataPath output/DerivedData CODE_SIGNING_ALLOWED=NO build
+Result: BUILD SUCCEEDED
+Full log: /Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/build-xcode-test3.log
+
+Warnings:
+/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/Sources/ImageEngine.swift:96:28: warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+    |                            `- warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+2026-10-29 10:51:48.499 appintentsmetadataprocessor[72742:76232928] warning: Metadata extraction skipped, no AppIntents.framework dependency found

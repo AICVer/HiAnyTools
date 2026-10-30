@@ -1,0 +1,25 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project HDRImageLab.xcodeproj -scheme HDRImageLab -configuration Debug -destination id=00008140-000160EE3440801C -destination-timeout 20 -derivedDataPath output/DerivedDataPhone -allowProvisioningUpdates -allowProvisioningDeviceRegistration build
+
+2026-10-30 14:44:22.008 xcodebuild[17234:78779240] Writing error result bundle to /var/folders/63/fddmfp_n1b9fr0zyjzg08bc00000gn/T/ResultBundle_2026-30-10_14-44-0022.xcresult
+xcodebuild: error: Unable to find a destination matching the provided destination specifier:
+		{ id:00008140-000160EE3440801C }
+
+	Destinations compatible with the "HDRImageLab" scheme:
+		{ platform:macOS, arch:arm64, variant:Designed for [iPad,iPhone], id:00006040-0006691C2686801C, name:My Mac }
+		{ platform:iOS, id:dvtdevice-DVTiPhonePlaceholder-iphoneos:placeholder, name:Any iOS Device }
+		{ platform:iOS Simulator, id:dvtdevice-DVTiOSDeviceSimulatorPlaceholder-iphonesimulator:placeholder, name:Any iOS Simulator Device }
+		{ platform:iOS Simulator, arch:arm64, id:B2A02D7E-3D31-43C5-A753-E0C05D9A7704, OS:27.0, name:iPad (A16) }
+		{ platform:iOS Simulator, arch:arm64, id:FF89D442-B458-4298-B603-9E4D91F7F1F1, OS:27.0, name:iPad Air 11-inch (M4) }
+		{ platform:iOS Simulator, arch:arm64, id:224BA1DE-D8BE-48CF-BEAE-E36EB9748468, OS:27.0, name:iPad Air 13-inch (M4) }
+		{ platform:iOS Simulator, arch:arm64, id:C5AEF96E-E3F2-4D48-811C-613607809A26, OS:27.0, name:iPad Pro 11-inch (M5) }
+		{ platform:iOS Simulator, arch:arm64, id:36D746DB-BA21-4C5F-AD73-634926D86B85, OS:27.0, name:iPad Pro 13-inch (M5) }
+		{ platform:iOS Simulator, arch:arm64, id:04063946-851E-40F7-8E65-8C0E2FBFDD7D, OS:27.0, name:iPad mini (A17 Pro) }
+		{ platform:iOS Simulator, arch:arm64, id:ADA3A538-F53C-4F1C-B79B-9D734FAFAB49, OS:27.0, name:iPhone 17 }
+		{ platform:iOS Simulator, arch:arm64, id:D4D44DFF-4CC7-46ED-9DE1-7A06CD86A6B6, OS:27.0, name:iPhone 17e }
+		{ platform:iOS Simulator, arch:arm64, id:8FC2AEA1-6399-4FA4-9A41-B4A81F74B221, OS:27.0, name:iPhone 18 Pro }
+		{ platform:iOS Simulator, arch:arm64, id:A5D28A39-1AD5-4422-8D4C-A0D3C7168961, OS:27.0, name:iPhone 18 Pro Max }
+		{ platform:iOS Simulator, arch:arm64, id:C850E77A-477F-44AA-B396-5327BB81C34A, OS:27.0, name:iPhone Air }
+
+	Destinations incompatible with the "HDRImageLab" scheme:
+		{ platform:macOS, arch:arm64e, id:00006040-0006691C2686801C, name:My Mac, error:My Mac’s macOS platform doesn’t match HDRImageLab.app’s supported platforms. You can change HDRImageLab.app’s Base SDK or Supported Platforms to support My Mac. }

@@ -1,0 +1,161 @@
+.........FFFEE......................                                     [100%]
+==================================== ERRORS ====================================
+________________ ERROR at setup of test_invalid_sample_size[0] _________________
+
+fixturedef = <FixtureDef argname='sdr' scope='function' baseid='tests/test_pixel_distribution.py'>
+request = <SubRequest 'sdr' for <Function test_invalid_sample_size[0]>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        if (
+            fixturedef.argname == "event_loop_policy"
+            and fixturedef.func.__module__ != __name__
+        ):
+            warnings.warn(
+                PytestDeprecationWarning(_EVENT_LOOP_POLICY_FIXTURE_DEPRECATION_WARNING),
+            )
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+../../../miniforge3/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_hdr_engine.py:58: in sdr
+    probe("fixture", path)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+success = True
+args = ('fixture', PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/c613aa656f794e15a03e197ab3c9ff78/sdr.png'))
+runDirectory = PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/runs/fa45a0ddad214db8b2b427897bca7f8e')
+process = CompletedProcess(args=['/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/hdr-probe', 'fixture', '/Users/....png'], returncode=1, stdout='', stderr='The operation couldn’t be completed. (Foundation._GenericObjCError error 0.)')
+
+    def runProbe(*args: object, success: bool = True):
+        runDirectory = OUTPUT / "runs" / uuid.uuid4().hex
+        runDirectory.mkdir(parents=True)
+        process = subprocess.run([str(binary), *map(str, args)], cwd=runDirectory,
+                                 capture_output=True, text=True, timeout=60)
+        if success:
+>           assert process.returncode == 0, process.stderr
+E           AssertionError: The operation couldn’t be completed. (Foundation._GenericObjCError error 0.)
+E           assert 1 == 0
+E            +  where 1 = CompletedProcess(args=['/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/hdr-probe', 'fixture', '/Users/....png'], returncode=1, stdout='', stderr='The operation couldn’t be completed. (Foundation._GenericObjCError error 0.)').returncode
+
+tests/test_hdr_engine.py:40: AssertionError
+_______________ ERROR at setup of test_invalid_sample_size[129] ________________
+
+fixturedef = <FixtureDef argname='sdr' scope='function' baseid='tests/test_pixel_distribution.py'>
+request = <SubRequest 'sdr' for <Function test_invalid_sample_size[129]>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        if (
+            fixturedef.argname == "event_loop_policy"
+            and fixturedef.func.__module__ != __name__
+        ):
+            warnings.warn(
+                PytestDeprecationWarning(_EVENT_LOOP_POLICY_FIXTURE_DEPRECATION_WARNING),
+            )
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+../../../miniforge3/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_hdr_engine.py:58: in sdr
+    probe("fixture", path)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+success = True
+args = ('fixture', PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/4e945c9d0af741fa9d67a31b41cb47bf/sdr.png'))
+runDirectory = PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/runs/3d960d9fa1df44b8ab6e9134faae2312')
+process = CompletedProcess(args=['/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/hdr-probe', 'fixture', '/Users/....png'], returncode=1, stdout='', stderr='The operation couldn’t be completed. (Foundation._GenericObjCError error 0.)')
+
+    def runProbe(*args: object, success: bool = True):
+        runDirectory = OUTPUT / "runs" / uuid.uuid4().hex
+        runDirectory.mkdir(parents=True)
+        process = subprocess.run([str(binary), *map(str, args)], cwd=runDirectory,
+                                 capture_output=True, text=True, timeout=60)
+        if success:
+>           assert process.returncode == 0, process.stderr
+E           AssertionError: The operation couldn’t be completed. (Foundation._GenericObjCError error 0.)
+E           assert 1 == 0
+E            +  where 1 = CompletedProcess(args=['/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/hdr-probe', 'fixture', '/Users/....png'], returncode=1, stdout='', stderr='The operation couldn’t be completed. (Foundation._GenericObjCError error 0.)').returncode
+
+tests/test_hdr_engine.py:40: AssertionError
+=================================== FAILURES ===================================
+___________________ test_hdr_coordinates_not_clamped_to_sdr ____________________
+
+probe = <function probe.<locals>.runProbe at 0x1698a3d80>
+imageDirectory = PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/5bb6e91de94a4f04a17a544b0dc972d4')
+
+    def test_hdr_coordinates_not_clamped_to_sdr(probe, imageDirectory):
+        source = imageDirectory / "hdr.png"
+>       probe("hdrfixture", source)
+
+tests/test_pixel_distribution.py:32: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+success = True
+args = ('hdrfixture', PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/5bb6e91de94a4f04a17a544b0dc972d4/hdr.png'))
+runDirectory = PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/runs/bfc9120f11b14a3fa7ede6ccea7047db')
+process = CompletedProcess(args=['/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/hdr-probe', 'hdrfixture', '/Use....png'], returncode=1, stdout='', stderr='The operation couldn’t be completed. (Foundation._GenericObjCError error 0.)')
+
+    def runProbe(*args: object, success: bool = True):
+        runDirectory = OUTPUT / "runs" / uuid.uuid4().hex
+        runDirectory.mkdir(parents=True)
+        process = subprocess.run([str(binary), *map(str, args)], cwd=runDirectory,
+                                 capture_output=True, text=True, timeout=60)
+        if success:
+>           assert process.returncode == 0, process.stderr
+E           AssertionError: The operation couldn’t be completed. (Foundation._GenericObjCError error 0.)
+E           assert 1 == 0
+E            +  where 1 = CompletedProcess(args=['/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/hdr-probe', 'hdrfixture', '/Use....png'], returncode=1, stdout='', stderr='The operation couldn’t be completed. (Foundation._GenericObjCError error 0.)').returncode
+
+tests/test_hdr_engine.py:40: AssertionError
+________________________ test_sampling_alpha_and_counts ________________________
+
+probe = <function probe.<locals>.runProbe at 0x1698a3d80>
+imageDirectory = PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/eab79d8991734e5788a9182ae8fdebc6')
+
+    def test_sampling_alpha_and_counts(probe, imageDirectory):
+        source = imageDirectory / "alpha.png"
+        values = np.zeros((64,64,4), dtype=np.uint8)
+        values[:32,:,:] = [255,0,0,128]
+        Image.fromarray(values).save(source)
+        stats = probe("distribution", source, 203)
+>       assert len(stats["points"]) == 2048
+E       assert 0 == 2048
+E        +  where 0 = len([])
+
+tests/test_pixel_distribution.py:44: AssertionError
+________________ test_distribution_aspect_ratio_and_max_samples ________________
+
+probe = <function probe.<locals>.runProbe at 0x1698a3d80>
+imageDirectory = PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/403eeeebfb57425e8cbf02b2e571bb7e')
+
+    def test_distribution_aspect_ratio_and_max_samples(probe, imageDirectory):
+        source = imageDirectory / "big.png"
+        Image.new("RGB", (1920,1080), (128,128,128)).save(source)
+        stats = probe("distribution", source, 203)
+        assert (stats["width"],stats["height"]) == (64,36)
+>       assert len(stats["points"]) == 2304
+E       assert 0 == 2304
+E        +  where 0 = len([])
+
+tests/test_pixel_distribution.py:55: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_pixel_distribution.py::test_hdr_coordinates_not_clamped_to_sdr
+FAILED tests/test_pixel_distribution.py::test_sampling_alpha_and_counts - ass...
+FAILED tests/test_pixel_distribution.py::test_distribution_aspect_ratio_and_max_samples
+ERROR tests/test_pixel_distribution.py::test_invalid_sample_size[0] - Asserti...
+ERROR tests/test_pixel_distribution.py::test_invalid_sample_size[129] - Asser...
+3 failed, 31 passed, 2 errors in 22.73s
+ERROR conda.cli.main_run:execute(127): `conda run python -m pytest -q tests/test_pixel_distribution.py tests/test_reference_gamut.py` failed. (See above for error)

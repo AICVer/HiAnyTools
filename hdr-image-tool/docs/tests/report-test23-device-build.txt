@@ -1,0 +1,595 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project HDRImageLab.xcodeproj -scheme HDRImageLab -configuration Debug -destination generic/platform=iOS -derivedDataPath output/DerivedDataLUTDevice CODE_SIGNING_ALLOWED=NO build
+
+Build settings from command line:
+    CODE_SIGNING_ALLOWED = NO
+
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (1 target)
+    Target 'HDRImageLab' in project 'HDRImageLab' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/actool --print-asset-tag-combinations --output-format xml1 /Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/Sources/Assets.xcassets
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/actool --version --output-format xml1
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc --version
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+Build description signature: fd3e3e76ad61e69d7e2d19415f1359c6
+Build description path: /Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/XCBuildData/fd3e3e76ad61e69d7e2d19415f1359c6.xcbuilddata
+CreateBuildDirectory /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/HDRImageLab.xcodeproj
+    builtin-create-build-directory /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules
+
+CreateBuildDirectory /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/ModuleCache.noindex
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/HDRImageLab.xcodeproj
+    builtin-create-build-directory /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/ModuleCache.noindex
+
+CreateBuildDirectory /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/CompilationCache.noindex
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/HDRImageLab.xcodeproj
+    builtin-create-build-directory /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/CompilationCache.noindex
+
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKStatCaches.noindex/iphoneos27.0-24A430-6c78b3cbc238196c85e1bf6c792c5915.sdkstatcache
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/HDRImageLab.xcodeproj
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk -o /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKStatCaches.noindex/iphoneos27.0-24A430-6c78b3cbc238196c85e1bf6c792c5915.sdkstatcache
+
+CreateBuildDirectory /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/HDRImageLab.xcodeproj
+    builtin-create-build-directory /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products
+
+CreateBuildDirectory /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/HDRImageLab.xcodeproj
+    builtin-create-build-directory /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex
+
+CreateBuildDirectory /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/PrecompiledHeaders
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/HDRImageLab.xcodeproj
+    builtin-create-build-directory /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/PrecompiledHeaders
+
+CreateBuildDirectory /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/HDRImageLab.xcodeproj
+    builtin-create-build-directory /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules
+
+CreateBuildDirectory /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/ExplicitPrecompiledModules
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/HDRImageLab.xcodeproj
+    builtin-create-build-directory /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/ExplicitPrecompiledModules
+
+CreateBuildDirectory /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphoneos
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/HDRImageLab.xcodeproj
+    builtin-create-build-directory /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphoneos
+
+WriteAuxiliaryFile /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab-7c485e1efa7403604fcba6ba905abba8-VFS-iphoneos/all-product-headers.yaml
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/HDRImageLab.xcodeproj
+    write-file /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab-7c485e1efa7403604fcba6ba905abba8-VFS-iphoneos/all-product-headers.yaml
+
+CreateBuildDirectory /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/HDRImageLab.xcodeproj
+    builtin-create-build-directory /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos
+
+WriteAuxiliaryFile /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab.hmap (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab.hmap
+
+WriteAuxiliaryFile /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-project-headers.hmap (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-project-headers.hmap
+
+WriteAuxiliaryFile /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/empty-HDRImageLab.plist (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/empty-HDRImageLab.plist
+
+WriteAuxiliaryFile /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-generated-files.hmap (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-generated-files.hmap
+
+WriteAuxiliaryFile /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab.DependencyStaticMetadataFileList (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab.DependencyMetadataFileList (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab.DependencyMetadataFileList
+
+WriteAuxiliaryFile /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-all-target-headers.hmap (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-all-target-headers.hmap
+
+WriteAuxiliaryFile /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-own-target-headers.hmap (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-own-target-headers.hmap
+
+WriteAuxiliaryFile /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab-OutputFileMap.json (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab-OutputFileMap.json
+
+WriteAuxiliaryFile /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.SwiftConstValuesFileList (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.SwiftConstValuesFileList
+
+WriteAuxiliaryFile /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab_const_extract_protocols.json (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab_const_extract_protocols.json
+
+WriteAuxiliaryFile /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.LinkFileList (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.LinkFileList
+
+WriteAuxiliaryFile /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.SwiftFileList (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.SwiftFileList
+
+WriteAuxiliaryFile /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-all-non-framework-target-headers.hmap (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-all-non-framework-target-headers.hmap
+
+WriteAuxiliaryFile /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-DebugDylibPath-normal-arm64.txt (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-DebugDylibPath-normal-arm64.txt
+
+WriteAuxiliaryFile /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-DebugDylibInstallName-normal-arm64.txt (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    write-file /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-DebugDylibInstallName-normal-arm64.txt
+
+MkDir /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    /bin/mkdir -p /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app
+
+Ld /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app/__preview.dylib normal (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios18.0 -dynamiclib -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk -Os -Xlinker -no_warn_duplicate_libraries -L/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos -F/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos -install_name @rpath/HDRImageLab.debug.dylib -Xlinker -dead_strip -Xlinker -dependency_info -Xlinker /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab_dependency_info.dat -o /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app/__preview.dylib
+
+CpResource /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app/bt709_to_bt2020_catd65_linear.cube /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/Resources/bt709_to_bt2020_catd65_linear.cube (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -strip-unsigned-binaries -strip-deterministic -strip-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip -resolve-src-symlinks /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/Resources/bt709_to_bt2020_catd65_linear.cube /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app
+
+MkDir /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/assetcatalog_output/unthinned (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    /bin/mkdir -p /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/assetcatalog_output/unthinned
+
+MkDir /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/assetcatalog_output/thinned (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    /bin/mkdir -p /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/assetcatalog_output/thinned
+
+GenerateAssetSymbols /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/Assets.xcassets (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    /Applications/Xcode.app/Contents/Developer/usr/bin/actool /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/Assets.xcassets --compile /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app --output-format human-readable-text --notices --warnings --export-dependency-info /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/assetcatalog_dependencies --output-partial-info-plist /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/assetcatalog_generated_info.plist --app-icon AppIcon --compress-pngs --enable-on-demand-resources YES --development-region zh-Hans --target-device iphone --minimum-deployment-target 18.0 --platform iphoneos --bundle-identifier local.hdrimagelab --generate-swift-asset-symbol-extensions NO --generate-swift-asset-symbols /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources/GeneratedAssetSymbols.swift --generate-objc-asset-symbols /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources/GeneratedAssetSymbols.h --generate-asset-symbol-index /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources/GeneratedAssetSymbols-Index.plist
+/* com.apple.actool.compilation-results */
+/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources/GeneratedAssetSymbols-Index.plist
+/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources/GeneratedAssetSymbols.h
+/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources/GeneratedAssetSymbols.swift
+
+
+CompileAssetCatalogVariant thinned /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/Assets.xcassets (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    /Applications/Xcode.app/Contents/Developer/usr/bin/actool /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/Assets.xcassets --compile /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/assetcatalog_output/thinned --output-format human-readable-text --notices --warnings --export-dependency-info /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/assetcatalog_dependencies_thinned --output-partial-info-plist /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/assetcatalog_generated_info.plist_thinned --app-icon AppIcon --compress-pngs --enable-on-demand-resources YES --development-region zh-Hans --target-device iphone --minimum-deployment-target 18.0 --platform iphoneos
+/* com.apple.actool.compilation-results */
+/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/assetcatalog_generated_info.plist_thinned
+/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/assetcatalog_output/thinned/AppIcon60x60@2x.png
+/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/assetcatalog_output/thinned/AppIcon76x76@2x~ipad.png
+/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/assetcatalog_output/thinned/Assets.car
+
+
+SwiftDriver HDRImageLab normal arm64 com.apple.xcode.tools.swift.compiler (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftDriver -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name HDRImageLab -Onone @/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.SwiftFileList -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk -target arm64-apple-ios18.0 -g -module-cache-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/ModuleCache.noindex -Xfrontend -serialize-debugging-options -index-store-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Index.noindex/DataStore -swift-version 5 -I /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos -F /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos -c -j14 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKStatCaches.noindex/iphoneos27.0-24A430-6c78b3cbc238196c85e1bf6c792c5915.sdkstatcache -output-file-map /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab-OutputFileMap.json -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/ModuleCache.noindex -sdk-module-cache-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules -emit-dependencies -emit-module -emit-module-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.swiftmodule -serialize-diagnostics -dependency-scan-serialize-diagnostics-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab-dependency-scan.dia -validate-clang-modules-once -clang-build-session-file /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/ModuleCache.noindex/Session.modulevalidation -Xcc -fmodules-prune-interval\=86400 -Xcc -fmodules-prune-after\=345600 -emit-const-values -const-gather-protocols-list /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab_const_extract_protocols.json -Xcc -iquote -Xcc /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-generated-files.hmap -Xcc -I/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-own-target-headers.hmap -Xcc -I/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-all-target-headers.hmap -Xcc -iquote -Xcc /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-project-headers.hmap -Xcc -I/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/include -Xcc -I/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources-normal/arm64 -Xcc -I/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources/arm64 -Xcc -I/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources -emit-objc-header -emit-objc-header-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab-Swift.h -working-directory /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool -experimental-emit-module-separately -disable-cmo
+
+LinkAssetCatalog /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/Assets.xcassets (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-linkAssetCatalog --thinned /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/assetcatalog_output/thinned --thinned-dependencies /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/assetcatalog_dependencies_thinned --thinned-info-plist-content /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/assetcatalog_generated_info.plist_thinned --unthinned /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/assetcatalog_output/unthinned --unthinned-dependencies /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/assetcatalog_dependencies_unthinned --unthinned-info-plist-content /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/assetcatalog_generated_info.plist_unthinned --output /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app --plist-output /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/assetcatalog_generated_info.plist
+note: Emplaced /Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app/AppIcon60x60@2x.png (in target 'HDRImageLab' from project 'HDRImageLab')
+note: Emplaced /Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app/Assets.car (in target 'HDRImageLab' from project 'HDRImageLab')
+note: Emplaced /Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app/AppIcon76x76@2x~ipad.png (in target 'HDRImageLab' from project 'HDRImageLab')
+
+ProcessInfoPlistFile /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app/Info.plist /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/empty-HDRImageLab.plist (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-infoPlistUtility /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/empty-HDRImageLab.plist -producttype com.apple.product-type.application -genpkginfo /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app/PkgInfo -expandbuildsettings -format binary -platform iphoneos -additionalcontentfile /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/assetcatalog_generated_info.plist -requiredArchitecture arm64 -o /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app/Info.plist
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/ptrcheck-EMYC5H1SFJMTNNJQ1RFMKK2T8.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/_Builtin_stdbool-586APCXA6WSYDWGATF6ZNVA92.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/DeveloperToolsSupport-DFLMWWVFYIG8G5T0ZPRRCZEGK.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/ptrauth-17VDFPSU8YL7LG472LL4MZ2M7.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/SwiftShims-90G2R9AV7X3V685KKK8I7YYFO.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/_Builtin_stddef-3T9L031PYYLHP2NMS22UT6CCA.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/_AvailabilityInternal-1VEZH278U221UKNTJ5VZ476YZ.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/_Builtin_float-5LQ5CDMYN26M9Q90GZBGR2WJ9.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/_Builtin_stdarg-DDPBSSJE0P4DDH38KQKFEFJQW.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/_SwiftConcurrencyShims-1JXR993T9PUUZC1FWF6MV63UY.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/_DarwinFoundation1-3A8JMUPAZZ3O3S78L318SL8QC.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/_DarwinFoundation2-CNYDXSQTN0F5VLXWC4834PJF5.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/_Builtin_limits-2AD8ZR5SXHD1M36DFGC6ZPEIM.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/ExtensionFoundation-10YX8BNFV36DNOVB3YI54OXB7.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/_Builtin_stdint-BMD810ZX8HCF98W7IHWBA9IKD.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/sys_types-2J9Z7LQ7NURM931JO63ZLLPJ3.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/_Builtin_tgmath-78Q231PNZC3Y726E2OCWM8J.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/string_h-418X92EED0H0XXIIX6PO5V4J4.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/_Builtin_stdatomic-M4H397EGJTL31FKGUJWCCIE.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/_DarwinFoundation3-3JNNN7JHDDXSXGEFZCK7WL3WU.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/_Builtin_intrinsics-65F0PE5T5VWFUMXT0LV4N9LNW.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/_Builtin_inttypes-785A972EPXC6M0AYQNAPI736A.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/zlib-8XXAICZWP33BZBFJ3J1MYW9EC.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/Darwin-AUQFC1H5P1Q7NMG4URYA0BESE.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/simd-8EZ7RVE8V2OUQTKLEW986H3SF.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/MachO-86QK21JYYLV45JMNN4DWWV4IJ.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/ObjectiveC-DACYJ9HD9C10VF09JRBTRR8ZS.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/os_object-6X6ZBJZRUA44DE165VP5T86QS.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/os_workgroup-3IDCFE6K3CEXF0FS0I8K4E8I0.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/Spatial-APK8KZC3YHI2MMNMHQVWFO1FT.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/Dispatch-1WHGXWSUT6VU9TFXM8R9GW8ZI.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/XPC-729UZQSI7LDJ4VI5MIWEUPVGP.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/CoreFoundation-AJRU842LTSVX2V2K36DDR38NA.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/dnssd-8OR7S8IM3BVFGVV29CDH6ZV07.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/os-EPU6YHHOFT4FQ4PK1LGTGFK25.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/CoreAudioTypes-2YIMFZYEEAEVE8YEH79XAYL3Z.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/CFNetwork-33ZMZP0E60V3U11SD2VNTJ7HM.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/CoreGraphics-2X2UL6O9EXN3L7DFVRDADJ83N.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/Security-2JLC1VM1UX4ZSE2Z4KTQF2KL1.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/CoreAudio-5T2N8XO42LBZS0DJJ3JE8LOH9.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/Foundation-A3FYCR82OYA7G4BHXJT5T4T8R.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/ImageIO-323ZRTF358PLWFOVBUFAL4OV9.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/CoreText-Z7TMGYWYVSQ86NVOZV66K3X5.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/Accessibility-3GNBRYOYS6JPF29DX4XZG5PP5.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/CoreTransferable-2TEEX6H9DG52IBY1BKT1NQT7G.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/Symbols-AH5GLY524X9KK9ZYY4HRPMGX2.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/CoreData-BW6VXTS9AGK3RTRN2YOAZ6RDB.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/OSLog-5NUY5U1WYV2YAKE8PBOZH7WBC.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/UniformTypeIdentifiers-6N03UULGPQGK7L9XN5LNR91IH.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/CoreMIDI-C7QNUNKACOJD32A7MJIMKR8TH.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/_LocationEssentials-ATWCA4DJG2XXMUI5P619PVJ5Y.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/IOSurface-8A90BUW60MV27T0AP50UCHKFD.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/UIUtilities-BQ113VDWWPSABY63Y86O3R321.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/Network-43YSR7Z3143YPZMF53G6ONBBJ.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/DataDetection-1KWKQPGPK4K1NVPA44BOINBKP.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/UserNotifications-3S34BMPARCN4O9LN1OQ0D8MOG.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/FileProvider-EQRDGASVLMQ4WUUMMFLCVH4HS.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/CoreLocation-5YV2G7NZLFE1IGLIWVSZ6PRYG.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/OpenGLES-6LMWF3VBLYPQY9R7P2LWQUMED.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/Metal-14GYF8WOTYOJQ4XUBH2BAXR2Z.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/AVRouting-CGCQIDL3L1BBW9NNM5OP769BR.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/AudioToolbox-7AW9GPZEQRGDCTYMNXBGF0Q4Y.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/CoreMotion-BRPN7JT0FH9V5FN5J65RFUM8R.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/CloudKit-5ZY0CZ0VP3AZY41BXZIKKMEHO.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/CoreVideo-CVW7X07FAIZSCS27GHAACPXQ6.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/QuartzCore-3FYFDS7E9QO7KI94ES1OBLDU5.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/CoreMedia-4M6C0X3Y6ZRJETQ813Q51SSB3.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/CoreImage-2C9JW1N0YUKY0Y7AAH7XWDHKL.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/SwiftUICore-8HFOAL12M2LFLIWX64NDH06VY.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/MediaToolbox-900WCWAMIQ30GN6I6PAD3BSU7.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/AVFAudio-32AD2HOUQ3I8A3MM8V81MBNAU.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/VideoToolbox-6KOQ7FYU0EV4GJZVQDX6XVWAL.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/UIKit-DBZBPRCCQN753LT1HTDRLUVAC.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/AVFoundation-9H8IY9Z7KK66GUZQI30CUQFAY.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/Photos-ELT11RFMABBXS2938ELVKH18W.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/PhotosUI-1M5HMYCUAZ8RLPTP6JPEBVCR9.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules/SwiftUI-83BPZ4RN2T53HLTVWTM87M0MZ.pcm
+
+SwiftEmitModule normal arm64 Emitting\ module\ for\ HDRImageLab (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftCompile normal arm64 (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    
+
+SwiftCompile normal arm64 Compiling\ JPEGPrimary.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/JPEGPrimary.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/JPEGPrimary.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile JPEGPrimary.swift
+
+SwiftCompile normal arm64 Compiling\ ImageEngine.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/ImageEngine.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/ImageEngine.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile ImageEngine.swift
+
+/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/Sources/ImageEngine.swift:169:28: warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+167 |         }
+168 |         """
+169 |         guard let kernel = CIColorKernel(source: source),
+    |                            `- warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+170 |               let result = kernel.apply(extent: image.extent, arguments: [image, peak / 203])
+171 |         else { throw ImageFailure.renderFailed }
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+SwiftCompile normal arm64 Compiling\ ReferenceGamut.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/ReferenceGamut.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/ReferenceGamut.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile ReferenceGamut.swift
+
+SwiftCompile normal arm64 Compiling\ PixelHull.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/PixelHull.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/PixelHull.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile PixelHull.swift
+
+SwiftCompile normal arm64 Compiling\ HDRImageLabApp.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/HDRImageLabApp.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/HDRImageLabApp.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile HDRImageLabApp.swift
+
+SwiftCompile normal arm64 Compiling\ HDRPNG.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/HDRPNG.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/HDRPNG.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile HDRPNG.swift
+
+SwiftCompile normal arm64 Compiling\ PixelVisualizationView.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/PixelVisualizationView.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/PixelVisualizationView.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile PixelVisualizationView.swift
+
+SwiftCompile normal arm64 Compiling\ GainMapComposition.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/GainMapComposition.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/Sources/GainMapComposition.swift:32:32: warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+ 30 |         }
+ 31 |         """
+ 32 |         guard let grayKernel = CIColorKernel(source: grayCode),
+    |                                `- warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+ 33 |               let gainKernel = CIColorKernel(source: gainCode),
+ 34 |               let gray = grayKernel.apply(extent: target, arguments: [aligned]),
+
+/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/Sources/GainMapComposition.swift:33:32: warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+ 31 |         """
+ 32 |         guard let grayKernel = CIColorKernel(source: grayCode),
+ 33 |               let gainKernel = CIColorKernel(source: gainCode),
+    |                                `- warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+ 34 |               let gray = grayKernel.apply(extent: target, arguments: [aligned]),
+ 35 |               let hdr = gainKernel.apply(extent: target, arguments: [base.sdr, gray, maximumGain])
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/GainMapComposition.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile GainMapComposition.swift
+
+SwiftCompile normal arm64 Compiling\ PixelDistribution.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/PixelDistribution.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/PixelDistribution.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile PixelDistribution.swift
+
+SwiftCompile normal arm64 Compiling\ ExportOptions.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/ExportOptions.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/ExportOptions.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile ExportOptions.swift
+
+SwiftCompile normal arm64 Compiling\ GeneratedAssetSymbols.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources/GeneratedAssetSymbols.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources/GeneratedAssetSymbols.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile GeneratedAssetSymbols.swift
+
+SwiftCompile normal arm64 Compiling\ SpectralLocus.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/SpectralLocus.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/SpectralLocus.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile SpectralLocus.swift
+
+SwiftCompile normal arm64 Compiling\ ColorOptions.swift,\ CubeLUT.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/ColorOptions.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/CubeLUT.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/Sources/CubeLUT.swift:87:28: warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+85 |             size: CGSize(width: lut.dimension * lut.dimension, height: lut.dimension),
+86 |             format: .RGBAf, colorSpace: nil).samplingNearest()
+87 |         guard let kernel = CIKernel(source: code),
+   |                            `- warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+88 |               let result = kernel.apply(extent: encoded.extent,
+89 |                 roiCallback: { index, rect in index == 1 ? table.extent : rect }, arguments: [encoded, table, lut.dimension,
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/ColorOptions.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile ColorOptions.swift
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/CubeLUT.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile CubeLUT.swift
+
+SwiftCompile normal arm64 Compiling\ Histogram.swift /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/Histogram.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftCompile normal arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/Sources/Histogram.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-SwiftPerFileCompile Histogram.swift
+
+SwiftDriverJobDiscovery normal arm64 Emitting module for HDRImageLab (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftDriver\ Compilation\ Requirements HDRImageLab normal arm64 com.apple.xcode.tools.swift.compiler (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-Swift-Compilation-Requirements -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name HDRImageLab -Onone @/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.SwiftFileList -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk -target arm64-apple-ios18.0 -g -module-cache-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/ModuleCache.noindex -Xfrontend -serialize-debugging-options -index-store-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Index.noindex/DataStore -swift-version 5 -I /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos -F /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos -c -j14 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKStatCaches.noindex/iphoneos27.0-24A430-6c78b3cbc238196c85e1bf6c792c5915.sdkstatcache -output-file-map /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab-OutputFileMap.json -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/ModuleCache.noindex -sdk-module-cache-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules -emit-dependencies -emit-module -emit-module-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.swiftmodule -serialize-diagnostics -dependency-scan-serialize-diagnostics-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab-dependency-scan.dia -validate-clang-modules-once -clang-build-session-file /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/ModuleCache.noindex/Session.modulevalidation -Xcc -fmodules-prune-interval\=86400 -Xcc -fmodules-prune-after\=345600 -emit-const-values -const-gather-protocols-list /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab_const_extract_protocols.json -Xcc -iquote -Xcc /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-generated-files.hmap -Xcc -I/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-own-target-headers.hmap -Xcc -I/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-all-target-headers.hmap -Xcc -iquote -Xcc /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-project-headers.hmap -Xcc -I/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/include -Xcc -I/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources-normal/arm64 -Xcc -I/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources/arm64 -Xcc -I/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources -emit-objc-header -emit-objc-header-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab-Swift.h -working-directory /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool -experimental-emit-module-separately -disable-cmo
+
+SwiftDriverJobDiscovery normal arm64 Compiling SpectralLocus.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftMergeGeneratedHeaders /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources/HDRImageLab-Swift.h /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab-Swift.h (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-swiftHeaderTool -arch arm64 /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab-Swift.h -o /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources/HDRImageLab-Swift.h
+
+Copy /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.swiftmodule/arm64-apple-ios.swiftmodule /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.swiftmodule (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -strip-unsigned-binaries -strip-deterministic -strip-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip -resolve-src-symlinks -rename /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.swiftmodule /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.swiftmodule/arm64-apple-ios.swiftmodule
+
+Copy /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.swiftmodule/arm64-apple-ios.swiftdoc /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.swiftdoc (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -strip-unsigned-binaries -strip-deterministic -strip-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip -resolve-src-symlinks -rename /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.swiftdoc /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.swiftmodule/arm64-apple-ios.swiftdoc
+
+Copy /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.swiftmodule/arm64-apple-ios.abi.json /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.abi.json (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -strip-unsigned-binaries -strip-deterministic -strip-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip -resolve-src-symlinks -rename /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.abi.json /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.swiftmodule/arm64-apple-ios.abi.json
+
+Copy /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.swiftsourceinfo (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -strip-unsigned-binaries -strip-deterministic -strip-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip -resolve-src-symlinks -rename /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.swiftsourceinfo /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo
+
+SwiftDriverJobDiscovery normal arm64 Compiling ReferenceGamut.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftDriverJobDiscovery normal arm64 Compiling JPEGPrimary.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftDriverJobDiscovery normal arm64 Compiling ExportOptions.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftDriverJobDiscovery normal arm64 Compiling HDRPNG.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftDriverJobDiscovery normal arm64 Compiling GeneratedAssetSymbols.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftDriverJobDiscovery normal arm64 Compiling GainMapComposition.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftDriverJobDiscovery normal arm64 Compiling ImageEngine.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftDriverJobDiscovery normal arm64 Compiling PixelDistribution.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftDriverJobDiscovery normal arm64 Compiling PixelHull.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftDriverJobDiscovery normal arm64 Compiling ColorOptions.swift, CubeLUT.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftDriverJobDiscovery normal arm64 Compiling Histogram.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftDriverJobDiscovery normal arm64 Compiling PixelVisualizationView.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftDriverJobDiscovery normal arm64 Compiling HDRImageLabApp.swift (in target 'HDRImageLab' from project 'HDRImageLab')
+
+SwiftDriver\ Compilation HDRImageLab normal arm64 com.apple.xcode.tools.swift.compiler (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-Swift-Compilation -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name HDRImageLab -Onone @/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.SwiftFileList -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk -target arm64-apple-ios18.0 -g -module-cache-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/ModuleCache.noindex -Xfrontend -serialize-debugging-options -index-store-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Index.noindex/DataStore -swift-version 5 -I /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos -F /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos -c -j14 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKStatCaches.noindex/iphoneos27.0-24A430-6c78b3cbc238196c85e1bf6c792c5915.sdkstatcache -output-file-map /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab-OutputFileMap.json -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/ModuleCache.noindex -sdk-module-cache-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules -emit-dependencies -emit-module -emit-module-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.swiftmodule -serialize-diagnostics -dependency-scan-serialize-diagnostics-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab-dependency-scan.dia -validate-clang-modules-once -clang-build-session-file /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/ModuleCache.noindex/Session.modulevalidation -Xcc -fmodules-prune-interval\=86400 -Xcc -fmodules-prune-after\=345600 -emit-const-values -const-gather-protocols-list /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab_const_extract_protocols.json -Xcc -iquote -Xcc /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-generated-files.hmap -Xcc -I/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-own-target-headers.hmap -Xcc -I/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-all-target-headers.hmap -Xcc -iquote -Xcc /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-project-headers.hmap -Xcc -I/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/include -Xcc -I/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources-normal/arm64 -Xcc -I/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources/arm64 -Xcc -I/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/DerivedSources -emit-objc-header -emit-objc-header-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab-Swift.h -working-directory /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool -experimental-emit-module-separately -disable-cmo
+
+Ld /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app/HDRImageLab.debug.dylib normal (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios18.0 -dynamiclib -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk -Os -Xlinker -no_warn_duplicate_libraries -L/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphoneos -L/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos -F/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphoneos -F/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos -filelist /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.LinkFileList -install_name @rpath/HDRImageLab.debug.dylib -Xlinker -rpath -Xlinker /usr/lib/swift -Xlinker -dead_strip -Xlinker -object_path_lto -Xlinker /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab_lto.o -rdynamic -Xlinker -dependency_info -Xlinker /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab_dependency_info.dat -fobjc-link-runtime -L/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos -L/usr/lib/swift -Xlinker -add_ast_path -Xlinker /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.swiftmodule -Xlinker -alias -Xlinker _main -Xlinker ___debug_main_executable_dylib_entry_point -o /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app/HDRImageLab.debug.dylib
+
+ConstructStubExecutorLinkFileList /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-ExecutorLinkFileList-normal-arm64.txt (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    construct-stub-executor-link-file-list /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app/HDRImageLab.debug.dylib /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/libPreviewsJITStubExecutor_no_swift_entry_point.a /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/libPreviewsJITStubExecutor.a --output /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-ExecutorLinkFileList-normal-arm64.txt
+note: Using stub executor library with Swift entry point. (in target 'HDRImageLab' from project 'HDRImageLab')
+
+Ld /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app/HDRImageLab normal (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios18.0 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk -Os -Xlinker -no_warn_duplicate_libraries -L/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos -F/Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos -Xlinker -rpath -Xlinker @executable_path -rdynamic -e ___debug_blank_executor_main -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_dylib -Xlinker /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-DebugDylibPath-normal-arm64.txt -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_instlnm -Xlinker /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-DebugDylibInstallName-normal-arm64.txt -Xlinker -filelist -Xlinker /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab-ExecutorLinkFileList-normal-arm64.txt /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app/HDRImageLab.debug.dylib -o /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app/HDRImageLab
+
+CopySwiftLibs /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-swiftStdLibTool --copy --verbose --scan-executable /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app/HDRImageLab.debug.dylib --scan-folder /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app/Frameworks --scan-folder /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app/PlugIns --scan-folder /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app/SystemExtensions --scan-folder /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app/Extensions --platform iphoneos --toolchain /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --destination /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app/Frameworks --strip-bitcode --strip-bitcode-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip --emit-dependency-info /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/SwiftStdLibToolInputDependencies.dep --filter-for-swift-os --back-deploy-swift-span
+Ignoring --strip-bitcode because --sign was not passed
+
+ExtractAppIntentsMetadata (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsmetadataprocessor --toolchain-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --module-name HDRImageLab --sdk-root /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk --xcode-version 27A266a --platform-family iOS --deployment-target 18.0 --bundle-identifier local.hdrimagelab --output /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app --target-triple arm64-apple-ios18.0 --binary-file /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app/HDRImageLab --dependency-file /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab_dependency_info.dat --stringsdata-file /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/ExtractedAppShortcutsMetadata.stringsdata --source-file-list /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.SwiftFileList --metadata-file-list /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab.DependencyMetadataFileList --static-metadata-file-list /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab.DependencyStaticMetadataFileList --swift-const-vals-list /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/Objects-normal/arm64/HDRImageLab.SwiftConstValuesFileList --compile-time-extraction --deployment-aware-processing --no-app-shortcuts-localization
+2026-10-30 20:42:40.784 appintentsmetadataprocessor[26429:79645293] Starting appintentsmetadataprocessor export
+2026-10-30 20:42:40.785 appintentsmetadataprocessor[26429:79645293] warning: Metadata extraction skipped, no AppIntents.framework dependency found
+
+AppIntentsSSUTraining (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsnltrainingprocessor --infoplist-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app/Info.plist --temp-dir-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/ssu --bundle-id local.hdrimagelab --product-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app --extracted-metadata-path /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app/Metadata.appintents --metadata-file-list /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/HDRImageLab.build/Debug-iphoneos/HDRImageLab.build/HDRImageLab.DependencyMetadataFileList --source-file /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app/Info.plist --archive-ssu-assets
+2026-10-30 20:42:40.806 appintentsnltrainingprocessor[26430:79645296] Parsing options for appintentsnltrainingprocessor
+2026-10-30 20:42:40.806 appintentsnltrainingprocessor[26430:79645296] Starting AppIntents SSU YAML Generation
+2026-10-30 20:42:40.807 appintentsnltrainingprocessor[26430:79645296] No AppShortcuts found - Skipping.
+
+RegisterExecutionPolicyException /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-RegisterExecutionPolicyException /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app
+
+Validate /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    builtin-validationUtility /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app -shallow-bundle -infoplist-subpath Info.plist
+
+Touch /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app (in target 'HDRImageLab' from project 'HDRImageLab')
+    cd /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool
+    /usr/bin/touch -c /Users/wangshupeng/Desktop/图像转\ PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Products/Debug-iphoneos/HDRImageLab.app
+
+PruneExplicitPrecompiledModules /Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/ExplicitPrecompiledModules
+
+PruneExplicitPrecompiledModules /Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/DerivedDataLUTDevice/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules
+
+PruneExplicitPrecompiledModules /Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/DerivedDataLUTDevice/SDKExplicitPrecompiledModules
+
+** BUILD SUCCEEDED **
+

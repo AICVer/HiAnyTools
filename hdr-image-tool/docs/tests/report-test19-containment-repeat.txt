@@ -1,0 +1,29 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+____________ test_native_inside_color_is_inside_displayed_lab_mesh _____________
+
+    def test_native_inside_color_is_inside_displayed_lab_mesh() -> None:
+        """直接调用生产 Swift 坐标和网格，复现网格内缩导致的假越界。"""
+        directory = Path(__file__).resolve().parent
+        binary = directory.parents[1] / "output/tests/hdr-probe"
+    
+        def probe(*args: object) -> dict:
+            return json.loads(subprocess.check_output(
+                [str(binary), *map(str, args)], cwd=directory, text=True))
+    
+        rgb = [0.00001, 0.6128143024535753, 0.1972192905039931]
+        assert all(0 < value < 1 for value in rgb)
+        point = probe("coordinates", ",".join(map(str, rgb)))
+        mesh = probe("reference-mesh", "BT.2020", 203, 8)
+        inside = winding(np.asarray(point["lab"]),
+                         np.asarray([p["lab"] for p in mesh["vertices"]]),
+                         np.asarray(mesh["triangles"]))
+>       assert inside > 0.5, f"合法 RGB={rgb}, Lab={point['lab']}, 网格绕数={inside}（应≈1）"
+E       AssertionError: 合法 RGB=[1e-05, 0.6128143024535753, 0.1972192905039931], Lab=[71.36349147713524, -124.39084055255634, 32.139762043091565], 网格绕数=7.067899292141149e-17（应≈1）
+E       assert 7.067899292141149e-17 > 0.5
+
+output/gamut-audit/test_mesh_containment.py:27: AssertionError
+=========================== short test summary info ============================
+FAILED output/gamut-audit/test_mesh_containment.py::test_native_inside_color_is_inside_displayed_lab_mesh
+1 failed in 10.36s
+ERROR conda.cli.main_run:execute(127): `conda run python -m pytest -q output/gamut-audit/test_mesh_containment.py` failed. (See above for error)

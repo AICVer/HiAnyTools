@@ -1,0 +1,37 @@
+test19 — 2026-10-30 二维/三维色域散点越界诊断
+
+范围：排查当前实现并报告；App源代码未修改。
+环境：本机Miniforge base Python，colour-science 0.4.7，Xcode Swift/Core Image。
+
+1. 现有模块
+命令：/Users/wangshupeng/miniforge3/bin/conda run --no-capture-output -n base python -m pytest -q tests/test_pixel_distribution.py tests/test_reference_gamut.py
+首次沙箱：31 passed, 3 failed, 2 errors；Core Image图形设备访问受限，见report-test19-modules.txt。
+本机图形设备可用后：36 passed in 11.63s，见report-test19-modules-local.txt。
+
+2. 最小失败断言
+命令：/Users/wangshupeng/miniforge3/bin/conda run --no-capture-output -n base python -m pytest -q output/gamut-audit/test_mesh_containment.py
+结果：1 failed。合法BT.2020 RGB=(0.00001,0.6128143024535753,0.1972192905039931)在203nit Lab网格外；绕数7.0679e-17，应≈1。
+这是保留的诊断失败，不是已修复功能。详见report-test19-containment.txt。
+独立重复执行仍为1 failed，同一RGB/绕数；见report-test19-containment-repeat.txt，确认结果可重复。
+
+3. 完整合成图审计
+命令：/Users/wangshupeng/miniforge3/bin/conda run --no-capture-output -n base python output/gamut-audit/audit.py --output-dir output/gamut-audit-19
+结果：退出0。PQ203/1000nit灰阶、SDR128、P3红和网格假越界成功复现。
+日志report-test19-audit.txt；产物output/gamut-audit-19/results.json。
+
+4. 三空间×两峰值×两密度补充
+命令：/Users/wangshupeng/miniforge3/bin/conda run --no-capture-output -n base python output/gamut-audit-19/checks.py diagnose
+结果：退出0；203与10000nit、8与16格的网格均有近边界合法样本在显示网格外。
+日志report-test19-checks.txt；数据output/gamut-audit-19/checks.json。
+180个样本是刻意近边界采样，不表示照片越界率。
+
+结论：
+- 当前默认参考包络203nit，不是用户最新要求10000nit；1000nit等HDR高光超203nit壳合理。
+- 点/壳共享坐标函数，现有公式与colour-science对照通过；未发现合成样本漏解码/重复EOTF证据。
+- 平面三角形不能精确表示非线性变换曲面，合法点可发生假越界；既有网格顶点和拓扑测试未覆盖内部包含性。
+- 部分P3红本来略超BT.2020三角形；不能强制所有散点都塞入所有参考色域。
+- 当前分析始终是HDR工作输出，SDR增强参数会影响其散点；切换SDR预览不会切换分析源。
+- 参考白203nit、包络上限10000nit、PQ编码常数10000nit须分开；二维色度不受统一亮度缩放影响。
+
+未验证：用户具体异常图片、iOS实际UI/物理XDR；没有生产变更，不重跑完整套件、覆盖率或安装。
+详细逻辑、代码入口与下一步建议：docs/agent/tasks/2026-10-30-gamut-diagnosis/progress.md。

@@ -1,0 +1,32 @@
+扩展版模拟器交互验收与小修复
+日期：2026-10-30
+设备：iPhone17 / iOS27，Device Hub；主代理使用CUA实际操作。
+
+结论：主要交互冒烟验收通过，未发现剩余阻断问题；不等于全部手势、所有异步调度或真机显示已验证。
+
+已执行与证据（output/tests/extension-ui/）：
+1. 双击960×640色阶预览进入全屏，图像可见，双击退出；后续4032×3024真实照片双击进入，再点“退出全屏”返回。fullscreen.jpg/txt。
+2. 当前图灰度合成：最大增益2.96×，预览内容余量2.96×；改用另一张花卉照片，主图尺寸不变、余量2.29×，GainMap视图显示花卉灰度；恢复源图后余量1.00×、无GainMap。self-compose、other-compose、other-gray-map、restore-source证据。
+3. HDR选Display P3，分别生成GainMap JPEG和HEIC，均出现保存/分享入口。实际导出文件回读确认960×640、Display P3、ISO辅助图；文件分别265050及194286字节。gainmap-*-export、export-readback.json。
+4. SDR选Adobe RGB，分别执行等XYZ和RGB直通，成功生成JPEG且ICC均为Adobe RGB (1998)；切BMP后仅显示sRGB与能力限制说明，旧分享入口失效。adobe-xyz-export、adobe-rgb-export、bmp-space-limit证据。
+5. 打开像素分布，色阶图64×42采样共2688点；CIE1931 xy与CIE1976 u′v′切换，三个色域三角形逐个关闭再打开，图形变化正确。cie1931、cie1976-triangles-off证据。
+6. 三维CAM16-UCS、ICtCp、CIELab逐一切换，轴标签与说明改变；Lab显示L*>100。自动旋转开关启用后，两次截图的点云朝向持续变化；拖动改变朝向并暂停自动旋转，重置视角可点击。cam16-before/rotating-1/rotating-2/drag-paused、ictcp、lab证据。
+7. 切换真实4032×3024花卉HEIC后，直方图采样改为512×384/196608，像素分布改为64×48/3072；原合成标志及旧分享入口清空。before-source-switch、after-source-switch证据。
+
+发现与修复：
+- 原界面把合成内存灰度图描述为“含系统可读取的GainMap”，并称为“HDR源图”。新增ImageInfo.isComposed，改为“HDR合成结果”“源文件格式”“尚未写入文件”，不改变处理逻辑；修复后实际合成复查通过，final-composition-labels.txt。
+- 原三个switch并排使BT.2020断行。改为紧凑Toggle按钮，完整显示sRGB/Display P3/BT.2020；三个按钮均实际关闭、打开复查，final-gamut-toggles.jpg/txt及final-toggle-check.json。
+- SDR提示从“保留HDR请使用上方PQ导出”改为“上方HDR导出”，涵盖新增GainMap格式。
+
+变更与验证：
+- 仅Sources/HDRImageLabApp.swift、Sources/PixelVisualizationView.swift发生源码变更，SHA逐项核对，所有共享核心与test13冻结一致。
+- 无需重跑未改动的核心全套测试；保留test13的283项通过与94.08%核心行覆盖率结论。
+- 修复后模拟器、设备目标均BUILD SUCCEEDED：report-test14-simulator-build.txt、report-test14-device-build.txt。
+- 最终版本已重新安装并启动（PID77835）；最终源码SHA在output/tests/extension-ui/final-source-sha256.json。
+- 未提交/推送Git，无依赖安装、环境变量或原始图像修改。
+
+未实际验证：
+- 双指缩放：当前CUA原生接口无多点触控能力，Device Hub Controls菜单亦无Pinch动作；保留待手动验证，不把代码存在称为手势通过。
+- 辅助图实际选取本轮覆盖PhotosPicker路径；文件选择器端到端、全透明图的界面提示没有追加实际点击，相关解码/透明统计由模块测试覆盖。
+- 最后一张真实照片点云截图尚未保存：收尾时Mac再次锁定。已有色阶的二维/三维截图和真实照片更新后的完整AX已保存，不影响上述已完成检查。
+- iPhone16签名、真实XDR物理亮度、真机性能/内存及所有异步调度仍未验收。

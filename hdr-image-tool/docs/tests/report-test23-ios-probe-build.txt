@@ -1,0 +1,828 @@
+Sources/CubeLUT.swift:87:28: warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+85 |             size: CGSize(width: lut.dimension * lut.dimension, height: lut.dimension),
+86 |             format: .RGBAf, colorSpace: nil).samplingNearest()
+87 |         guard let kernel = CIKernel(source: code),
+   |                            `- warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+88 |               let result = kernel.apply(extent: encoded.extent,
+89 |                 roiCallback: { index, rect in index == 1 ? table.extent : rect }, arguments: [encoded, table, lut.dimension,
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+Sources/GainMapComposition.swift:32:32: warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+ 30 |         }
+ 31 |         """
+ 32 |         guard let grayKernel = CIColorKernel(source: grayCode),
+    |                                `- warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+ 33 |               let gainKernel = CIColorKernel(source: gainCode),
+ 34 |               let gray = grayKernel.apply(extent: target, arguments: [aligned]),
+
+Sources/GainMapComposition.swift:33:32: warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+ 31 |         """
+ 32 |         guard let grayKernel = CIColorKernel(source: grayCode),
+ 33 |               let gainKernel = CIColorKernel(source: gainCode),
+    |                                `- warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+ 34 |               let gray = grayKernel.apply(extent: target, arguments: [aligned]),
+ 35 |               let hdr = gainKernel.apply(extent: target, arguments: [base.sdr, gray, maximumGain])
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+Sources/ImageEngine.swift:169:28: warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+167 |         }
+168 |         """
+169 |         guard let kernel = CIColorKernel(source: source),
+    |                            `- warning: 'init(source:)' was deprecated in iOS 12.0: Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings) [#DeprecatedDeclaration]
+170 |               let result = kernel.apply(extent: image.extent, arguments: [image, peak / 203])
+171 |         else { throw ImageFailure.renderFailed }
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+sandbox-exec: sandbox_apply: Operation not permitted
+Sources/PixelVisualizationView.swift:13:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 11 |         self.analysisID = analysisID
+ 12 |     }
+ 13 |     @State private var showOriginalPoints = true
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 14 |     @State private var showEnhancedPoints = true
+ 15 |     @State private var showOriginalHull = false
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:14:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 12 |     }
+ 13 |     @State private var showOriginalPoints = true
+ 14 |     @State private var showEnhancedPoints = true
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 15 |     @State private var showOriginalHull = false
+ 16 |     @State private var showEnhancedHull = false
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:15:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 13 |     @State private var showOriginalPoints = true
+ 14 |     @State private var showEnhancedPoints = true
+ 15 |     @State private var showOriginalHull = false
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 16 |     @State private var showEnhancedHull = false
+ 17 |     @State private var originalHull: PixelHullMesh?
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:16:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 14 |     @State private var showEnhancedPoints = true
+ 15 |     @State private var showOriginalHull = false
+ 16 |     @State private var showEnhancedHull = false
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 17 |     @State private var originalHull: PixelHullMesh?
+ 18 |     @State private var enhancedHull: PixelHullMesh?
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:17:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 15 |     @State private var showOriginalHull = false
+ 16 |     @State private var showEnhancedHull = false
+ 17 |     @State private var originalHull: PixelHullMesh?
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 18 |     @State private var enhancedHull: PixelHullMesh?
+ 19 |     @State private var loadedHullSpace: GamutVolumeSpace?
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:18:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 16 |     @State private var showEnhancedHull = false
+ 17 |     @State private var originalHull: PixelHullMesh?
+ 18 |     @State private var enhancedHull: PixelHullMesh?
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 19 |     @State private var loadedHullSpace: GamutVolumeSpace?
+ 20 |     @State private var loadedHullID: String?
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:19:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 17 |     @State private var originalHull: PixelHullMesh?
+ 18 |     @State private var enhancedHull: PixelHullMesh?
+ 19 |     @State private var loadedHullSpace: GamutVolumeSpace?
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 20 |     @State private var loadedHullID: String?
+ 21 |     @State private var hullError: String?
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:20:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 18 |     @State private var enhancedHull: PixelHullMesh?
+ 19 |     @State private var loadedHullSpace: GamutVolumeSpace?
+ 20 |     @State private var loadedHullID: String?
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 21 |     @State private var hullError: String?
+ 22 |     @State private var useUV = false
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:21:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 19 |     @State private var loadedHullSpace: GamutVolumeSpace?
+ 20 |     @State private var loadedHullID: String?
+ 21 |     @State private var hullError: String?
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 22 |     @State private var useUV = false
+ 23 |     @State private var showSRGB = true
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:22:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 20 |     @State private var loadedHullID: String?
+ 21 |     @State private var hullError: String?
+ 22 |     @State private var useUV = false
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 23 |     @State private var showSRGB = true
+ 24 |     @State private var showP3 = true
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:23:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 21 |     @State private var hullError: String?
+ 22 |     @State private var useUV = false
+ 23 |     @State private var showSRGB = true
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 24 |     @State private var showP3 = true
+ 25 |     @State private var show2020 = true
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:24:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 22 |     @State private var useUV = false
+ 23 |     @State private var showSRGB = true
+ 24 |     @State private var showP3 = true
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 25 |     @State private var show2020 = true
+ 26 |     @State private var volumeSpace = GamutVolumeSpace.cam16
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:25:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 23 |     @State private var showSRGB = true
+ 24 |     @State private var showP3 = true
+ 25 |     @State private var show2020 = true
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 26 |     @State private var volumeSpace = GamutVolumeSpace.cam16
+ 27 |     @State private var showReferenceSRGB = true
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:26:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 24 |     @State private var showP3 = true
+ 25 |     @State private var show2020 = true
+ 26 |     @State private var volumeSpace = GamutVolumeSpace.cam16
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 27 |     @State private var showReferenceSRGB = true
+ 28 |     @State private var showReferenceP3 = true
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:27:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 25 |     @State private var show2020 = true
+ 26 |     @State private var volumeSpace = GamutVolumeSpace.cam16
+ 27 |     @State private var showReferenceSRGB = true
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 28 |     @State private var showReferenceP3 = true
+ 29 |     @State private var showReference2020 = true
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:28:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 26 |     @State private var volumeSpace = GamutVolumeSpace.cam16
+ 27 |     @State private var showReferenceSRGB = true
+ 28 |     @State private var showReferenceP3 = true
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 29 |     @State private var showReference2020 = true
+ 30 |     @State private var referencePeak = 10000
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:29:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 27 |     @State private var showReferenceSRGB = true
+ 28 |     @State private var showReferenceP3 = true
+ 29 |     @State private var showReference2020 = true
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 30 |     @State private var referencePeak = 10000
+ 31 |     @State private var referenceMeshes: [ReferenceGamutMesh] = []
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:30:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 28 |     @State private var showReferenceP3 = true
+ 29 |     @State private var showReference2020 = true
+ 30 |     @State private var referencePeak = 10000
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 31 |     @State private var referenceMeshes: [ReferenceGamutMesh] = []
+ 32 |     @State private var loadedReferencePeak: Int?
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:31:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 29 |     @State private var showReference2020 = true
+ 30 |     @State private var referencePeak = 10000
+ 31 |     @State private var referenceMeshes: [ReferenceGamutMesh] = []
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 32 |     @State private var loadedReferencePeak: Int?
+ 33 |     @State private var referenceError: String?
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:32:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 30 |     @State private var referencePeak = 10000
+ 31 |     @State private var referenceMeshes: [ReferenceGamutMesh] = []
+ 32 |     @State private var loadedReferencePeak: Int?
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 33 |     @State private var referenceError: String?
+ 34 |     @State private var automaticRotation = false
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:33:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 31 |     @State private var referenceMeshes: [ReferenceGamutMesh] = []
+ 32 |     @State private var loadedReferencePeak: Int?
+ 33 |     @State private var referenceError: String?
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 34 |     @State private var automaticRotation = false
+ 35 |     @State private var yaw = 0.6
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:34:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 32 |     @State private var loadedReferencePeak: Int?
+ 33 |     @State private var referenceError: String?
+ 34 |     @State private var automaticRotation = false
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 35 |     @State private var yaw = 0.6
+ 36 |     @State private var pitch = -0.25
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:35:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 33 |     @State private var referenceError: String?
+ 34 |     @State private var automaticRotation = false
+ 35 |     @State private var yaw = 0.6
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 36 |     @State private var pitch = -0.25
+ 37 |     @State private var zoom = 1.0
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:36:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 34 |     @State private var automaticRotation = false
+ 35 |     @State private var yaw = 0.6
+ 36 |     @State private var pitch = -0.25
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 37 |     @State private var zoom = 1.0
+ 38 |     @State private var rotationStarted = Date()
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:37:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 35 |     @State private var yaw = 0.6
+ 36 |     @State private var pitch = -0.25
+ 37 |     @State private var zoom = 1.0
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 38 |     @State private var rotationStarted = Date()
+ 39 |     @GestureState private var drag = CGSize.zero
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:38:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 36 |     @State private var pitch = -0.25
+ 37 |     @State private var zoom = 1.0
+ 38 |     @State private var rotationStarted = Date()
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 39 |     @GestureState private var drag = CGSize.zero
+ 40 |     @GestureState private var magnification = 1.0
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:13:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 11 |         self.analysisID = analysisID
+ 12 |     }
+ 13 |     @State private var showOriginalPoints = true
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 14 |     @State private var showEnhancedPoints = true
+ 15 |     @State private var showOriginalHull = false
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:14:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 12 |     }
+ 13 |     @State private var showOriginalPoints = true
+ 14 |     @State private var showEnhancedPoints = true
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 15 |     @State private var showOriginalHull = false
+ 16 |     @State private var showEnhancedHull = false
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:15:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 13 |     @State private var showOriginalPoints = true
+ 14 |     @State private var showEnhancedPoints = true
+ 15 |     @State private var showOriginalHull = false
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 16 |     @State private var showEnhancedHull = false
+ 17 |     @State private var originalHull: PixelHullMesh?
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:16:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 14 |     @State private var showEnhancedPoints = true
+ 15 |     @State private var showOriginalHull = false
+ 16 |     @State private var showEnhancedHull = false
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 17 |     @State private var originalHull: PixelHullMesh?
+ 18 |     @State private var enhancedHull: PixelHullMesh?
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:17:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 15 |     @State private var showOriginalHull = false
+ 16 |     @State private var showEnhancedHull = false
+ 17 |     @State private var originalHull: PixelHullMesh?
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 18 |     @State private var enhancedHull: PixelHullMesh?
+ 19 |     @State private var loadedHullSpace: GamutVolumeSpace?
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:18:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 16 |     @State private var showEnhancedHull = false
+ 17 |     @State private var originalHull: PixelHullMesh?
+ 18 |     @State private var enhancedHull: PixelHullMesh?
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 19 |     @State private var loadedHullSpace: GamutVolumeSpace?
+ 20 |     @State private var loadedHullID: String?
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:19:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 17 |     @State private var originalHull: PixelHullMesh?
+ 18 |     @State private var enhancedHull: PixelHullMesh?
+ 19 |     @State private var loadedHullSpace: GamutVolumeSpace?
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 20 |     @State private var loadedHullID: String?
+ 21 |     @State private var hullError: String?
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:20:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 18 |     @State private var enhancedHull: PixelHullMesh?
+ 19 |     @State private var loadedHullSpace: GamutVolumeSpace?
+ 20 |     @State private var loadedHullID: String?
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 21 |     @State private var hullError: String?
+ 22 |     @State private var useUV = false
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:21:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 19 |     @State private var loadedHullSpace: GamutVolumeSpace?
+ 20 |     @State private var loadedHullID: String?
+ 21 |     @State private var hullError: String?
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 22 |     @State private var useUV = false
+ 23 |     @State private var showSRGB = true
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:22:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 20 |     @State private var loadedHullID: String?
+ 21 |     @State private var hullError: String?
+ 22 |     @State private var useUV = false
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 23 |     @State private var showSRGB = true
+ 24 |     @State private var showP3 = true
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:23:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 21 |     @State private var hullError: String?
+ 22 |     @State private var useUV = false
+ 23 |     @State private var showSRGB = true
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 24 |     @State private var showP3 = true
+ 25 |     @State private var show2020 = true
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:24:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 22 |     @State private var useUV = false
+ 23 |     @State private var showSRGB = true
+ 24 |     @State private var showP3 = true
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 25 |     @State private var show2020 = true
+ 26 |     @State private var volumeSpace = GamutVolumeSpace.cam16
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:25:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 23 |     @State private var showSRGB = true
+ 24 |     @State private var showP3 = true
+ 25 |     @State private var show2020 = true
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 26 |     @State private var volumeSpace = GamutVolumeSpace.cam16
+ 27 |     @State private var showReferenceSRGB = true
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:26:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 24 |     @State private var showP3 = true
+ 25 |     @State private var show2020 = true
+ 26 |     @State private var volumeSpace = GamutVolumeSpace.cam16
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 27 |     @State private var showReferenceSRGB = true
+ 28 |     @State private var showReferenceP3 = true
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:27:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 25 |     @State private var show2020 = true
+ 26 |     @State private var volumeSpace = GamutVolumeSpace.cam16
+ 27 |     @State private var showReferenceSRGB = true
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 28 |     @State private var showReferenceP3 = true
+ 29 |     @State private var showReference2020 = true
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:28:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 26 |     @State private var volumeSpace = GamutVolumeSpace.cam16
+ 27 |     @State private var showReferenceSRGB = true
+ 28 |     @State private var showReferenceP3 = true
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 29 |     @State private var showReference2020 = true
+ 30 |     @State private var referencePeak = 10000
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:29:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 27 |     @State private var showReferenceSRGB = true
+ 28 |     @State private var showReferenceP3 = true
+ 29 |     @State private var showReference2020 = true
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 30 |     @State private var referencePeak = 10000
+ 31 |     @State private var referenceMeshes: [ReferenceGamutMesh] = []
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:30:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 28 |     @State private var showReferenceP3 = true
+ 29 |     @State private var showReference2020 = true
+ 30 |     @State private var referencePeak = 10000
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 31 |     @State private var referenceMeshes: [ReferenceGamutMesh] = []
+ 32 |     @State private var loadedReferencePeak: Int?
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:31:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 29 |     @State private var showReference2020 = true
+ 30 |     @State private var referencePeak = 10000
+ 31 |     @State private var referenceMeshes: [ReferenceGamutMesh] = []
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 32 |     @State private var loadedReferencePeak: Int?
+ 33 |     @State private var referenceError: String?
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:32:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 30 |     @State private var referencePeak = 10000
+ 31 |     @State private var referenceMeshes: [ReferenceGamutMesh] = []
+ 32 |     @State private var loadedReferencePeak: Int?
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 33 |     @State private var referenceError: String?
+ 34 |     @State private var automaticRotation = false
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:33:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 31 |     @State private var referenceMeshes: [ReferenceGamutMesh] = []
+ 32 |     @State private var loadedReferencePeak: Int?
+ 33 |     @State private var referenceError: String?
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 34 |     @State private var automaticRotation = false
+ 35 |     @State private var yaw = 0.6
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:34:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 32 |     @State private var loadedReferencePeak: Int?
+ 33 |     @State private var referenceError: String?
+ 34 |     @State private var automaticRotation = false
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 35 |     @State private var yaw = 0.6
+ 36 |     @State private var pitch = -0.25
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:35:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 33 |     @State private var referenceError: String?
+ 34 |     @State private var automaticRotation = false
+ 35 |     @State private var yaw = 0.6
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 36 |     @State private var pitch = -0.25
+ 37 |     @State private var zoom = 1.0
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:36:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 34 |     @State private var automaticRotation = false
+ 35 |     @State private var yaw = 0.6
+ 36 |     @State private var pitch = -0.25
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 37 |     @State private var zoom = 1.0
+ 38 |     @State private var rotationStarted = Date()
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:37:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 35 |     @State private var yaw = 0.6
+ 36 |     @State private var pitch = -0.25
+ 37 |     @State private var zoom = 1.0
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 38 |     @State private var rotationStarted = Date()
+ 39 |     @GestureState private var drag = CGSize.zero
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:38:24: error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 36 |     @State private var pitch = -0.25
+ 37 |     @State private var zoom = 1.0
+ 38 |     @State private var rotationStarted = Date()
+    |                        `- error: external macro implementation type 'SwiftUIMacros.StateMacro' could not be found for macro 'State()'; '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server' produced malformed response
+ 39 |     @GestureState private var drag = CGSize.zero
+ 40 |     @GestureState private var magnification = 1.0
+
+SwiftUI.State:1:145: note: 'State()' declared here
+1 | @attached(accessor, names: named(init), named(get), named(set)) @attached(peer, names: prefixed(`_`), prefixed(__), prefixed(`$`)) public macro State() = #externalMacro(module: "SwiftUIMacros", type: "StateMacro")
+  |                                                                                                                                                 `- note: 'State()' declared here
+
+Sources/PixelVisualizationView.swift:52:48: error: left side of mutating operator isn't mutable: 'self' is immutable
+ 49 |     }
+ 50 | 
+ 51 |     private func setRotation(_ enabled: Bool) {
+    |             `- note: mark method 'mutating' to make 'self' mutable
+ 52 |         if automaticRotation && !enabled { yaw += Date().timeIntervalSince(rotationStarted) * 0.25 }
+    |                                                `- error: left side of mutating operator isn't mutable: 'self' is immutable
+ 53 |         if enabled && !automaticRotation { rotationStarted = .now }
+ 54 |         automaticRotation = enabled
+
+Sources/PixelVisualizationView.swift:53:44: error: cannot assign to property: 'self' is immutable
+ 49 |     }
+ 50 | 
+ 51 |     private func setRotation(_ enabled: Bool) {
+    |             `- note: mark method 'mutating' to make 'self' mutable
+ 52 |         if automaticRotation && !enabled { yaw += Date().timeIntervalSince(rotationStarted) * 0.25 }
+ 53 |         if enabled && !automaticRotation { rotationStarted = .now }
+    |                                            `- error: cannot assign to property: 'self' is immutable
+ 54 |         automaticRotation = enabled
+ 55 |     }
+
+Sources/PixelVisualizationView.swift:54:9: error: cannot assign to property: 'self' is immutable
+ 49 |     }
+ 50 | 
+ 51 |     private func setRotation(_ enabled: Bool) {
+    |             `- note: mark method 'mutating' to make 'self' mutable
+ 52 |         if automaticRotation && !enabled { yaw += Date().timeIntervalSince(rotationStarted) * 0.25 }
+ 53 |         if enabled && !automaticRotation { rotationStarted = .now }
+ 54 |         automaticRotation = enabled
+    |         `- error: cannot assign to property: 'self' is immutable
+ 55 |     }
+ 56 | 
+
+Sources/PixelVisualizationView.swift:90:100: error: cannot find '$showOriginalPoints' in scope
+ 88 |                 }
+ 89 |                 HStack {
+ 90 |                     Toggle(enhancedDistribution == nil ? "当前图散点" : "原图散点", isOn: $showOriginalPoints)
+    |                                                                                  `- error: cannot find '$showOriginalPoints' in scope
+ 91 |                     if enhancedDistribution != nil { Toggle("LUT增强散点", isOn: $showEnhancedPoints) }
+ 92 |                 }.font(.caption).toggleStyle(.button)
+
+Sources/PixelVisualizationView.swift:91:86: error: cannot find '$showEnhancedPoints' in scope
+ 89 |                 HStack {
+ 90 |                     Toggle(enhancedDistribution == nil ? "当前图散点" : "原图散点", isOn: $showOriginalPoints)
+ 91 |                     if enhancedDistribution != nil { Toggle("LUT增强散点", isOn: $showEnhancedPoints) }
+    |                                                                              `- error: cannot find '$showEnhancedPoints' in scope
+ 92 |                 }.font(.caption).toggleStyle(.button)
+ 93 |                 HStack {
+
+Sources/PixelVisualizationView.swift:94:100: error: cannot find '$showOriginalHull' in scope
+ 92 |                 }.font(.caption).toggleStyle(.button)
+ 93 |                 HStack {
+ 94 |                     Toggle(enhancedDistribution == nil ? "当前图凸包" : "原图凸包", isOn: $showOriginalHull).tint(.cyan)
+    |                                                                                  `- error: cannot find '$showOriginalHull' in scope
+ 95 |                     if enhancedDistribution != nil { Toggle("LUT增强凸包", isOn: $showEnhancedHull).tint(.pink) }
+ 96 |                 }.font(.caption).toggleStyle(.button)
+
+Sources/PixelVisualizationView.swift:95:86: error: cannot find '$showEnhancedHull' in scope
+ 93 |                 HStack {
+ 94 |                     Toggle(enhancedDistribution == nil ? "当前图凸包" : "原图凸包", isOn: $showOriginalHull).tint(.cyan)
+ 95 |                     if enhancedDistribution != nil { Toggle("LUT增强凸包", isOn: $showEnhancedHull).tint(.pink) }
+    |                                                                              `- error: cannot find '$showEnhancedHull' in scope
+ 96 |                 }.font(.caption).toggleStyle(.button)
+ 97 |                 Text("散点和凸包开关同时作用于二维与三维；凸包会填平凹陷，仅描述采样范围，不是设备色域。原图凸包为青色，LUT凸包为粉色。")
+
+Sources/PixelVisualizationView.swift:99:48: error: cannot find '$useUV' in scope
+ 97 |                 Text("散点和凸包开关同时作用于二维与三维；凸包会填平凹陷，仅描述采样范围，不是设备色域。原图凸包为青色，LUT凸包为粉色。")
+ 98 |                     .font(.caption).foregroundStyle(.secondary)
+ 99 |                 Picker("色度图", selection: $useUV) {
+    |                                          `- error: cannot find '$useUV' in scope
+100 |                     Text("CIE 1931 xy").tag(false)
+101 |                     Text("CIE 1976 u′v′").tag(true)
+
+Sources/PixelVisualizationView.swift:104:42: error: cannot find '$showSRGB' in scope
+102 |                 }.pickerStyle(.segmented)
+103 |                 HStack {
+104 |                     Toggle("sRGB", isOn: $showSRGB).tint(.blue)
+    |                                          `- error: cannot find '$showSRGB' in scope
+105 |                     Toggle("Display P3", isOn: $showP3).tint(.orange)
+106 |                     Toggle("BT.2020", isOn: $show2020).tint(.purple)
+
+Sources/PixelVisualizationView.swift:105:48: error: cannot find '$showP3' in scope
+103 |                 HStack {
+104 |                     Toggle("sRGB", isOn: $showSRGB).tint(.blue)
+105 |                     Toggle("Display P3", isOn: $showP3).tint(.orange)
+    |                                                `- error: cannot find '$showP3' in scope
+106 |                     Toggle("BT.2020", isOn: $show2020).tint(.purple)
+107 |                 }.font(.caption).toggleStyle(.button).lineLimit(1)
+
+Sources/PixelVisualizationView.swift:106:45: error: cannot find '$show2020' in scope
+104 |                     Toggle("sRGB", isOn: $showSRGB).tint(.blue)
+105 |                     Toggle("Display P3", isOn: $showP3).tint(.orange)
+106 |                     Toggle("BT.2020", isOn: $show2020).tint(.purple)
+    |                                             `- error: cannot find '$show2020' in scope
+107 |                 }.font(.caption).toggleStyle(.button).lineLimit(1)
+108 |                 chromaticityChart
+
+Sources/PixelVisualizationView.swift:116:51: error: cannot find '$volumeSpace' in scope
+114 |                         .font(.caption).foregroundStyle(.secondary)
+115 |                 }
+116 |                 Picker("立体色域", selection: $volumeSpace) {
+    |                                           `- error: cannot find '$volumeSpace' in scope
+117 |                     ForEach(GamutVolumeSpace.allCases, id: \.self) { Text($0.rawValue).tag($0) }
+118 |                 }.pickerStyle(.segmented)
+
+Sources/PixelVisualizationView.swift:121:42: error: cannot find '$showReferenceSRGB' in scope
+119 |                 Text("三维参考外包络").font(.subheadline.weight(.semibold))
+120 |                 HStack {
+121 |                     Toggle("sRGB", isOn: $showReferenceSRGB).tint(.blue)
+    |                                          `- error: cannot find '$showReferenceSRGB' in scope
+122 |                         .accessibilityLabel("三维 sRGB 外包络")
+123 |                     Toggle("Display P3", isOn: $showReferenceP3).tint(.orange)
+
+Sources/PixelVisualizationView.swift:123:48: error: cannot find '$showReferenceP3' in scope
+121 |                     Toggle("sRGB", isOn: $showReferenceSRGB).tint(.blue)
+122 |                         .accessibilityLabel("三维 sRGB 外包络")
+123 |                     Toggle("Display P3", isOn: $showReferenceP3).tint(.orange)
+    |                                                `- error: cannot find '$showReferenceP3' in scope
+124 |                         .accessibilityLabel("三维 Display P3 外包络")
+125 |                     Toggle("BT.2020", isOn: $showReference2020).tint(.purple)
+
+Sources/PixelVisualizationView.swift:125:45: error: cannot find '$showReference2020' in scope
+123 |                     Toggle("Display P3", isOn: $showReferenceP3).tint(.orange)
+124 |                         .accessibilityLabel("三维 Display P3 外包络")
+125 |                     Toggle("BT.2020", isOn: $showReference2020).tint(.purple)
+    |                                             `- error: cannot find '$showReference2020' in scope
+126 |                         .accessibilityLabel("三维 BT.2020 外包络")
+127 |                 }.font(.caption).toggleStyle(.button).lineLimit(1)
+
+Sources/PixelVisualizationView.swift:128:57: error: cannot find '$referencePeak' in scope
+126 |                         .accessibilityLabel("三维 BT.2020 外包络")
+127 |                 }.font(.caption).toggleStyle(.button).lineLimit(1)
+128 |                 Picker("包络参考峰值", selection: $referencePeak) {
+    |                                             `- error: cannot find '$referencePeak' in scope
+129 |                     ForEach([203,600,1000,10000], id: \.self) { Text("\($0) nit").tag($0) }
+130 |                 }.pickerStyle(.menu)
+
+Sources/PixelVisualizationView.swift:162:13: error: cannot assign to property: 'self' is immutable
+160 |         .task(id: referencePeak) {
+161 |             let requestedPeak = referencePeak
+162 |             referenceError = nil
+    |             `- error: cannot assign to property: 'self' is immutable
+163 |             do {
+164 |                 let meshes = try await Task.detached(priority: .userInitiated) {
+
+Sources/PixelVisualizationView.swift:178:13: error: cannot assign to property: 'self' is immutable
+176 |         .task(id: "\(analysisID)|\(volumeSpace.rawValue)") {
+177 |             let requestedSpace = volumeSpace
+178 |             loadedHullSpace = nil
+    |             `- error: cannot assign to property: 'self' is immutable
+179 |             hullError = nil
+180 |             let originalPoints = distribution.points.compactMap { $0.scene(requestedSpace) }
+
+Sources/PixelVisualizationView.swift:343:37: error: left side of mutating operator isn't mutable: 'self' is immutable
+341 |         .gesture(DragGesture().updating($drag) { value,state,_ in state=value.translation }
+342 |             .onChanged { _ in if automaticRotation { setRotation(false) } }
+343 |             .onEnded { value in yaw += Double(value.translation.width)/100; pitch=max(-1.4,min(1.4,pitch+Double(value.translation.height)/150)) })
+    |                                     `- error: left side of mutating operator isn't mutable: 'self' is immutable
+344 |         .simultaneousGesture(MagnifyGesture().updating($magnification) { value,state,_ in state=value.magnification }
+345 |             .onEnded { value in zoom=max(0.3,min(5,zoom*value.magnification)) })
+
+Sources/PixelVisualizationView.swift:345:33: error: cannot assign to property: 'self' is immutable
+343 |             .onEnded { value in yaw += Double(value.translation.width)/100; pitch=max(-1.4,min(1.4,pitch+Double(value.translation.height)/150)) })
+344 |         .simultaneousGesture(MagnifyGesture().updating($magnification) { value,state,_ in state=value.magnification }
+345 |             .onEnded { value in zoom=max(0.3,min(5,zoom*value.magnification)) })
+    |                                 `- error: cannot assign to property: 'self' is immutable
+346 |         .accessibilityLabel("\(volumeSpace.rawValue) 三维像素点云，\(entries.count) 点；参考外包络 \(visibleReferenceMeshes.map { $0.gamut.rawValue }.joined(separator: "、"))，\(referencePeak) nit；支持拖动旋转与双指缩放")
+347 |     }

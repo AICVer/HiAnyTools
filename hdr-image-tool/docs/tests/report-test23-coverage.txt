@@ -1,0 +1,16 @@
+Current regular regression only; UI/static spectral data excluded. No branch metric.
+Filename                      Regions    Missed Regions     Cover   Functions  Missed Functions  Executed       Lines      Missed Lines     Cover    Branches   Missed Branches     Cover
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ColorOptions.swift                 26                 2    92.31%           8                 0   100.00%          36                 0   100.00%           0                 0         -
+CubeLUT.swift                      52                 3    94.23%          13                 0   100.00%          84                 0   100.00%           0                 0         -
+ExportOptions.swift                37                 0   100.00%          24                 0   100.00%          57                 0   100.00%           0                 0         -
+GainMapComposition.swift           50                16    68.00%           6                 1    83.33%         121                12    90.08%           0                 0         -
+HDRPNG.swift                       23                 4    82.61%           8                 0   100.00%          49                 0   100.00%           0                 0         -
+Histogram.swift                    66                13    80.30%          15                 2    86.67%         120                 9    92.50%           0                 0         -
+ImageEngine.swift                 208                34    83.65%          48                 8    83.33%         327                17    94.80%           0                 0         -
+JPEGPrimary.swift                  52                 7    86.54%          12                 0   100.00%         122                 4    96.72%           0                 0         -
+PixelDistribution.swift            83                16    80.72%          34                 5    85.29%         205                17    91.71%           0                 0         -
+PixelHull.swift                    75                 1    98.67%          38                 0   100.00%         159                 0   100.00%           0                 0         -
+ReferenceGamut.swift               28                 0   100.00%           7                 0   100.00%          76                 0   100.00%           0                 0         -
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+TOTAL                             700                96    86.29%         213                16    92.49%        1356                59    95.65%           0                 0         -

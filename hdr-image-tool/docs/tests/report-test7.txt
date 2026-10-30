@@ -1,0 +1,32 @@
+日期：2026-10-29
+范围：iPhone 安装条件检查与 R1 普通图像格式转换。
+
+安装条件：
+- security find-identity -v -p codesigning：0 valid identities found。
+- devicectl / xctrace：仅本机与模拟设备，没有连接的真实 iPhone。
+- 工程未配置 DEVELOPMENT_TEAM，保持用户后续选择团队的空间。
+- 结果：当前不能交付已签名、可装 iPhone 16 的测试包；已补 docs/iphone-testing.md 官方步骤。
+
+模块：
+- 新增 R1 测试：30 passed，原始结果 report-test7-sdr.txt。
+- 完整回归：58 passed in 19.16s，原始结果 report-test7-all.txt。
+- 使用 base Python、实际编译的生产 Swift ImageEngine、原生 Core Image/ImageIO。
+- JPEG/HEIC/PNG/BMP 16 种转换组合；PNG 透明保留、其他白底；方向/尺寸/原文件不变；HDR→SDR；既有 PQ/GainMap 数值与格式回归。
+- Swift 生产引擎覆盖率：行 94.51%、区域 83.84%、函数 88.00%，详见 report-test7-coverage.txt。
+- 未提供 branch 口径；UI 和物理设备不计入此覆盖率。
+
+构建：
+- iOS 设备无签名：BUILD SUCCEEDED，report-test7-device-build.txt。
+- iOS 模拟器：BUILD SUCCEEDED，report-test7-simulator-build.txt。
+- 未签名设备 .app：output/DerivedData/Build/Products/Debug-iphoneos/HDRImageLab.app。
+- 未伪装为 IPA 或宣称已经可安装。
+
+模拟器：
+- 现有 iPhone 17 / iOS 27.0 启动成功，安装新版成功，应用 PID 74511。
+- Device Hub 可打开，当前 iPhone 18 Pro 在切换/加载；CUA 因用户窗口状态变化未完成新转换控件点击。
+- 完整新 UI 流程、真实手机编码能力、iPhone 16 XDR 尚未验收。
+
+改动与边界：
+- 新增系统格式枚举与 SDR 写出，SwiftUI 增加普通格式转换/保存入口。
+- 无第三方依赖、无新环境变量、无 .env 修改、无证书/账号修改、无提交推送。
+- JPEG/HEIC 当前固定质量 0.92；R2 压缩/DPI/目标体积/尺寸、R7 直方图留到后续小迭代。

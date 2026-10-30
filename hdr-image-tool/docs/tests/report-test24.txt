@@ -1,0 +1,33 @@
+test24 — 2026-10-30 0.1.1(5)真机迭代与本地Git归档
+
+授权：用户明确要求编译安装到真机、当前版本向前迭代一次、更新Git commit。
+版本：0.1.0(4)→0.1.1(5)，bundle local.hdrimagelab、原Personal Team不变。
+算法：与test23最终源码/测试探针SHA逐项一致，引用其345项回归和核心行95.65%，未为元数据重复运行完整算法测试。
+
+签名构建：
+xcodebuild -project HDRImageLab.xcodeproj -scheme HDRImageLab -configuration Debug -destination id=00008140-000160EE3440801C -derivedDataPath /private/tmp/HDRImageLab-phone.Q89DLq build
+结果BUILD SUCCEEDED，report-test24-signed-build.txt。
+本机现有证书/描述文件，不创建证书、注册设备或启用ProvisioningUpdates，不上传代码/图像。
+codesign --verify --deep --strict通过，report-test24-codesign.txt。
+Info.plist实际版本0.1.1/Bundle Version5，描述文件包含iPhone16，2026-11-06 14:48北京时间到期。
+内置LUT资源与源码逐字节一致；摘要output/release-0.1.1-verification.json。
+
+安装：
+devicectl device install app覆盖安装outcome=success，report-test24-install.txt、output/release-0.1.1-install.json。
+设备应用清单确认HDR Image Lab 0.1.1(5)，report-test24-app-list.txt。
+没有卸载原App；旧测试JPEG缓存元数据仍存在、547352字节，report-test24-data-preserved.txt。只读元数据，未导出图像/像素。
+
+启动：
+首次因Locked拒绝，report-test24-launch.txt，保留原始失败。
+用户回复“已解锁”后启动成功，outcome=success、activatedWhenStarted=true、PID4310；report-test24-launch-unlocked.txt、output/release-0.1.1-launch-unlocked.json。
+运行进程核对PID4310且路径为本次安装的0A924B94目录；report-test24-process.txt、output/release-0.1.1-process.json。
+本轮已完成编译/签名/覆盖安装/版本/启动验证，不把它等同于全面真机画质、XDR或LUT交互实测。
+
+Git归档：
+父仓库main，项目此前整体未跟踪、初始暂存区为空。本次按用户授权首次纳入hdr-image-tool源码、共享Xcode工程、构建资源、pytest、文档与测试报告。
+新增项目.gitignore，排除output（约2.1GB构建/签名/调试夹具）、profraw/profdata、Xcode用户状态、缓存。.env保持未修改且未纳入。
+仅限hdr-image-tool路径；根.DS_Store及wechat-miniprogram原有改动不纳入；采用现有Git身份创建新本地提交，不amend或推送。
+对应提交查询：git log -1 -- hdr-image-tool；提交摘要保存output/release-0.1.1-commit.json（本地产物不入Git）。
+
+重要文件：HDRImageLab.xcodeproj/project.pbxproj（版本/构建号）、.gitignore、README、docs/agent/context.md、docs/changelog.md、docs/agent/tasks/2026-10-30-release-0.1.1/progress.md、本报告。当前源码/测试基线为此前完成的LUT、凸包、HDR与导出功能。
+未验证：未重跑无变化算法、未全面实测真机增强画质/交互性能/物理XDR；已有数值/模拟器验证以test23为准。

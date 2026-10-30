@@ -1,0 +1,13 @@
+Scope: all platform-independent production Swift core files, exercised by final blue suite.
+UI/MainActor model excluded; code review and simulator checks recorded separately.
+No branch coverage metric from this Swift toolchain.
+
+Filename                      Regions    Missed Regions     Cover   Functions  Missed Functions  Executed       Lines      Missed Lines     Cover    Branches   Missed Branches     Cover
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ExportOptions.swift                28                 0   100.00%          18                 0   100.00%          45                 0   100.00%           0                 0         -
+HDRPNG.swift                       23                 4    82.61%           8                 0   100.00%          49                 0   100.00%           0                 0         -
+Histogram.swift                    66                13    80.30%          15                 2    86.67%         120                 9    92.50%           0                 0         -
+ImageEngine.swift                 185                30    83.78%          39                 6    84.62%         289                14    95.16%           0                 0         -
+JPEGPrimary.swift                  52                 7    86.54%          12                 0   100.00%         122                 4    96.72%           0                 0         -
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+TOTAL                             354                54    84.75%          92                 8    91.30%         625                27    95.68%           0                 0         -

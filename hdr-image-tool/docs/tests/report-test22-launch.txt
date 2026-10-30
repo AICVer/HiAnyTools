@@ -1,0 +1,11 @@
+ERROR: The application failed to launch. (com.apple.dt.CoreDeviceError error 10002 (0x2712))
+       BundleIdentifier = local.hdrimagelab
+       ----------------------------------------
+           The request to open "local.hdrimagelab" failed. (FBSOpenApplicationServiceErrorDomain error 1 (0x01))
+           NSLocalizedFailureReason = The request was denied by service delegate (SBMainWorkspace) for reason: Locked ("Unable to launch local.hdrimagelab because the device was not, or could not be, unlocked").
+           FBSOpenApplicationRequestID = 0x52fb
+           BSErrorCodeDescription = RequestDenied
+       ----------------------------------------
+               The operation couldn’t be completed. Unable to launch local.hdrimagelab because the device was not, or could not be, unlocked. (FBSOpenApplicationErrorDomain error 7 (0x07))
+               NSLocalizedFailureReason = Unable to launch local.hdrimagelab because the device was not, or could not be, unlocked.
+               BSErrorCodeDescription = Locked

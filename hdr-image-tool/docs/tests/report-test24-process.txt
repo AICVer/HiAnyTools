@@ -1,0 +1,3 @@
+PID    Executable Path                                                                                            
+----   -----------------------------------------------------------------------------------------------------------
+4310   /private/var/containers/Bundle/Application/0A924B94-0671-47CF-850D-DBADFAE85407/HDRImageLab.app/HDRImageLab

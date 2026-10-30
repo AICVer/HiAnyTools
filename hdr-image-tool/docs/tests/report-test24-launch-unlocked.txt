@@ -1,0 +1,1 @@
+Launched application with local.hdrimagelab bundle identifier.

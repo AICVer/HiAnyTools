@@ -1,0 +1,188 @@
+............F...F......FFFF                                              [100%]
+=================================== FAILURES ===================================
+____________________________ test_p3_pq_export[PNG] ____________________________
+
+probe = <function probe.<locals>.runProbe at 0x12415c720>
+sdr = PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/6a4068d44dc2489eac27b13d99414b52/sdr.png')
+imageDirectory = PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/6a4068d44dc2489eac27b13d99414b52')
+fmt = 'PNG'
+
+    @pytest.mark.parametrize("fmt", ["PNG", "TIFF"])
+    def test_p3_pq_export(probe, sdr, imageDirectory, fmt):
+        path = probe("hdr-options", sdr, fmt, 600, json.dumps({"hdrColorSpace": "Display P3"}), imageDirectory)["path"]
+        info = probe("inspect", path)
+        assert "P3" in info["space"] and "PQ" in info["space"]
+        assert abs(max(info["linear"]) - 600 / 203) < .01
+        if fmt == "PNG":
+>           assert pngChunks(path)[b"cICP"][:2] == bytes([12, 16])
+                   ^^^^^^^^^^^^^^^
+
+tests/test_color_exports.py:62: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = '/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/6a4068d44dc2489eac27b13d99414b52/HDR-17200DF2-61E9-41F0-96DC-949B89DFF4E3.png'
+
+    def pngChunks(path: Path) -> dict[bytes, bytes]:
+        """独立检查 PNG chunk 与 CRC，不通过生产代码解释元数据。"""
+>       data = path.read_bytes()
+               ^^^^^^^^^^^^^^^
+E       AttributeError: 'str' object has no attribute 'read_bytes'
+
+tests/test_hdr_engine.py:70: AttributeError
+___________________ test_sdr_space_roundtrip[PNG-Adobe RGB] ____________________
+
+probe = <function probe.<locals>.runProbe at 0x12415c720>
+sdr = PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/f32ea4457da241888e155bc929109778/sdr.png')
+imageDirectory = PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/f32ea4457da241888e155bc929109778')
+space = 'Adobe RGB', fmt = 'PNG'
+
+    @pytest.mark.parametrize("space", ["sRGB", "Display P3", "Adobe RGB"])
+    @pytest.mark.parametrize("fmt", ["PNG", "JPEG", "HEIC", "BMP"])
+    def test_sdr_space_roundtrip(probe, sdr, imageDirectory, space, fmt):
+>       path = probe("sdr-options", sdr, fmt, json.dumps({"sdrColorSpace": space}), imageDirectory)["path"]
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_color_exports.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+success = True
+args = ('sdr-options', PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/f32ea4457da241888e1... PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/f32ea4457da241888e155bc929109778'))
+runDirectory = PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/runs/df61ebc42c814b31a0995489773029dd')
+process = CompletedProcess(args=['/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/hdr-probe', 'sdr-options', '/Us...ixtures/f32ea4457da241888e155bc929109778'], returncode=1, stdout='', stderr='该格式或源图无法可靠保留所选色彩空间，请改用 PNG、JPEG 或其他色彩空间。')
+
+    def runProbe(*args: object, success: bool = True):
+        runDirectory = OUTPUT / "runs" / uuid.uuid4().hex
+        runDirectory.mkdir(parents=True)
+        process = subprocess.run([str(binary), *map(str, args)], cwd=runDirectory,
+                                 capture_output=True, text=True, timeout=60)
+        if success:
+>           assert process.returncode == 0, process.stderr
+E           AssertionError: 该格式或源图无法可靠保留所选色彩空间，请改用 PNG、JPEG 或其他色彩空间。
+E           assert 1 == 0
+E            +  where 1 = CompletedProcess(args=['/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/hdr-probe', 'sdr-options', '/Us...ixtures/f32ea4457da241888e155bc929109778'], returncode=1, stdout='', stderr='该格式或源图无法可靠保留所选色彩空间，请改用 PNG、JPEG 或其他色彩空间。').returncode
+
+tests/test_hdr_engine.py:40: AssertionError
+______________________ test_sdr_space_roundtrip[BMP-sRGB] ______________________
+
+probe = <function probe.<locals>.runProbe at 0x12415c720>
+sdr = PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/9cd5d16a6f3b4f5b9c08eedee1dbcfad/sdr.png')
+imageDirectory = PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/9cd5d16a6f3b4f5b9c08eedee1dbcfad')
+space = 'sRGB', fmt = 'BMP'
+
+    @pytest.mark.parametrize("space", ["sRGB", "Display P3", "Adobe RGB"])
+    @pytest.mark.parametrize("fmt", ["PNG", "JPEG", "HEIC", "BMP"])
+    def test_sdr_space_roundtrip(probe, sdr, imageDirectory, space, fmt):
+        path = probe("sdr-options", sdr, fmt, json.dumps({"sdrColorSpace": space}), imageDirectory)["path"]
+        meta = probe("meta", path)
+        token = {"sRGB": "sRGB", "Display P3": "P3", "Adobe RGB": "Adobe"}[space]
+>       assert token in meta["profileName"]
+E       AssertionError: assert 'sRGB' in 'unknown'
+
+tests/test_color_exports.py:71: AssertionError
+___________________ test_sdr_space_roundtrip[BMP-Display P3] ___________________
+
+probe = <function probe.<locals>.runProbe at 0x12415c720>
+sdr = PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/e768a68165854698b1a912817df2cfa3/sdr.png')
+imageDirectory = PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/e768a68165854698b1a912817df2cfa3')
+space = 'Display P3', fmt = 'BMP'
+
+    @pytest.mark.parametrize("space", ["sRGB", "Display P3", "Adobe RGB"])
+    @pytest.mark.parametrize("fmt", ["PNG", "JPEG", "HEIC", "BMP"])
+    def test_sdr_space_roundtrip(probe, sdr, imageDirectory, space, fmt):
+>       path = probe("sdr-options", sdr, fmt, json.dumps({"sdrColorSpace": space}), imageDirectory)["path"]
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_color_exports.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+success = True
+args = ('sdr-options', PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/e768a68165854698b1a... PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/e768a68165854698b1a912817df2cfa3'))
+runDirectory = PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/runs/ff225a81c92c4190985b353d9b860132')
+process = CompletedProcess(args=['/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/hdr-probe', 'sdr-options', '/Us...ixtures/e768a68165854698b1a912817df2cfa3'], returncode=1, stdout='', stderr='该格式或源图无法可靠保留所选色彩空间，请改用 PNG、JPEG 或其他色彩空间。')
+
+    def runProbe(*args: object, success: bool = True):
+        runDirectory = OUTPUT / "runs" / uuid.uuid4().hex
+        runDirectory.mkdir(parents=True)
+        process = subprocess.run([str(binary), *map(str, args)], cwd=runDirectory,
+                                 capture_output=True, text=True, timeout=60)
+        if success:
+>           assert process.returncode == 0, process.stderr
+E           AssertionError: 该格式或源图无法可靠保留所选色彩空间，请改用 PNG、JPEG 或其他色彩空间。
+E           assert 1 == 0
+E            +  where 1 = CompletedProcess(args=['/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/hdr-probe', 'sdr-options', '/Us...ixtures/e768a68165854698b1a912817df2cfa3'], returncode=1, stdout='', stderr='该格式或源图无法可靠保留所选色彩空间，请改用 PNG、JPEG 或其他色彩空间。').returncode
+
+tests/test_hdr_engine.py:40: AssertionError
+___________________ test_sdr_space_roundtrip[BMP-Adobe RGB] ____________________
+
+probe = <function probe.<locals>.runProbe at 0x12415c720>
+sdr = PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/7b8cd12bbfac40c0accaa111d0158e87/sdr.png')
+imageDirectory = PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/7b8cd12bbfac40c0accaa111d0158e87')
+space = 'Adobe RGB', fmt = 'BMP'
+
+    @pytest.mark.parametrize("space", ["sRGB", "Display P3", "Adobe RGB"])
+    @pytest.mark.parametrize("fmt", ["PNG", "JPEG", "HEIC", "BMP"])
+    def test_sdr_space_roundtrip(probe, sdr, imageDirectory, space, fmt):
+>       path = probe("sdr-options", sdr, fmt, json.dumps({"sdrColorSpace": space}), imageDirectory)["path"]
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_color_exports.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+success = True
+args = ('sdr-options', PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/7b8cd12bbfac40c0acc... PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/7b8cd12bbfac40c0accaa111d0158e87'))
+runDirectory = PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/runs/1361d4ed790d44e9b894dd568d6c4fd8')
+process = CompletedProcess(args=['/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/hdr-probe', 'sdr-options', '/Us...ixtures/7b8cd12bbfac40c0accaa111d0158e87'], returncode=1, stdout='', stderr='该格式或源图无法可靠保留所选色彩空间，请改用 PNG、JPEG 或其他色彩空间。')
+
+    def runProbe(*args: object, success: bool = True):
+        runDirectory = OUTPUT / "runs" / uuid.uuid4().hex
+        runDirectory.mkdir(parents=True)
+        process = subprocess.run([str(binary), *map(str, args)], cwd=runDirectory,
+                                 capture_output=True, text=True, timeout=60)
+        if success:
+>           assert process.returncode == 0, process.stderr
+E           AssertionError: 该格式或源图无法可靠保留所选色彩空间，请改用 PNG、JPEG 或其他色彩空间。
+E           assert 1 == 0
+E            +  where 1 = CompletedProcess(args=['/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/hdr-probe', 'sdr-options', '/Us...ixtures/7b8cd12bbfac40c0accaa111d0158e87'], returncode=1, stdout='', stderr='该格式或源图无法可靠保留所选色彩空间，请改用 PNG、JPEG 或其他色彩空间。').returncode
+
+tests/test_hdr_engine.py:40: AssertionError
+___________________ test_rgb_passthrough_keeps_source_codes ____________________
+
+probe = <function probe.<locals>.runProbe at 0x12415c720>
+imageDirectory = PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/356c8976472147319a78b4555d5e1e66')
+
+    def test_rgb_passthrough_keeps_source_codes(probe, imageDirectory):
+        original = imageDirectory / "source.png"
+        Image.new("RGB", (32, 32), (180, 70, 40)).save(original)
+        p3 = probe("sdr-options", original, "PNG", json.dumps({"sdrColorSpace": "Display P3"}), imageDirectory)["path"]
+>       direct = probe("sdr-options", p3, "PNG", json.dumps({"sdrColorSpace": "Adobe RGB", "sdrMapping": "RGB 直通"}), imageDirectory)["path"]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_color_exports.py:78: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+success = True
+args = ('sdr-options', '/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/356c8976472147319a78b4555d5e1... PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/356c8976472147319a78b4555d5e1e66'))
+runDirectory = PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/runs/18b6733a5eec4aafa47b41f0a2f04766')
+process = CompletedProcess(args=['/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/hdr-probe', 'sdr-options', '/Us...ixtures/356c8976472147319a78b4555d5e1e66'], returncode=1, stdout='', stderr='该格式或源图无法可靠保留所选色彩空间，请改用 PNG、JPEG 或其他色彩空间。')
+
+    def runProbe(*args: object, success: bool = True):
+        runDirectory = OUTPUT / "runs" / uuid.uuid4().hex
+        runDirectory.mkdir(parents=True)
+        process = subprocess.run([str(binary), *map(str, args)], cwd=runDirectory,
+                                 capture_output=True, text=True, timeout=60)
+        if success:
+>           assert process.returncode == 0, process.stderr
+E           AssertionError: 该格式或源图无法可靠保留所选色彩空间，请改用 PNG、JPEG 或其他色彩空间。
+E           assert 1 == 0
+E            +  where 1 = CompletedProcess(args=['/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/hdr-probe', 'sdr-options', '/Us...ixtures/356c8976472147319a78b4555d5e1e66'], returncode=1, stdout='', stderr='该格式或源图无法可靠保留所选色彩空间，请改用 PNG、JPEG 或其他色彩空间。').returncode
+
+tests/test_hdr_engine.py:40: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_color_exports.py::test_p3_pq_export[PNG] - AttributeError: ...
+FAILED tests/test_color_exports.py::test_sdr_space_roundtrip[PNG-Adobe RGB]
+FAILED tests/test_color_exports.py::test_sdr_space_roundtrip[BMP-sRGB] - Asse...
+FAILED tests/test_color_exports.py::test_sdr_space_roundtrip[BMP-Display P3]
+FAILED tests/test_color_exports.py::test_sdr_space_roundtrip[BMP-Adobe RGB]
+FAILED tests/test_color_exports.py::test_rgb_passthrough_keeps_source_codes
+6 failed, 21 passed in 15.69s
+ERROR conda.cli.main_run:execute(127): `conda run python -m pytest -q tests/test_color_exports.py` failed. (See above for error)

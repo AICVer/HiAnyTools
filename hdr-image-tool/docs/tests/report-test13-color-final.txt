@@ -1,0 +1,83 @@
+................................F.F.                                     [100%]
+=================================== FAILURES ===================================
+_________ test_colored_p3_gainmap_preserves_linear_rgb[GainMap JPEG-1] _________
+
+probe = <function probe.<locals>.runProbe at 0x11af60cc0>
+imageDirectory = PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/a962b155999a4803a1e6500abf71f079')
+gain = 1, fmt = 'GainMap JPEG'
+
+    @pytest.mark.parametrize("gain", [1,4])
+    @pytest.mark.parametrize("fmt", ["GainMap JPEG","GainMap HEIC"])
+    def test_colored_p3_gainmap_preserves_linear_rgb(probe, imageDirectory, gain, fmt):
+        original=imageDirectory / "red.png"
+        gray=imageDirectory / "gray.png"
+        Image.new("RGB",(64,64),(220,80,50)).save(original)
+        Image.new("RGB",(64,64),(255,255,255)).save(gray)
+        p3=probe("sdr-options",original,"PNG",json.dumps({"sdrColorSpace":"Display P3","sdrMapping":"RGB 直通"}),imageDirectory)["path"]
+        expected=np.array(probe("compose",p3,gray,gain)["hdr"]).reshape(-1,4)[:,:3].mean(axis=0)
+>       path=probe("compose",p3,gray,gain,fmt,json.dumps({"hdrColorSpace":"Display P3","quality":1}),imageDirectory)["path"]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_color_exports.py:159: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+success = True
+args = ('compose', '/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/a962b155999a4803a1e6500abf71f079/...s/a962b155999a4803a1e6500abf71f079/gray.png'), 1, 'GainMap JPEG', '{"hdrColorSpace": "Display P3", "quality": 1}', ...)
+runDirectory = PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/runs/3d01cec006bf461c9bc421cebd513f93')
+process = CompletedProcess(args=['/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/hdr-probe', 'compose', '/Users/...-tool/output/tests/fixtures/a962b155999a4803a1e6500abf71f079'], returncode=1, stdout='', stderr='导出文件回读校验失败，未生成可分享结果。')
+
+    def runProbe(*args: object, success: bool = True):
+        runDirectory = OUTPUT / "runs" / uuid.uuid4().hex
+        runDirectory.mkdir(parents=True)
+        process = subprocess.run([str(binary), *map(str, args)], cwd=runDirectory,
+                                 capture_output=True, text=True, timeout=60)
+        if success:
+>           assert process.returncode == 0, process.stderr
+E           AssertionError: 导出文件回读校验失败，未生成可分享结果。
+E           assert 1 == 0
+E            +  where 1 = CompletedProcess(args=['/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/hdr-probe', 'compose', '/Users/...-tool/output/tests/fixtures/a962b155999a4803a1e6500abf71f079'], returncode=1, stdout='', stderr='导出文件回读校验失败，未生成可分享结果。').returncode
+
+tests/test_hdr_engine.py:40: AssertionError
+_________ test_colored_p3_gainmap_preserves_linear_rgb[GainMap HEIC-1] _________
+
+probe = <function probe.<locals>.runProbe at 0x11af60cc0>
+imageDirectory = PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/3677ea19db0a4bafbc85e41b9ab4fbc5')
+gain = 1, fmt = 'GainMap HEIC'
+
+    @pytest.mark.parametrize("gain", [1,4])
+    @pytest.mark.parametrize("fmt", ["GainMap JPEG","GainMap HEIC"])
+    def test_colored_p3_gainmap_preserves_linear_rgb(probe, imageDirectory, gain, fmt):
+        original=imageDirectory / "red.png"
+        gray=imageDirectory / "gray.png"
+        Image.new("RGB",(64,64),(220,80,50)).save(original)
+        Image.new("RGB",(64,64),(255,255,255)).save(gray)
+        p3=probe("sdr-options",original,"PNG",json.dumps({"sdrColorSpace":"Display P3","sdrMapping":"RGB 直通"}),imageDirectory)["path"]
+        expected=np.array(probe("compose",p3,gray,gain)["hdr"]).reshape(-1,4)[:,:3].mean(axis=0)
+>       path=probe("compose",p3,gray,gain,fmt,json.dumps({"hdrColorSpace":"Display P3","quality":1}),imageDirectory)["path"]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_color_exports.py:159: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+success = True
+args = ('compose', '/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/fixtures/3677ea19db0a4bafbc85e41b9ab4fbc5/...s/3677ea19db0a4bafbc85e41b9ab4fbc5/gray.png'), 1, 'GainMap HEIC', '{"hdrColorSpace": "Display P3", "quality": 1}', ...)
+runDirectory = PosixPath('/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/runs/32252ea4ad644f2faa119f06924b8c3e')
+process = CompletedProcess(args=['/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/hdr-probe', 'compose', '/Users/...-tool/output/tests/fixtures/3677ea19db0a4bafbc85e41b9ab4fbc5'], returncode=1, stdout='', stderr='导出文件回读校验失败，未生成可分享结果。')
+
+    def runProbe(*args: object, success: bool = True):
+        runDirectory = OUTPUT / "runs" / uuid.uuid4().hex
+        runDirectory.mkdir(parents=True)
+        process = subprocess.run([str(binary), *map(str, args)], cwd=runDirectory,
+                                 capture_output=True, text=True, timeout=60)
+        if success:
+>           assert process.returncode == 0, process.stderr
+E           AssertionError: 导出文件回读校验失败，未生成可分享结果。
+E           assert 1 == 0
+E            +  where 1 = CompletedProcess(args=['/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/output/tests/hdr-probe', 'compose', '/Users/...-tool/output/tests/fixtures/3677ea19db0a4bafbc85e41b9ab4fbc5'], returncode=1, stdout='', stderr='导出文件回读校验失败，未生成可分享结果。').returncode
+
+tests/test_hdr_engine.py:40: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_color_exports.py::test_colored_p3_gainmap_preserves_linear_rgb[GainMap JPEG-1]
+FAILED tests/test_color_exports.py::test_colored_p3_gainmap_preserves_linear_rgb[GainMap HEIC-1]
+2 failed, 34 passed in 12.28s
+ERROR conda.cli.main_run:execute(127): `conda run python -m pytest -q tests/test_color_exports.py` failed. (See above for error)

@@ -1,0 +1,31 @@
+三维参考色域外包络：软件验证与界面观察
+日期：2026-10-30
+
+实现：sRGB、Display P3、BT.2020三种半透明参考外壳/网格线；三维开关独立于二维。共用峰值203nit默认，可选600/1000/10000nit。采用RGB立方体六面闭合采样，默认386顶点/768三角形，共用D65和既有Lab/CAM16-UCS/ICtCp变换。按可见包络和像素点共同定显示范围。
+
+验证：
+- 新包络与关联像素分布模块：36 passed in 13.65s，report-test15-module.txt。
+- 完整常规套件：199 passed in 89.58s，report-test15-all.txt。
+- 原有红军脚本显式单独执行：105 passed in 38.46s，report-test15-red.txt。
+- 合计304项通过；没有把重跑原有红军脚本称为本轮独立人工红军审阅。
+- pytest混用目录和子路径时未收集额外红军脚本，已单独显式补跑，按两个实际日志计数。
+- 三原色×四峰值的全部边界顶点用colour-science独立核对；验证黑白点、10000nit白点ICtCp=1/0/0、真实超界拒绝。
+- 检查六面顶点去重、每条三角形边共享两次且方向相反、朝外法向、Euler特征V−E+F=2、线框无内部对角线、非法参数拒绝。
+- 共享Swift核心行覆盖94.51%、区域83.55%、函数90.26%；新增ReferenceGamut.swift三项均100%。UI与静态光谱数据不计入，未提供分支指标。报告report-test15-coverage.txt。
+
+构建：iOS设备与模拟器均BUILD SUCCEEDED，日志report-test15-device-build.txt及report-test15-simulator-build.txt。设备构建仍未签名。
+模拟器最终版本安装并启动：iPhone17 / iOS27，PID98876。
+
+界面实际证据：output/tests/envelope-ui/
+- all-203.jpg/txt：4032×3024真实花卉照片，3072采样点，CAM16-UCS；三种外壳在203nit同时显示，颜色和图例对应，像素与外壳共同可见。
+- bt2020-1000-observed.txt：后续观察到sRGB/P3三维开关为0，BT.2020为1，峰值1000nit，自动旋转为1；二维三个开关仍为1。该状态为直接AX观察，不冒称未记录的每一步均由代理成功点击。
+- 控制工具多次返回noWindowsAvailable，改用独立设备窗口后恢复照片选择和包络展示；后续操作再次出现30秒超时及会话重置。
+- 全部关闭和逐档峰值/其他模型的完整UI组合未留存完成证据，不标作已逐项点击通过；对应数学坐标、网格与所有峰值已由模块测试覆盖。
+
+边界：包络是理想原色与指定峰值的采样参考，不是实测显示器色域或精确凸包容积。端点1e-8nit容差仅消除浮点误差。手机真实性能、XDR、双指缩放仍待真机/手动验收。
+
+复现命令（项目目录，本机base环境）：
+/Users/wangshupeng/miniforge3/bin/conda run --no-capture-output -n base python -m pytest -q tests
+/Users/wangshupeng/miniforge3/bin/conda run --no-capture-output -n base python -m pytest -q tests/red_team_r1_r2.py tests/red_team_r3_r4.py tests/red_team_r5_r6.py tests/red_team_r7_r8.py
+
+关键文件：Sources/ReferenceGamut.swift、Sources/PixelVisualizationView.swift、Sources/PixelDistribution.swift、tests/test_reference_gamut.py、tests/Probe.swift。

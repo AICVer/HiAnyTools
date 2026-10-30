@@ -1,0 +1,9 @@
+Date: 2026-10-29
+Scope: production Sources/ImageEngine.swift via 58 pytest cases.
+UI and physical device display excluded; no branch metric available.
+
+Filename                                                                              Regions    Missed Regions     Cover   Functions  Missed Functions  Executed       Lines      Missed Lines     Cover    Branches   Missed Branches     Cover
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/Users/wangshupeng/Desktop/图像转 PDF/hdr-image-tool/Sources/ImageEngine.swift          99                16    83.84%          25                 3    88.00%         164                 9    94.51%           0                 0         -
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+TOTAL                                                                                      99                16    83.84%          25                 3    88.00%         164                 9    94.51%           0                 0         -
