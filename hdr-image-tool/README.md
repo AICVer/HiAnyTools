@@ -2,7 +2,11 @@
 
 本机开发的原生 iOS HDR 图像工具，最低系统 iOS 18。需求与开发顺序已经两轮讨论确认，见 [需求规格](docs/requirements.md)。
 
-当前本地迭代：**0.1.1（构建5）**，已签名安装并在iPhone16启动；包含SDR 3D LUT增强、前后像素散点与凸包比较。见[本轮安装与Git归档记录](docs/tests/report-test24.txt)。
+最新源码与签名测试包为 **0.1.1（构建7）**：状态详情分别显示SDR/HDR/GainMap色彩描述；全屏支持捏合缩放；调整页模式控件间距与查看页一致；直方图默认RGBY叠加、四个独立开关，H/S/V保持单通道。251项常规及6项真实模拟器UI用例通过，见[test28](docs/tests/report-test28.txt)。构建7已覆盖安装到用户iPhone16并成功启动，见[test29](docs/tests/report-test29.txt)。
+
+本次界面迭代已完成“四页工作台”：查看、调整、分析、导出；共用导入入口，调整页保留紧凑预览，分析图三选一，导出参数折叠。由 Coze DeepSeek-v4-Pro 出稿，本机集成验收，位于 `ui-workspace/root` 独立 worktree，未合并main；已更新至用户iPhone16并启动，见 [test27](docs/tests/report-test27.txt)。双目标构建、238项常规回归和两项模拟器UI用例通过，范围与限制见 [test25](docs/tests/report-test25.txt)。
+
+当前本地迭代：**0.1.1（构建7）**，四项新功能已签名覆盖安装到iPhone16并启动；原21份导入缓存元数据保留。见[本轮安装记录](docs/tests/report-test29.txt)，历史构建6安装见[test27](docs/tests/report-test27.txt)。当前开发描述文件有效至2026-11-06 14:48（北京时间），到期需重新签名安装。历史0.1.1(5)归档见[test24](docs/tests/report-test24.txt)。
 
 ## 当前功能
 

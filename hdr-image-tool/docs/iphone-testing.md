@@ -1,6 +1,6 @@
 # 在 iPhone 16 上安装测试版
 
-本项目可通过本机Xcode安装到自己的iPhone16，最低iOS18，无需上架。2026-10-30已在用户iPhone16（iOS26.6.1）完成Personal Team签名和安装，现已更新为图标版0.1.0 (2)，启动成功（PID1382），图标更新证据见[test17](tests/report-test17.txt)，首次安装过程见[安装进度](agent/tasks/2026-10-30-iphone-install/progress.md)。
+本项目可通过本机Xcode安装到自己的iPhone16，最低iOS18，无需上架。最新2026-11-05已将四项增量0.1.1(7)签名覆盖安装到用户iPhone16/iOS26.6.1并启动（PID47369），原21份导入缓存元数据保留，见[test29](tests/report-test29.txt)。首次安装过程保留于[历史安装进度](agent/tasks/2026-10-30-iphone-install/progress.md)。
 
 ## 首次配置
 
@@ -34,4 +34,4 @@
 - [签名与团队流程](https://help.apple.com/xcode/mac/current/en.lproj/dev60b6fbbc7.html)
 - [开启 Developer Mode](https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device)
 
-状态：2026-10-30已签名安装；原首次配置步骤供后续重装参考。当前描述文件至2026-11-06 14:48（北京时间），到期须重新签名安装。构建产物应使用独立本机临时目录，避免桌面文件提供程序附加FinderInfo导致codesign失败；本轮路径记录在output/iphone-build-location.txt。
+状态：2026-11-05已安装0.1.1(7)并启动；原首次配置步骤供后续重装参考。当前描述文件至2026-11-06 14:48（北京时间），到期须重新签名安装。构建产物使用独立本机临时目录，避免桌面文件提供程序附加FinderInfo导致codesign失败；本轮路径记录在output/phone-install-20261105/build-path.txt。
