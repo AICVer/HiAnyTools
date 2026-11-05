@@ -1,5 +1,7 @@
 # 项目上下文
 
+- 构建7已发布到用户指定的[HiAnyTools](https://github.com/AICVer/HiAnyTools)：annotated tag `hdr-image-tool/v0.1.1-build.7`固定指向e80782a，远程main及标签解引用SHA已核对一致。用户明确选择完整仓库/完整历史，包含历史其他工具、PDF与output产物；原origin=image2pdf保留，新增hianytools远程。发布结果文档随后单独提交并推送main，不移动版本标签。19份冻结源码/测试指纹全匹配；本轮没有重跑既有功能测试。见[test31](../tests/report-test31.txt)、[进度](tasks/2026-11-05-publish-build7/progress.md)。历史各阶段“未推送”记录只描述当时状态。
+
 - 主干已整合：[进度](tasks/2026-11-05-merge-main/progress.md)、[test30](../tests/report-test30.txt)。用户授权提交并merge，功能提交74cf799、no-ff合并36ec99f，main已安全快进。合并无冲突，产品/正式测试指纹与test28一致，原有主干无关修改/删除/子模块状态保留；结果文档单独提交，最新hash以main日志为准。范围仅hdr-image-tool，不推送、不改写历史或删除worktree。历史调试输出仍在原ui-workspace/root的output，正式报告已纳入主干。
 
 - 构建7真机安装完成：[test29](../tests/report-test29.txt)。用户重新连接并解锁后，现有0.1.1(7)签名/源码指纹复核通过，已覆盖更新iPhone16并激活启动PID47369，设备版本与本次安装目录进程核验一致；旧21份导入缓存相对路径/大小均保留。源码/正式测试不变，不重跑test28；本轮只证实安装启动，不替代真机手势/XDR实测。现有开发签名有效至2026-11-06 14:48北京时间。无提交/合并/推送。

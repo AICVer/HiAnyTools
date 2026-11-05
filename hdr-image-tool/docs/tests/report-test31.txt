@@ -1,0 +1,28 @@
+test31 — 2026-11-05 构建7版本标签与GitHub发布
+
+范围：按用户授权发布完整仓库及完整历史到https://github.com/AICVer/HiAnyTools。
+用户在明确获知存在其他工具、历史PDF及output产物后，选择全部保留并推送。
+未纳入未提交/未跟踪改动，未改写历史，未强制推送。
+
+版本：MARKETING_VERSION=0.1.1，CURRENT_PROJECT_VERSION=7。
+已验收发布提交：e80782a070fd1157023bdb5e9c3d6257fc440463。
+功能：74cf79999641b81c43c1f3d124a91d386177fff9；合并：36ec99ff570a42d9856252d5cf4a87983131f877。
+19份生产代码/正式测试SHA256与构建7冻结指纹全部匹配。
+
+origin继续指向https://github.com/AICVer/image2pdf.git。
+新增hianytools=https://github.com/AICVer/HiAnyTools.git，预检远程为空。
+annotated tag：hdr-image-tool/v0.1.1-build.7。
+tag对象：7a55f1337de125c2eb6d2ae3d4d52841daa3c5d3。
+tag目标：e80782a070fd1157023bdb5e9c3d6257fc440463。
+git push --atomic hianytools refs/heads/main:refs/heads/main refs/tags/hdr-image-tool/v0.1.1-build.7:refs/tags/hdr-image-tool/v0.1.1-build.7成功。
+git ls-remote回读：main=e80782a、tag对象=7a55f13、tag解引用=e80782a，均与本地完整SHA一致。
+
+发布结果文档在干净整合worktree单独提交，随后main安全快进并正常推送；版本标签固定不动。
+最终远程main、本地HEAD和工作区保留核验以output/publish-build7-20261105/summary.json为准，避免提交文档自引用自身hash。
+原有根DS_Store、AGENTS/README删除、其他工具及wechat子模块未提交状态不属于本次提交；保留且不stash/清理。
+
+没有修改产品代码，不为标签/文档重复执行已有功能测试。
+沿用test28：251通过、2项外部HiEnhance LUT缺失跳过、6项模拟器UI通过。
+沿用test29：iPhone16构建7安装/启动完成；物理XDR及全面真机手势未测。
+本轮未发布GitHub Release、未上传签名App或本地未跟踪图像。
+知识自检：不建议新增入库；仅维护项目发布记录。
