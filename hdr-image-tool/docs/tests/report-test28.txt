@@ -1,0 +1,59 @@
+test28 — 2026-11-05 色彩详情／全屏缩放／调整间距／RGBY
+
+基线：现有0.1.1(6)未提交副本，ui-workspace/root，保留之前已交付的四页界面。
+用户确认缺失项显示“未提供／不适用”；随后明确确认“同图叠加RGBY，四个独立开关”。先行推荐方案与确认一致。
+
+模块首轮：13 passed in 7.79s。
+命令：base python -m pytest -q tests/test_image_color_info.py。
+真实Swift模块ImageColorInfo覆盖sRGB/P3/PQ/HLG/线性域/灰度、缺失与设备RGB、实际SDR/PQ/GainMap文件和明确合成工作域。
+日志：output/ui-followup-20261105/color-module.txt。
+已有UI夹具额外只读核对：系统实际解码为kCGColorSpaceSRGB；无原生HDR、无GainMap，未根据缺失ICC自行猜测。
+
+第1批Coze：同项目7704274349251133475，DeepSeek-v4-Pro已核实激活。
+9次成功edit_file仅修改主SwiftUI文件，按实际编辑事件取回并核对SHA256：73a945763ce0c368fa4074a0f4948e364f95fd97e92cf0f87f55cfe49946113f。
+接入三行色彩信息、UIScrollView全屏图像缩放、20pt调整顶部间距；HistogramPanel未改。
+本机第1批模拟器BUILD SUCCEEDED，stage1-build.txt。云端无Xcode，不冒称云端构建/手势通过。
+静态审阅发现每次updateUIView无条件重置、零bounds首次布局、contentSize重复乘zoomScale三处问题；已纳入第2批修正指令，尚不作为最终缩放可用结论。
+
+第2批及本机集成：
+Coze首次流只读后正常退出，未交付；续接实际保存5处编辑（根owner状态、分析绑定/调用、缩放组件替换），随后E5000中断；按提示重试一次返回空输出。均不把退出0或中间answer当完成。
+安全提取已成功保存的编辑；本机补齐HistogramPanel主体、缩放回调弱引用、初始/尺寸变化时居中及空状态无障碍描述。保留所有既有函数/类型，不改Histogram.swift分箱或解码/增强/导出算法。
+Coze实际开发范围为色彩详情UI接入、缩放组件、20pt间距、RGBY状态绑定；本机负责ImageColorInfo、绘图剩余主体与集成修正、测试和构建。不虚称全部代码由Coze完成。
+
+实现与边界：
+- 三处ImageInfo构造传入真实解码色彩描述；无原生HDR的SDR源图标明不适用及增强工作域；合成HDR明确线性BT.2020工作域；GainMap增益数据不冒充RGB色域。缺失项明确显示未提供/不适用；CGColorSpace名称不等于文件必有嵌入ICC，也不代表面板实测。
+- 全屏原生UIScrollView+UIImageView，1～8倍约束、捏合与拖动、保留HDR图像/动态范围设置；图或模式变化重置，普通刷新不重置。回调不强捕获自身，零bounds后由布局通知补齐，居中不重复乘缩放倍率。
+- 调整页模式控件顶部20pt；UI相对查看页实测差值不超过4pt，间距至少16pt。
+- 默认同图RGBY全开，四开关独立且由根owner保持；可全关。四曲线原始分箱、原始计数，共用四通道固定计数最大值/对数纵轴；上RGB倍参考白、下Y nit标尺。H/S/V仍原单通道方式和统计域，无重算分箱/每通道独立峰值归一化。
+
+最终常规回归：251 passed, 2 skipped in 101.70s。
+base python -m pytest -q tests --ignore=tests/test_workspace_ui.py。
+regression.txt；2项为外部HiEnhance指定LUT路径不可用，未伪造外部参考。
+
+UI首轮：六项中5通过/1失败，pytest编排1 failed in 169.13s。
+失败在RGBY全关提示的独立StaticText查询；文字位于Canvas overlay，图表AX标签未描述空状态。补齐图表空状态标签并加强逐个开关关闭断言后复测，不修改统计数据。
+首轮ui-tests.txt；结果output/workspace-ui/67b9882084064bbfa7140d99c9ca2bab/result.xcresult。
+
+最终UI：pytest编排1 passed in 165.48s，内部六项XCTest全部通过、无跳过。
+base python -m pytest -q tests/test_workspace_ui.py。
+ui-tests-final.txt；结果output/workspace-ui/134e274898814edf91f4fe913d4870d9/result.xcresult。
+新增四项：色彩详情字段/缺失项、调整间距相对查看页、真实pinch放大且关闭重开1倍/双击退出、RGBY默认四开关/独立隐藏/跨页及图表保持/全关/H/S/V切换。
+旧两项：四页空状态与实际加载后的调整/分析/导出状态回归。
+真实pinch后倍率断言>1.2且不超8，原始截图已导出并核对显示实际图像而非黑底视口；未假称测试了物理HDR亮度。
+
+覆盖率分开统计：
+- 本轮251项常规回归491份profraw：共享Swift模块行1338/1402=95.44%，区域634/736=86.14%，函数202/220=91.82%；ImageColorInfo.swift行44/46=95.65%。不含SwiftUI/测试探针/静态光谱表；core-coverage-summary.json。
+- 六项UI：主SwiftUI行2192/2615=83.82%，PixelVisualizationView.swift行739/824=89.68%；ui-coverage.json。
+- 仅UI用例下ImageColorInfo行78.26%、iOS App整体78.31%，不混入Mac探针覆盖或伪造统一跨平台覆盖率。新增色彩模块以上述实际模块覆盖95.65%为验收口径。
+
+构建/交付：
+集成模拟器BUILD SUCCEEDED，最终六项UI测试亦构建/执行成功。
+原真机目标因设备unavailable导致目标不可用，signed-build.txt；改用generic/platform=iOS后签名BUILD SUCCEEDED，signed-generic-build.txt。
+包0.1.1(7)、签名校验通过、描述文件包含原iPhone、模拟器测试入口不在真机二进制；package.json。描述文件至2026-11-06 14:48北京时间。
+当轮设备不可用，暂未安装构建7。用户后续重新连接后，已另行完成构建7覆盖安装和启动，证据见test29；不混用两轮验证。
+
+补充视觉核对：仅在output临时测试副本增加截图，定向重跑色彩详情/RGBY两项，通过；生产源码和正式测试不变，不重复计入6个唯一UI用例。visual-tests.txt、visual.xcresult。导出的color-details.png确认三字段与缺失说明可见；rgby.png确认四条曲线/四开关和RGB/Y双单位轴清楚显示。screenshots/0C8CE2F6-BA1A-4295-BEB8-54AF52E64D7C.png确认真实捏合后图像内容放大，未用窗口缩放代替。
+最终Coze同步完成：原始附件复制两份源码，云端与本机SHA一致；sync-stream.ndjson与sync-answer.md。主UI=e470c56a2917c40b4d9f3c0e4c0f46619b5abc71d1d9d22cb0b733af22103f6b，ImageColorInfo=9f72d5487f2e35c3769d0c258d846433ade2eebc1bce2c441eb270e6a6cc0908。未提交Git或部署云服务。
+
+证据目录均在output/ui-followup-20261105/：原始Coze流、阶段稿、构建日志、最终源码指纹、模块/回归/UI日志、覆盖率和截图。生产代码仅主UI增量与新增ImageColorInfo；其他既有Swift源码不变，测试/工程构建号/文档配套更新。未提交/合并/推送Git，未改.env、未新增依赖、未发送图像或签名资料。
+未验证：真机新功能/物理XDR、全分辨率主观画质及全部格式/空间/设备组合。模拟器实际捏合不是此前3D图直接双指手势验收。

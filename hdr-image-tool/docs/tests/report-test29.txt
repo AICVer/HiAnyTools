@@ -1,0 +1,28 @@
+test29 — 2026-11-05 构建7真机覆盖安装
+
+授权：用户回复“已连接并解锁，继续安装”。沿用ui-workspace/root的0.1.1(7)最终签名包，不改源码或重新编译。
+目标：已配对且available的物理iPhone16，UDID00008140-000160EE3440801C；bundle local.hdrimagelab。
+安装前设备清单为0.1.1(6)，安装后为0.1.1(7)。
+
+安装前复核：
+codesign --verify --deep --strict返回0；实际Info.plist的bundle/版本/构建号正确。
+现有描述文件包含目标iPhone，Team BCVP74Y9F4，有效至2026-11-06 14:48北京时间。
+生产源码及正式测试指纹与test28最终快照一致，未为无变化源码重复执行回归。
+构建包：/private/tmp/HDRImageLab-phone-20261105.rCvRaO/Build/Products/Debug-iphoneos/HDRImageLab.app。
+
+覆盖安装：
+devicectl device install app结果outcome=success，未卸载旧App、未清理数据。
+设备应用清单核对0.1.1 / Bundle Version7。
+安装前记录的21份tmp/HDRImports缓存文件，安装后相对路径/大小21/21匹配。
+只读文件元数据，没有复制原图或计算其内容hash，不把元数据匹配冒称字节级内容验证。
+
+启动：
+devicectl device process launch --terminate-existing成功，outcome=success、activatedWhenStarted=true、PID47369。
+仅查询HDRImageLab过滤后的进程清单，PID与可执行路径一致，路径属于本次42BAAEB9安装目录。
+未传入测试启动参数，没有操作其他App或外发分享。
+
+证据：output/ui-followup-20261105/phone/下package-recheck.json、codesign.txt、apps-before.json/apps-after.json、files-before.json/files-after.json、install.json、launch.json、processes.json及summary.json。
+本轮验证范围：签名/版本/覆盖安装/旧缓存元数据/启动运行。
+未验证：新功能的全面真机手势/主观画质及物理XDR；test28的251项常规回归与6项模拟器UI用例是之前的独立证据，本轮未重跑、不冒充真机效果验收。
+变更仅为安装文档、状态、changelog与知识自检；源码、工程配置及正式测试未改，无Git提交/合并/推送。
+知识自检：复用K10，不建议新增入库，设备和签名状态仅作为本次运行记录。

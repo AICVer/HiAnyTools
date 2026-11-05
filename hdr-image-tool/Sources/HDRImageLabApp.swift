@@ -28,7 +28,8 @@ private actor ImageSession {
         return ImageInfo(width: Int(loaded.size.width), height: Int(loaded.size.height),
                          isHDR: loaded.isHDR, hasGainMap: loaded.gainMap != nil,
                          typeName: loaded.formatName, dynamicRangeLabel: loaded.dynamicRangeLabel,
-                         sourceHeadroom: loaded.isHDR ? try engine.contentHeadroom(of: loaded.hdr) : 1)
+                         sourceHeadroom: loaded.isHDR ? try engine.contentHeadroom(of: loaded.hdr) : 1,
+                         colorInfo: loaded.colorInfo())
     }
 
     func compose(grayURL: URL?, maximumGain: Double?, generation: Int) throws -> ImageInfo {
@@ -45,7 +46,8 @@ private actor ImageSession {
         return ImageInfo(width: Int(result.size.width), height: Int(result.size.height),
             isHDR: result.isHDR, hasGainMap: result.gainMap != nil, typeName: result.formatName,
             dynamicRangeLabel: maximumGain == nil ? result.dynamicRangeLabel : "灰度 GainMap 合成",
-            sourceHeadroom: try engine.contentHeadroom(of: result.hdr), isComposed: maximumGain != nil)
+            sourceHeadroom: try engine.contentHeadroom(of: result.hdr), isComposed: maximumGain != nil,
+            colorInfo: result.colorInfo(generatedHDR: maximumGain != nil))
     }
 
     func applyLUT(data: Data?, name: String?, enabled: Bool, generation: Int) throws -> ImageInfo {
@@ -69,7 +71,8 @@ private actor ImageSession {
             isHDR: result.isHDR, hasGainMap: result.gainMap != nil, typeName: result.formatName,
             dynamicRangeLabel: enabled ? "LUT增强 · 线性BT.2020" : result.dynamicRangeLabel,
             sourceHeadroom: try engine.contentHeadroom(of: result.hdr), isLUT: enabled,
-            lutName: lut?.name, lutDimension: lut?.dimension)
+            lutName: lut?.name, lutDimension: lut?.dimension,
+            colorInfo: result.colorInfo())
     }
 
     func preview(mode: ImageMode, peak: Double, generation: Int) throws -> CGImage {
@@ -125,6 +128,8 @@ private struct ImageInfo {
     var isLUT = false
     var lutName: String?
     var lutDimension: Int?
+    /// 解码表观或已知合成工作域的色彩描述；非面板实测色域或导出目标。
+    var colorInfo = ImageColorInfo.unavailable
 }
 
 @MainActor
@@ -396,6 +401,182 @@ private struct HDRPreview: UIViewRepresentable {
     }
 }
 
+// MARK: - 全屏缩放预览
+
+/// 全屏查看时用原生 UIScrollView + UIImageView 承载同一 CGImage，
+/// 支持 1～8 倍双指缩放与放大后的拖动，保持 HDR/SDR 动态范围设置。
+/// 图像视图按真实宽高比铺满视口，缩放作用于图像本体而非仅缩放黑底视口。
+private final class FullScreenZoomScrollView: UIScrollView {
+    var onViewportLayout: ((CGSize) -> Void)?
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        onViewportLayout?(bounds.size)
+    }
+}
+
+private struct FullScreenZoomPreview: UIViewRepresentable {
+    let image: CGImage?
+    let mode: ImageMode
+
+    func makeCoordinator() -> Coordinator { Coordinator() }
+
+    func makeUIView(context: Context) -> FullScreenZoomScrollView {
+        let scrollView = FullScreenZoomScrollView()
+        scrollView.backgroundColor = .black
+        scrollView.minimumZoomScale = 1
+        scrollView.maximumZoomScale = 8
+        scrollView.zoomScale = 1
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.bouncesZoom = true
+        scrollView.delegate = context.coordinator
+        scrollView.contentInsetAdjustmentBehavior = .never
+        scrollView.accessibilityIdentifier = "full-screen-preview"
+        scrollView.accessibilityValue = String(format: "缩放 %.2f×", 1.0)
+
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        imageView.backgroundColor = .black
+        context.coordinator.imageView = imageView
+        scrollView.addSubview(imageView)
+        scrollView.onViewportLayout = { [weak coordinator = context.coordinator, weak scrollView] size in
+            guard let scrollView else { return }
+            coordinator?.viewportDidLayout(size, in: scrollView)
+        }
+        return scrollView
+    }
+
+    func updateUIView(_ scrollView: FullScreenZoomScrollView, context: Context) {
+        guard let imageView = context.coordinator.imageView else { return }
+        // 仅在 CGImage 身份或显示模式变化时才重置缩放；普通 SwiftUI 刷新保留当前缩放与偏移。
+        let imageChanged = context.coordinator.lastImage !== image
+        let modeChanged = context.coordinator.lastMode != mode
+        if imageChanged || modeChanged {
+            scrollView.zoomScale = 1
+            scrollView.contentOffset = .zero
+            scrollView.contentInset = .zero
+            scrollView.contentSize = .zero
+            scrollView.accessibilityValue = String(format: "缩放 %.2f×", 1.0)
+        }
+        context.coordinator.lastImage = image
+        context.coordinator.lastMode = mode
+
+        imageView.preferredImageDynamicRange = mode == .hdr ? .high : .standard
+        imageView.layer.toneMapMode = .automatic
+        if #available(iOS 26.0, *) {
+            imageView.layer.preferredDynamicRange = mode == .hdr ? .high : .standard
+        } else {
+            imageView.layer.wantsExtendedDynamicRangeContent = mode == .hdr
+        }
+        imageView.image = image.map { UIImage(cgImage: $0) }
+        if imageChanged || modeChanged {
+            context.coordinator.invalidateLayout(in: scrollView)
+        }
+    }
+
+    final class Coordinator: NSObject, UIScrollViewDelegate {
+        weak var imageView: UIImageView?
+        var lastImage: CGImage?
+        var lastMode: ImageMode?
+        private var laidOutSize: CGSize = .zero
+        private var needsLayout = true
+
+        func viewForZooming(in scrollView: UIScrollView) -> UIView? { imageView }
+
+        func scrollViewDidZoom(_ scrollView: UIScrollView) {
+            scrollView.accessibilityValue = String(format: "缩放 %.2f×", Double(scrollView.zoomScale))
+            centerContent(in: scrollView)
+        }
+
+        /// 首帧或视口尺寸变化时由 layoutSubviews 通知；缓存已布局尺寸，避免拖动/缩放时的重复布局递归。
+        func viewportDidLayout(_ size: CGSize, in scrollView: UIScrollView) {
+            guard size.width > 0, size.height > 0 else { return }
+            let changed = size != laidOutSize
+            guard needsLayout || changed else { return }
+            laidOutSize = size
+            needsLayout = false
+            if changed { scrollView.setZoomScale(1, animated: false) }
+            layoutImage(in: scrollView)
+        }
+
+        /// 新图/模式变化后强制重排，尽力立即布局；若此刻 bounds 仍为零，等待 layoutSubviews 再补一次。
+        func invalidateLayout(in scrollView: UIScrollView) {
+            needsLayout = true
+            laidOutSize = .zero
+            layoutImage(in: scrollView)
+        }
+
+        /// 按图像真实宽高比铺满视口；缩放/拖动作用于图像本体。
+        func layoutImage(in scrollView: UIScrollView) {
+            guard let imageView else { return }
+            let bounds = scrollView.bounds.size
+            guard bounds.width > 0, bounds.height > 0,
+                  let size = imageView.image?.size, size.width > 0, size.height > 0 else {
+                if bounds.width > 0, bounds.height > 0 {
+                    imageView.frame = CGRect(origin: .zero, size: bounds)
+                    scrollView.contentSize = bounds
+                    centerContent(in: scrollView)
+                }
+                return
+            }
+            let aspect = size.width / size.height
+            let boundsAspect = bounds.width / bounds.height
+            var fit = CGSize.zero
+            if aspect > boundsAspect {
+                fit.width = bounds.width
+                fit.height = bounds.width / aspect
+            } else {
+                fit.height = bounds.height
+                fit.width = bounds.height * aspect
+            }
+            imageView.frame = CGRect(origin: .zero, size: fit)
+            scrollView.contentSize = fit
+            centerContent(in: scrollView)
+            scrollView.contentOffset = CGPoint(x: -scrollView.contentInset.left,
+                                                y: -scrollView.contentInset.top)
+        }
+
+        private func centerContent(in scrollView: UIScrollView) {
+            // contentSize 已由 imageView.frame 决定，居中时不再重复乘 zoomScale。
+            let horizontal = max((scrollView.bounds.width - scrollView.contentSize.width) * 0.5, 0)
+            let vertical = max((scrollView.bounds.height - scrollView.contentSize.height) * 0.5, 0)
+            scrollView.contentInset = UIEdgeInsets(top: vertical, left: horizontal,
+                                                   bottom: vertical, right: horizontal)
+        }
+    }
+}
+
+// MARK: - 四页工作台
+
+private enum WorkspaceTab: Hashable {
+    case view
+    case adjust
+    case analyze
+    case export
+}
+
+private enum AdjustTool: String, CaseIterable, Identifiable {
+    case highlight = "高光增强"
+    case lut = "3D LUT"
+    case gainMap = "GainMap 合成"
+    var id: String { rawValue }
+}
+
+private enum AnalysisKind: String, CaseIterable, Identifiable {
+    case histogram = "直方图"
+    case chromaticity = "二维色度"
+    case volume = "三维色域"
+    var id: String { rawValue }
+}
+
+private enum ExportKind: String, CaseIterable, Identifiable {
+    case hdr = "HDR"
+    case sdr = "SDR"
+    var id: String { rawValue }
+}
+
 private struct ContentView: View {
     @StateObject private var model = ImageModel()
     @State private var photo: PhotosPickerItem?
@@ -411,6 +592,8 @@ private struct ContentView: View {
     @State private var targetKiBText = ""
     @State private var histogramChannel = HistogramChannel.red
     @State private var logarithmicCounts = true
+    @State private var showRGBY = true
+    @State private var visibleRGBY: Set<HistogramChannel> = [.red, .green, .blue, .luminance]
     @State private var showFullScreen = false
     @State private var showGrayImporter = false
     @State private var grayPhoto: PhotosPickerItem?
@@ -419,10 +602,8 @@ private struct ContentView: View {
     @State private var hdrColorSpace = HDRColorSpace.bt2020
     @State private var sdrColorSpace = SDRColorSpace.sRGB
     @State private var sdrMapping = SDRMapping.xyz
-    @State private var showDistribution = false
     @State private var showLUTImporter = false
-
-    private var distributionKey: String { "\(model.revision)|\(peak)" }
+    @State private var selectedTab = WorkspaceTab.view
 
     private var previewKey: String {
         model.requestKey(mode: mode, peak: peak)
@@ -432,278 +613,58 @@ private struct ContentView: View {
         "\(quality)|\(dpiText)|\(sizeAxis)|\(pixelsText)|\(targetKiBText)|\(hdrColorSpace)|\(sdrColorSpace)|\(sdrMapping)"
     }
 
-    private func exportOptions() throws -> ExportOptions {
-        func integer(_ text: String) throws -> Int? {
-            let value = text.trimmingCharacters(in: .whitespacesAndNewlines)
-            if value.isEmpty { return nil }
-            guard let result = Int(value), result > 0 else { throw ImageFailure.invalidOptions }
-            return result
-        }
-        let pixels = sizeAxis == "原尺寸" ? nil : try integer(pixelsText)
-        guard sizeAxis == "原尺寸" || pixels != nil else { throw ImageFailure.invalidOptions }
-        let kib = try integer(targetKiBText)
-        guard kib.map({ $0 <= Int.max / 1024 }) ?? true else { throw ImageFailure.invalidOptions }
-        return ExportOptions(quality: quality, dpi: try integer(dpiText),
-            width: sizeAxis == "宽度" ? pixels : nil, height: sizeAxis == "高度" ? pixels : nil,
-            targetBytes: kib.map { $0 * 1024 }, hdrColorSpace: hdrColorSpace,
-            sdrColorSpace: sdrColorSpace, sdrMapping: sdrMapping)
-    }
-
-    private var exportControls: some View {
-        GroupBox("导出参数") {
-            VStack(alignment: .leading, spacing: 12) {
-                Text("JPEG / HEIC 质量上限：\(Int(quality * 100))%")
-                Slider(value: $quality, in: 0...1, step: 0.01)
-                    .accessibilityLabel("压缩质量上限")
-                TextField("DPI（可选，1～2400）", text: $dpiText).keyboardType(.numberPad)
-                    .accessibilityLabel("导出 DPI")
-                Picker("像素尺寸", selection: $sizeAxis) {
-                    ForEach(["原尺寸", "宽度", "高度"], id: \.self) { Text($0).tag($0) }
-                }.pickerStyle(.segmented)
-                if sizeAxis != "原尺寸" {
-                    TextField("目标\(sizeAxis)（像素）", text: $pixelsText).keyboardType(.numberPad)
-                }
-                TextField("文件上限 KiB（可选）", text: $targetKiBText).keyboardType(.numberPad)
-                    .accessibilityLabel("目标文件大小 KiB")
-                Text("尺寸保持比例；DPI 只修改密度。目标体积仅搜索质量，不自动缩小像素；无损格式只校验体积上限。")
-                    .font(.caption).foregroundStyle(.secondary)
-            }.textFieldStyle(.roundedBorder)
-        }.disabled(model.busy)
-    }
-
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
-                    Text("看见高光里的层次")
-                        .font(.title2.weight(.semibold))
-                    Text("本地图像 · HDR / SDR · PQ 导出")
-                        .font(.subheadline).foregroundStyle(.secondary)
-                    HStack {
-                        PhotosPicker(selection: $photo, matching: .images,
-                                     preferredItemEncoding: .current) {
-                            Label("从相册选择", systemImage: "photo")
-                        }
-                        Button { showImporter = true } label: {
-                            Label("导入文件", systemImage: "folder")
-                        }
-                    }
-                    .buttonStyle(.bordered).disabled(model.busy)
+            VStack(spacing: 0) {
+                ImportEntry(model: model, photo: $photo, showImporter: $showImporter)
+                    .padding(.horizontal, 20)
+                TabView(selection: $selectedTab) {
+                    ViewTab(model: model, mode: $mode, showFullScreen: $showFullScreen, peak: peak)
+                        .tabItem { Label("查看", systemImage: "eye") }
+                        .tag(WorkspaceTab.view)
 
-                    if let info = model.info {
-                        Picker("查看", selection: $mode) {
-                            ForEach(ImageMode.allCases.filter { $0 != .gainMap || info.hasGainMap }, id: \.self) { item in
-                                Text(item.rawValue).tag(item)
-                                    .disabled(item == .gainMap && !info.hasGainMap)
-                            }
-                        }.pickerStyle(.segmented).disabled(model.busy)
-                        HDRPreview(image: model.previewRequestKey == previewKey ? model.preview : nil, mode: mode)
-                            .frame(height: 320).clipShape(RoundedRectangle(cornerRadius: 16))
-                            .contentShape(Rectangle())
-                            .onTapGesture(count: 2) {
-                                if model.previewRequestKey == previewKey && model.preview != nil { showFullScreen = true }
-                            }
-                            .accessibilityLabel("\(mode.rawValue) 图像预览")
-                            .accessibilityAction(named: "全屏显示") { showFullScreen = true }
-                        Text("双击图像全屏查看").font(.caption).foregroundStyle(.secondary)
-                        VStack(alignment: .leading, spacing: 6) {
-                            Text("\(info.width) × \(info.height) · \(info.isLUT ? "LUT 增强结果" : (info.isComposed ? "HDR 合成结果" : (info.isHDR ? "HDR 源图" : "SDR 源图")))")
-                            Text("\(info.isComposed || info.isLUT ? "源文件格式" : "实际文件格式")：\(info.typeName) · \(info.dynamicRangeLabel)")
-                            Text(info.isComposed ? "当前为合成灰度增益图，尚未写入文件。" :
-                                 (info.hasGainMap ? "含系统可读取的 GainMap" : "未读取到 GainMap"))
-                            if mode == .sdr {
-                                Text(info.isLUT ? "LUT 增强后的 SDR 表观" : (info.isComposed ? "原图 SDR 基础表观（未应用合成增益）" :
-                                     (info.hasGainMap ? "SDR 基础表观（HDR 基图时由系统映射）" : "SDR 表观（HDR 源图经系统色调映射）"))
-                                )
-                            }
-                            TimelineView(.periodic(from: .now, by: 2)) { _ in
-                                Text("当前显示余量 \(UIScreen.main.currentEDRHeadroom, specifier: "%.2f")×")
-                                if UIScreen.main.currentEDRHeadroom <= 1.01 {
-                                    Text("当前显示余量为 SDR，系统将映射高光；导出保留 HDR 数据。")
-                                }
-                            }
-                            if mode == .hdr, model.previewRequestKey == previewKey, let preview = model.preview {
-                                Text("预览内容余量 \(Double(preview.contentHeadroom), specifier: "%.2f")×")
-                            }
-                        }.font(.caption).foregroundStyle(.secondary)
-                        GroupBox("SDR · 3D LUT 增强") {
-                            VStack(alignment: .leading, spacing: 10) {
-                                Text("输入sRGB码值 → 线性BT.2020输出；其他编码的LUT不适用。")
-                                    .font(.caption).foregroundStyle(.secondary)
-                                Text(info.lutName.map { "\($0) · \(info.lutDimension ?? 0)³ · \(info.isLUT ? "已应用" : "未应用")" } ?? "尚未加载LUT")
-                                    .font(.caption)
-                                HStack {
-                                    Button("导入并应用 .cube") { showLUTImporter = true }
-                                    Button("使用提供的LUT") {
-                                        guard let url = Bundle.main.url(forResource: "bt709_to_bt2020_catd65_linear", withExtension: "cube")
-                                        else { model.report(LUTFailure.invalid("内置示例资源缺失。")); return }
-                                        Task { mode = .sdr; await model.loadLUT(url); if model.info?.isLUT == true { sdrColorSpace = .bt2020 } }
-                                    }
-                                }.buttonStyle(.bordered)
-                                HStack {
-                                    Button("重新应用LUT") { Task { mode = .sdr; await model.applyLUT(enabled: true) } }
-                                        .disabled(info.lutName == nil)
-                                    Button("恢复原图") { Task { mode = .sdr; await model.applyLUT(enabled: false) } }
-                                        .disabled(!info.isLUT)
-                                }.buttonStyle(.bordered)
-                                Text("每次从原图应用，不累积；预览、分析及SDR导出使用增强结果。原图与增强图按相同像素网格、当前峰值比较；灰度GainMap合成单独应用。")
-                                    .font(.caption).foregroundStyle(.secondary)
-                                Text("分布取编码前增强结果；SDR预览及导出受目标色域和亮度范围限制。")
-                                    .font(.caption).foregroundStyle(.secondary)
-                            }
-                        }.disabled(model.busy || info.isHDR)
-                        GroupBox("SDR + 灰度 GainMap 合成") {
-                            VStack(alignment: .leading, spacing: 12) {
-                                Picker("灰度来源", selection: $useOtherGray) {
-                                    Text("当前源图").tag(false)
-                                    Text("另一张图").tag(true)
-                                }.pickerStyle(.segmented)
-                                if useOtherGray {
-                                    HStack {
-                                        PhotosPicker("选择灰度来源照片", selection: $grayPhoto,
-                                            matching: .images, preferredItemEncoding: .current)
-                                        Button("选择灰度来源文件") { showGrayImporter = true }
-                                    }.buttonStyle(.bordered)
-                                    Text(model.grayName ?? "尚未选择来源图").font(.caption)
-                                }
-                                Text("最大增益 \(maximumGain, specifier: "%.2f")×")
-                                Slider(value: $maximumGain, in: 1...16).accessibilityLabel("灰度最大增益")
-                                Text("取源图 SDR 表观的线性亮度；黑色不增强，白色为最大增益。另一张图等比居中裁切；合成使用原始 SDR 基图，不叠加上次合成。")
-                                    .font(.caption).foregroundStyle(.secondary)
-                                HStack {
-                                    Button("应用合成") {
-                                        Task { mode = .hdr; await model.compose(useOtherImage: useOtherGray, maximumGain: maximumGain) }
-                                    }.disabled(useOtherGray && model.grayURL == nil)
-                                    Button("恢复源图") {
-                                        Task { mode = .hdr; await model.compose(useOtherImage: false, maximumGain: nil) }
-                                    }
-                                }.buttonStyle(.bordered)
-                            }
-                        }.disabled(model.busy)
-                        GroupBox("SDR → HDR 高光增强") {
-                            VStack(alignment: .leading, spacing: 10) {
-                                HStack {
-                                    Text("输出峰值")
-                                    Spacer()
-                                    Text("\(Int(peak)) nit").monospacedDigit()
-                                }
-                                Slider(value: $peak, in: 203...600, step: 1)
-                                    .accessibilityLabel("HDR 输出峰值")
-                                Text(info.isComposed ? "当前为合成 HDR；请在上方调整合成增益，或恢复源图。" :
-                                     (info.isHDR ? "源图已有 HDR，保留其原动态范围。" :
-                                      "203 nit 保持原映射；提高峰值逐渐增强亮区。"))
-                                    .font(.caption).foregroundStyle(.secondary)
-                            }
-                        }.disabled(info.isHDR || model.busy)
-                        if model.histogramRequestKey == previewKey, let stats = model.histograms {
-                            HistogramPanel(stats: stats, channel: $histogramChannel, logarithmic: $logarithmicCounts)
-                        } else if let error = model.histogramError {
-                            Text("直方图暂不可用：\(error)").font(.caption).foregroundStyle(.secondary)
-                        } else {
-                            ProgressView("正在更新采样统计…")
-                        }
-                        Toggle("显示像素色域分布", isOn: $showDistribution)
-                        if showDistribution {
-                            Group {
-                                if model.distributionKey == distributionKey, let data = model.distribution {
-                                    PixelVisualizationPanel(distribution: data, enhancedDistribution: model.enhancedDistribution,
-                                        analysisID: distributionKey)
-                                } else if let error = model.distributionError {
-                                    Text("像素分布暂不可用：\(error)").font(.caption)
-                                } else { ProgressView("正在计算像素色域分布…") }
-                            }.task(id: distributionKey) {
-                                await model.updateDistribution(peak: peak, key: distributionKey)
-                            }
-                        }
-                        exportControls
-                        GroupBox("导出 HDR 结果") {
-                            VStack(alignment: .leading, spacing: 12) {
-                                Picker("文件格式", selection: $format) {
-                                    ForEach(ExportFormat.allCases, id: \.self) { item in
-                                        Text(item.rawValue).tag(item)
-                                    }
-                                }.pickerStyle(.menu)
-                                Picker("HDR 色域", selection: $hdrColorSpace) {
-                                    ForEach(HDRColorSpace.allCases, id: \.self) { Text($0.rawValue).tag($0) }
-                                }.pickerStyle(.segmented)
-                                Text(format.isGainMap ? "SDR 基图 + ISO GainMap · 透明铺白底" : "16 位 · \(hdrColorSpace.rawValue) 原色 · PQ")
-                                    .font(.caption).foregroundStyle(.secondary)
-                                if format.isGainMap {
-                                    Text("结果需超过 SDR 参考白，系统才会写出 GainMap；无增益时可导出普通 SDR 或 PQ。")
-                                        .font(.caption).foregroundStyle(.secondary)
-                                }
-                                if Double(info.sourceHeadroom) * 203 > 10000.1 {
-                                    Text("系统解码的 RGB 分量超出 PQ 范围，导出将按 0～10000 nit 的编码边界裁切。")
-                                        .font(.caption).foregroundStyle(.orange)
-                                }
-                                Button("生成 \(format.isGainMap ? "" : "PQ ")\(format.rawValue)") {
-                                    Task {
-                                        do { await model.export(peak: peak, format: format, options: try exportOptions()) }
-                                        catch { model.report(error) }
-                                    }
-                                }.buttonStyle(.borderedProminent).disabled(model.busy)
-                                if let url = model.exportURL {
-                                    ShareLink(item: url) {
-                                        Label("保存或分享已生成文件", systemImage: "square.and.arrow.up")
-                                    }
-                                }
-                            }.disabled(model.busy)
-                        }
-                        Text("上方导出使用当前 HDR 结果。实际屏幕亮度由系统管理。")
-                            .font(.footnote).foregroundStyle(.secondary)
-                        GroupBox("普通格式转换（SDR）") {
-                            VStack(alignment: .leading, spacing: 12) {
-                                Picker("输出格式", selection: $sdrFormat) {
-                                    ForEach(SDRFormat.supported, id: \.self) { item in
-                                        Text(item.rawValue).tag(item)
-                                    }
-                                }.pickerStyle(.segmented).disabled(model.busy)
-                                Picker("SDR 色域", selection: $sdrColorSpace) {
-                                    ForEach(SDRColorSpace.allCases.filter { sdrFormat != .bmp || $0 == .sRGB }, id: \.self) { Text($0.rawValue).tag($0) }
-                                }.pickerStyle(.segmented)
-                                if sdrFormat == .bmp {
-                                    Text("系统 BMP 编解码器不保留宽色域 ICC；BMP 仅提供 sRGB，P3/Adobe RGB 请选 PNG、JPEG 或 HEIC。")
-                                        .font(.caption).foregroundStyle(.secondary)
-                                }
-                                Picker("色域映射", selection: $sdrMapping) {
-                                    ForEach(SDRMapping.allCases, id: \.self) { Text($0.rawValue).tag($0) }
-                                }.pickerStyle(.segmented)
-                                Text(sdrMapping == .xyz ? "等 XYZ：保持色度转换，目标范围外裁切。" : "RGB 直通：保留源 SDR 编码值，更换色彩空间解释，颜色外观会改变。")
-                                    .font(.caption).foregroundStyle(.secondary)
-                                Text("8 位 \(sdrColorSpace.rawValue) · \(info.isLUT ? "LUT增强SDR表观" : "源图SDR表观") · 使用上方导出参数")
-                                    .font(.caption).foregroundStyle(.secondary)
-                                Text(sdrFormat.keepsAlpha ? "PNG 保留透明区域。" : "透明区域铺白底。")
-                                    .font(.caption).foregroundStyle(.secondary)
-                                if info.isHDR {
-                                    Text("转换为 SDR；保留 HDR 请使用上方 HDR 导出。")
-                                        .font(.caption).foregroundStyle(.secondary)
-                                }
-                                Button("生成 SDR \(sdrFormat.rawValue)") {
-                                    Task {
-                                        do { await model.exportSDR(format: sdrFormat, options: try exportOptions()) }
-                                        catch { model.report(error) }
-                                    }
-                                }.buttonStyle(.borderedProminent).disabled(model.busy)
-                                if let url = model.sdrExportURL {
-                                    ShareLink(item: url) {
-                                        Label("保存或分享 SDR 文件", systemImage: "square.and.arrow.up")
-                                    }
-                                }
-                            }.disabled(model.busy)
-                        }
-                    } else {
-                        ContentUnavailableView("导入一张原始图片", systemImage: "photo.badge.plus",
-                            description: Text("选择 HEIC、JPEG、PNG、BMP 或 TIFF，查看与转换图像。"))
-                    }
-                    if model.busy { ProgressView("正在处理…") }
-                }.padding(20)
+                    AdjustTab(model: model, mode: $mode, peak: $peak,
+                              maximumGain: $maximumGain, useOtherGray: $useOtherGray,
+                              grayPhoto: $grayPhoto, showGrayImporter: $showGrayImporter,
+                              showLUTImporter: $showLUTImporter, sdrColorSpace: $sdrColorSpace)
+                        .tabItem { Label("调整", systemImage: "slider.horizontal.3") }
+                        .tag(WorkspaceTab.adjust)
+
+                    AnalyzeTab(model: model, mode: mode, peak: peak,
+                               histogramChannel: $histogramChannel,
+                               logarithmicCounts: $logarithmicCounts,
+                               showRGBY: $showRGBY,
+                               visibleRGBY: $visibleRGBY)
+                        .tabItem { Label("分析", systemImage: "chart.xyaxis.line") }
+                        .tag(WorkspaceTab.analyze)
+
+                    ExportTab(model: model, peak: peak,
+                              format: $format, sdrFormat: $sdrFormat,
+                              quality: $quality, dpiText: $dpiText, sizeAxis: $sizeAxis,
+                              pixelsText: $pixelsText, targetKiBText: $targetKiBText,
+                              hdrColorSpace: $hdrColorSpace, sdrColorSpace: $sdrColorSpace,
+                              sdrMapping: $sdrMapping)
+                        .tabItem { Label("导出", systemImage: "square.and.arrow.up") }
+                        .tag(WorkspaceTab.export)
+                }
             }
-            .scrollDismissesKeyboard(.interactively)
             .navigationTitle("HDR Image Lab")
+            .navigationBarTitleDisplayMode(.inline)
+            #if targetEnvironment(simulator)
+            .task {
+                // 模拟器 UI 回归复用真实文件加载路径，避免依赖系统相册服务。
+                let arguments = ProcessInfo.processInfo.arguments
+                if let index = arguments.firstIndex(of: "--workspace-test-image"),
+                   arguments.indices.contains(index + 1) {
+                    await model.load(URL(fileURLWithPath: arguments[index + 1]))
+                }
+            }
+            #endif
+            .overlay { busyOverlay }
             .fullScreenCover(isPresented: $showFullScreen) {
                 ZStack(alignment: .topTrailing) {
                     Color.black.ignoresSafeArea()
-                    HDRPreview(image: model.previewRequestKey == previewKey ? model.preview : nil, mode: mode)
+                    FullScreenZoomPreview(image: model.previewRequestKey == previewKey ? model.preview : nil, mode: mode)
                         .ignoresSafeArea().contentShape(Rectangle())
                         .onTapGesture(count: 2) { showFullScreen = false }
                         .accessibilityLabel("全屏 \(mode.rawValue) 图像")
@@ -763,15 +724,422 @@ private struct ContentView: View {
             } message: { Text(model.error ?? "") }
         }
     }
+
+    @ViewBuilder
+    private var busyOverlay: some View {
+        if model.busy {
+            ZStack {
+                Color.black.opacity(0.18).ignoresSafeArea()
+                VStack(spacing: 14) {
+                    ProgressView()
+                    Text("正在处理…")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+                .padding(28)
+                .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 18))
+            }
+            .transition(.opacity)
+        }
+    }
+}
+
+private struct ImportEntry: View {
+    @ObservedObject var model: ImageModel
+    @Binding var photo: PhotosPickerItem?
+    @Binding var showImporter: Bool
+
+    var body: some View {
+        HStack {
+            PhotosPicker(selection: $photo, matching: .images, preferredItemEncoding: .current) {
+                Label("从相册选择", systemImage: "photo")
+            }
+            Button { showImporter = true } label: {
+                Label("导入文件", systemImage: "folder")
+            }
+        }
+        .buttonStyle(.bordered)
+        .disabled(model.busy)
+    }
+}
+
+private struct ViewTab: View {
+    @ObservedObject var model: ImageModel
+    @Binding var mode: ImageMode
+    @Binding var showFullScreen: Bool
+    let peak: Double
+
+    private var previewKey: String {
+        model.requestKey(mode: mode, peak: peak)
+    }
+
+    private var statusLabel: String {
+        guard let info = model.info else { return "" }
+        if info.isLUT { return "LUT 增强结果" }
+        if info.isComposed { return "HDR 合成结果" }
+        return info.isHDR ? "HDR 源图" : "SDR 源图"
+    }
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 20) {
+                if let info = model.info {
+                    Picker("查看", selection: $mode) {
+                        ForEach(ImageMode.allCases.filter { $0 != .gainMap || info.hasGainMap }, id: \.self) { item in
+                            Text(item.rawValue).tag(item)
+                                .disabled(item == .gainMap && !info.hasGainMap)
+                        }
+                    }.pickerStyle(.segmented).disabled(model.busy)
+
+                    HDRPreview(image: model.previewRequestKey == previewKey ? model.preview : nil, mode: mode)
+                        .frame(height: 320).clipShape(RoundedRectangle(cornerRadius: 16))
+                        .contentShape(Rectangle())
+                        .onTapGesture(count: 2) {
+                            if model.previewRequestKey == previewKey && model.preview != nil { showFullScreen = true }
+                        }
+                        .accessibilityLabel("\(mode.rawValue) 图像预览")
+                        .accessibilityAction(named: "全屏显示") { showFullScreen = true }
+                    Text("双击图像全屏查看").font(.caption).foregroundStyle(.secondary)
+                    Text("\(info.width) × \(info.height) · \(statusLabel)")
+                        .font(.caption).foregroundStyle(.secondary)
+                    ViewerDetails(model: model, info: info, mode: mode, previewKey: previewKey)
+                } else {
+                    ContentUnavailableView("导入一张原始图片", systemImage: "photo.badge.plus",
+                        description: Text("选择 HEIC、JPEG、PNG、BMP 或 TIFF，查看与转换图像。"))
+                }
+            }
+            .padding(20)
+        }
+        .scrollDismissesKeyboard(.interactively)
+    }
+}
+
+private struct ViewerDetails: View {
+    @ObservedObject var model: ImageModel
+    let info: ImageInfo
+    let mode: ImageMode
+    let previewKey: String
+
+    var body: some View {
+        DisclosureGroup {
+            VStack(alignment: .leading, spacing: 6) {
+                Text("\(info.isComposed || info.isLUT ? "源文件格式" : "实际文件格式")：\(info.typeName) · \(info.dynamicRangeLabel)")
+                Text("SDR 色域：\(info.colorInfo.sdr)")
+                Text("HDR 色域：\(info.colorInfo.hdr)")
+                Text("GainMap 色域：\(info.colorInfo.gainMap)")
+                Text("色域描述为解码表观或已知合成工作域，非面板实测色域或导出目标。")
+                Text(info.isComposed ? "当前为合成灰度增益图，尚未写入文件。" :
+                     (info.hasGainMap ? "含系统可读取的 GainMap" : "未读取到 GainMap"))
+                if mode == .sdr {
+                    Text(info.isLUT ? "LUT 增强后的 SDR 表观" : (info.isComposed ? "原图 SDR 基础表观（未应用合成增益）" :
+                         (info.hasGainMap ? "SDR 基础表观（HDR 基图时由系统映射）" : "SDR 表观（HDR 源图经系统色调映射）")))
+                }
+                TimelineView(.periodic(from: .now, by: 2)) { _ in
+                    Text("当前显示余量 \(UIScreen.main.currentEDRHeadroom, specifier: "%.2f")×")
+                    if UIScreen.main.currentEDRHeadroom <= 1.01 {
+                        Text("当前显示余量为 SDR，系统将映射高光；导出保留 HDR 数据。")
+                    }
+                }
+                if mode == .hdr, model.previewRequestKey == previewKey, let preview = model.preview {
+                    Text("预览内容余量 \(Double(preview.contentHeadroom), specifier: "%.2f")×")
+                }
+            }
+            .font(.caption)
+            .foregroundStyle(.secondary)
+        } label: {
+            Label("图片状态详情", systemImage: "info.circle")
+                .font(.subheadline.weight(.medium))
+        }
+    }
+}
+
+private struct AdjustTab: View {
+    @ObservedObject var model: ImageModel
+    @Binding var mode: ImageMode
+    @Binding var peak: Double
+    @Binding var maximumGain: Double
+    @Binding var useOtherGray: Bool
+    @Binding var grayPhoto: PhotosPickerItem?
+    @Binding var showGrayImporter: Bool
+    @Binding var showLUTImporter: Bool
+    @Binding var sdrColorSpace: SDRColorSpace
+    @State private var tool = AdjustTool.highlight
+
+    private var previewKey: String {
+        model.requestKey(mode: mode, peak: peak)
+    }
+
+    private var statusText: String {
+        guard let info = model.info else { return "尚未导入图像" }
+        if info.isComposed { return "当前显示：灰度 GainMap 合成结果" }
+        if info.isLUT { return "当前显示：LUT 增强结果（\(info.lutName ?? "3D LUT")）" }
+        return info.isHDR ? "当前显示：HDR 源图" : "当前显示：SDR 源图"
+    }
+
+    var body: some View {
+        VStack(spacing: 0) {
+            compactPreview
+            ScrollView {
+                VStack(alignment: .leading, spacing: 16) {
+                    if let info = model.info {
+                        Picker("调整工具", selection: $tool) {
+                            ForEach(AdjustTool.allCases) { item in
+                                Text(item.rawValue).tag(item)
+                            }
+                        }
+                        .pickerStyle(.segmented)
+                        .disabled(model.busy)
+                        switch tool {
+                        case .highlight:
+                            HighlightPanel(peak: $peak, model: model, info: info)
+                        case .lut:
+                            LUTPanel(model: model, mode: $mode, info: info,
+                                     showLUTImporter: $showLUTImporter,
+                                     sdrColorSpace: $sdrColorSpace)
+                        case .gainMap:
+                            GainMapPanel(model: model, mode: $mode, info: info,
+                                         maximumGain: $maximumGain, useOtherGray: $useOtherGray,
+                                         grayPhoto: $grayPhoto, showGrayImporter: $showGrayImporter)
+                        }
+                        Text(statusText)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        Text("处理与导出参数在四个页面共享；切换页面不会清空图像与已生成文件。")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    } else {
+                        ContentUnavailableView("导入图像后调整", systemImage: "slider.horizontal.3",
+                            description: Text("先导入一张原始图片，再选择高光增强、3D LUT 或 GainMap 合成。"))
+                    }
+                }
+                .padding(20)
+            }
+            .scrollDismissesKeyboard(.interactively)
+        }
+    }
+
+    private var compactPreview: some View {
+        Group {
+            if let info = model.info {
+                VStack(spacing: 8) {
+                    Picker("调整预览模式", selection: $mode) {
+                        ForEach(ImageMode.allCases.filter { $0 != .gainMap || info.hasGainMap }, id: \.self) { item in
+                            Text(item.rawValue).tag(item)
+                        }
+                    }.pickerStyle(.segmented).disabled(model.busy)
+                    ZStack {
+                        Color.black
+                        HDRPreview(image: model.previewRequestKey == previewKey ? model.preview : nil, mode: mode)
+                            .padding(.vertical, 8)
+                    }
+                    .frame(height: 150)
+                    .accessibilityLabel("调整预览 \(mode.rawValue) 图像")
+                }
+                .padding(.horizontal, 20)
+                .padding(.top, 20)
+            }
+        }
+    }
+}
+
+private struct HighlightPanel: View {
+    @Binding var peak: Double
+    @ObservedObject var model: ImageModel
+    let info: ImageInfo
+
+    var body: some View {
+        GroupBox("SDR → HDR 高光增强") {
+            VStack(alignment: .leading, spacing: 10) {
+                HStack {
+                    Text("输出峰值")
+                    Spacer()
+                    Text("\(Int(peak)) nit").monospacedDigit()
+                }
+                Slider(value: $peak, in: 203...600, step: 1)
+                    .accessibilityLabel("HDR 输出峰值")
+                Text(info.isComposed ? "当前为合成 HDR；请改用 GainMap 合成工具调整增益，或恢复源图。" :
+                     (info.isHDR ? "源图已有 HDR，保留其原动态范围。" :
+                      "203 nit 保持原映射；提高峰值逐渐增强亮区。"))
+                    .font(.caption).foregroundStyle(.secondary)
+            }
+        }
+        .disabled(info.isHDR || model.busy)
+    }
+}
+
+private struct LUTPanel: View {
+    @ObservedObject var model: ImageModel
+    @Binding var mode: ImageMode
+    let info: ImageInfo
+    @Binding var showLUTImporter: Bool
+    @Binding var sdrColorSpace: SDRColorSpace
+
+    var body: some View {
+        GroupBox("SDR · 3D LUT 增强") {
+            VStack(alignment: .leading, spacing: 10) {
+                Text("输入sRGB码值 → 线性BT.2020输出；其他编码的LUT不适用。")
+                    .font(.caption).foregroundStyle(.secondary)
+                Text(info.lutName.map { "\($0) · \(info.lutDimension ?? 0)³ · \(info.isLUT ? "已应用" : "未应用")" } ?? "尚未加载LUT")
+                    .font(.caption)
+                HStack {
+                    Button("导入并应用 .cube") { showLUTImporter = true }
+                    Button("使用提供的LUT") {
+                        guard let url = Bundle.main.url(forResource: "bt709_to_bt2020_catd65_linear", withExtension: "cube")
+                        else { model.report(LUTFailure.invalid("内置示例资源缺失。")); return }
+                        Task { mode = .sdr; await model.loadLUT(url); if model.info?.isLUT == true { sdrColorSpace = .bt2020 } }
+                    }
+                }.buttonStyle(.bordered)
+                HStack {
+                    Button("重新应用LUT") { Task { mode = .sdr; await model.applyLUT(enabled: true) } }
+                        .disabled(info.lutName == nil)
+                    Button("恢复原图") { Task { mode = .sdr; await model.applyLUT(enabled: false) } }
+                        .disabled(!info.isLUT)
+                }.buttonStyle(.bordered)
+                Text("每次从原图应用，不累积；预览、分析及SDR导出使用增强结果。原图与增强图按相同像素网格、当前峰值比较；灰度GainMap合成单独应用。")
+                    .font(.caption).foregroundStyle(.secondary)
+                Text("分布取编码前增强结果；SDR预览及导出受目标色域和亮度范围限制。")
+                    .font(.caption).foregroundStyle(.secondary)
+            }
+        }
+        .disabled(model.busy || info.isHDR)
+    }
+}
+
+private struct GainMapPanel: View {
+    @ObservedObject var model: ImageModel
+    @Binding var mode: ImageMode
+    let info: ImageInfo
+    @Binding var maximumGain: Double
+    @Binding var useOtherGray: Bool
+    @Binding var grayPhoto: PhotosPickerItem?
+    @Binding var showGrayImporter: Bool
+
+    var body: some View {
+        GroupBox("SDR + 灰度 GainMap 合成") {
+            VStack(alignment: .leading, spacing: 12) {
+                Picker("灰度来源", selection: $useOtherGray) {
+                    Text("当前源图").tag(false)
+                    Text("另一张图").tag(true)
+                }.pickerStyle(.segmented)
+                if useOtherGray {
+                    HStack {
+                        PhotosPicker("选择灰度来源照片", selection: $grayPhoto,
+                            matching: .images, preferredItemEncoding: .current)
+                        Button("选择灰度来源文件") { showGrayImporter = true }
+                    }.buttonStyle(.bordered)
+                    Text(model.grayName ?? "尚未选择来源图").font(.caption)
+                }
+                Text("最大增益 \(maximumGain, specifier: "%.2f")×")
+                Slider(value: $maximumGain, in: 1...16).accessibilityLabel("灰度最大增益")
+                Text("取源图 SDR 表观的线性亮度；黑色不增强，白色为最大增益。另一张图等比居中裁切；合成使用原始 SDR 基图，不叠加上次合成。")
+                    .font(.caption).foregroundStyle(.secondary)
+                HStack {
+                    Button("应用合成") {
+                        Task { mode = .hdr; await model.compose(useOtherImage: useOtherGray, maximumGain: maximumGain) }
+                    }.disabled(useOtherGray && model.grayURL == nil)
+                    Button("恢复源图") {
+                        Task { mode = .hdr; await model.compose(useOtherImage: false, maximumGain: nil) }
+                    }
+                }.buttonStyle(.bordered)
+            }
+        }
+        .disabled(model.busy)
+    }
+}
+
+private struct AnalyzeTab: View {
+    @ObservedObject var model: ImageModel
+    let mode: ImageMode
+    let peak: Double
+    @Binding var histogramChannel: HistogramChannel
+    @Binding var logarithmicCounts: Bool
+    @Binding var showRGBY: Bool
+    @Binding var visibleRGBY: Set<HistogramChannel>
+    @State private var kind = AnalysisKind.histogram
+
+    private var previewKey: String {
+        model.requestKey(mode: mode, peak: peak)
+    }
+
+    private var distributionKey: String { "\(model.revision)|\(peak)" }
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                if model.info == nil {
+                    ContentUnavailableView("导入图像后分析", systemImage: "chart.xyaxis.line",
+                        description: Text("先导入一张原始图片，再进行直方图、二维色度或三维色域分析。"))
+                } else {
+                    Picker("分析类型", selection: $kind) {
+                        ForEach(AnalysisKind.allCases) { item in
+                            Text(item.rawValue).tag(item)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .disabled(model.busy)
+                    if kind == .histogram {
+                        histogramSection
+                    }
+                    // 保持同一分析视图身份，切换图表时保留图层和视角。
+                    distributionSection(kind == .volume ? .volume : .chromaticity)
+                        .frame(height: kind == .histogram ? 0 : nil)
+                        .clipped()
+                        .opacity(kind == .histogram ? 0 : 1)
+                        .accessibilityHidden(kind == .histogram)
+                        .allowsHitTesting(kind != .histogram)
+                }
+            }
+            .padding(20)
+        }
+        .scrollDismissesKeyboard(.interactively)
+    }
+
+    private var histogramSection: some View {
+        Group {
+            if model.histogramRequestKey == previewKey, let stats = model.histograms {
+                HistogramPanel(stats: stats, channel: $histogramChannel, logarithmic: $logarithmicCounts,
+                               showRGBY: $showRGBY, visibleRGBY: $visibleRGBY)
+            } else if let error = model.histogramError {
+                Text("直方图暂不可用：\(error)").font(.caption).foregroundStyle(.secondary)
+            } else {
+                ProgressView("正在更新采样统计…")
+            }
+        }
+    }
+
+    private func distributionSection(_ mode: PixelVisualizationMode) -> some View {
+        Group {
+            if model.distributionKey == distributionKey, let data = model.distribution {
+                PixelVisualizationPanel(distribution: data,
+                    enhancedDistribution: model.enhancedDistribution,
+                    analysisID: distributionKey,
+                    displayMode: mode)
+            } else if let error = model.distributionError {
+                Text("像素分布暂不可用：\(error)").font(.caption)
+            } else {
+                ProgressView("正在计算像素色域分布…")
+            }
+        }
+        .task(id: "\(distributionKey)|\(kind == .histogram)") {
+            guard kind != .histogram, model.distributionKey != distributionKey else { return }
+            await model.updateDistribution(peak: peak, key: distributionKey)
+        }
+    }
 }
 
 private struct HistogramPanel: View {
     let stats: HistogramStats
     @Binding var channel: HistogramChannel
     @Binding var logarithmic: Bool
+    @Binding var showRGBY: Bool
+    @Binding var visibleRGBY: Set<HistogramChannel>
 
-    private var color: Color {
-        switch channel {
+    private let rgbChannels: [HistogramChannel] = [.red, .green, .blue, .luminance]
+
+    private var color: Color { channelColor(channel) }
+
+    private func channelColor(_ item: HistogramChannel) -> Color {
+        switch item {
         case .red: return .red
         case .green: return .green
         case .blue: return .blue
@@ -782,27 +1150,97 @@ private struct HistogramPanel: View {
         }
     }
 
+    private var modeSelection: Binding<String> {
+        Binding(get: { showRGBY ? "RGBY" : channel.rawValue }, set: { value in
+            if value == "RGBY" { showRGBY = true }
+            else if let selected = HistogramChannel(rawValue: value) {
+                channel = selected
+                showRGBY = false
+            }
+        })
+    }
+
+    /// 共用原始计数尺度；隐藏通道不改变纵轴基准，也不独立归一化各曲线。
+    private var commonMaximum: Int {
+        max(1, rgbChannels.compactMap { stats.channels[$0.rawValue]?.bins.max() }.max() ?? 0)
+    }
+
+    private func histogramPath(_ distribution: HistogramDistribution, maximum: Int, size: CGSize) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: 0, y: size.height))
+        for (index, count) in distribution.bins.enumerated() {
+            let fraction = logarithmic ? log1p(Double(count)) / log1p(Double(maximum))
+                : Double(count) / Double(maximum)
+            let x = Double(index) / Double(distribution.bins.count - 1) * size.width
+            path.addLine(to: CGPoint(x: x, y: (1 - fraction) * size.height))
+        }
+        path.addLine(to: CGPoint(x: size.width, y: size.height))
+        path.closeSubpath()
+        return path
+    }
+
+    private func axis(_ item: HistogramChannel, title: String) -> some View {
+        let distribution = stats.channels[item.rawValue]!
+        return HStack {
+            Text("\(title)：\(distribution.lowerBound, specifier: "%.1f")")
+            Spacer()
+            Text("\(distribution.upperBound, specifier: "%.1f") \(item.unit)")
+        }.font(.caption).monospacedDigit()
+    }
+
+    private var rgbPlot: some View {
+        let maximum = commonMaximum
+        let selected = rgbChannels.filter { visibleRGBY.contains($0) }
+        return VStack(spacing: 6) {
+            HStack {
+                ForEach(rgbChannels, id: \.self) { item in
+                    Toggle(item.rawValue, isOn: Binding(get: { visibleRGBY.contains(item) }, set: { value in
+                        if value { visibleRGBY.insert(item) } else { visibleRGBY.remove(item) }
+                    }))
+                    .toggleStyle(.button).tint(channelColor(item))
+                    .frame(maxWidth: .infinity)
+                    .accessibilityIdentifier("histogram-channel-\(item.rawValue)")
+                    .accessibilityValue(visibleRGBY.contains(item) ? "显示" : "隐藏")
+                }
+            }
+            axis(.red, title: "RGB")
+            Canvas { context, size in
+                for item in selected {
+                    let path = histogramPath(stats.channels[item.rawValue]!, maximum: maximum, size: size)
+                    context.fill(path, with: .color(channelColor(item).opacity(0.12)))
+                    context.stroke(path, with: .color(channelColor(item)), lineWidth: 1.3)
+                }
+            }
+            .frame(height: 150)
+            .background(Color.secondary.opacity(0.06), in: RoundedRectangle(cornerRadius: 8))
+            .overlay { if selected.isEmpty { Text("未选择通道").font(.caption).foregroundStyle(.secondary) } }
+            .accessibilityIdentifier("histogram-rgby")
+            .accessibilityLabel(selected.isEmpty ? "RGBY 直方图，未选择通道"
+                : "RGBY 直方图，显示 \(selected.map { $0.rawValue }.joined(separator: "、"))")
+            axis(.luminance, title: "Y")
+            Text("共用计数纵轴；上下横轴分别表示RGB分量与Y亮度，1倍参考白为203 nit。")
+                .font(.caption).foregroundStyle(.secondary)
+        }
+    }
+
     var body: some View {
         let distribution = stats.channels[channel.rawValue]!
         let maximum = max(1, distribution.bins.max() ?? 0)
         GroupBox("直方图") {
             VStack(alignment: .leading, spacing: 10) {
-                Picker("通道", selection: $channel) {
-                    ForEach(HistogramChannel.allCases, id: \.self) { Text($0.rawValue).tag($0) }
-                }.pickerStyle(.segmented)
-                Text(channel.usesHDR ? stats.hdrDomain : stats.hsvDomain)
-                    .font(.caption).foregroundStyle(.secondary)
-                Canvas { context, size in
-                    var path = Path()
-                    path.move(to: CGPoint(x: 0, y: size.height))
-                    for (index, count) in distribution.bins.enumerated() {
-                        let fraction = logarithmic ? log1p(Double(count)) / log1p(Double(maximum))
-                            : Double(count) / Double(maximum)
-                        let x = Double(index) / Double(distribution.bins.count - 1) * size.width
-                        path.addLine(to: CGPoint(x: x, y: (1 - fraction) * size.height))
+                Picker("通道", selection: modeSelection) {
+                    Text("RGBY").tag("RGBY")
+                    ForEach([HistogramChannel.hue, .saturation, .value], id: \.self) {
+                        Text($0.rawValue).tag($0.rawValue)
                     }
-                    path.addLine(to: CGPoint(x: size.width, y: size.height))
-                    path.closeSubpath()
+                }.pickerStyle(.segmented)
+                Text(showRGBY || channel.usesHDR ? stats.hdrDomain : stats.hsvDomain)
+                    .font(.caption).foregroundStyle(.secondary)
+                if showRGBY {
+                    rgbPlot
+                } else {
+                Canvas { context, size in
+                    let path = histogramPath(distribution, maximum: maximum, size: size)
                     context.fill(path, with: .color(color.opacity(0.45)))
                     context.stroke(path, with: .color(color), lineWidth: 1)
                 }
@@ -814,17 +1252,26 @@ private struct HistogramPanel: View {
                     Spacer()
                     Text("\(distribution.upperBound, specifier: "%.1f") \(channel.unit)")
                 }.font(.caption).monospacedDigit()
+                }
                 Toggle("计数使用对数纵轴", isOn: $logarithmic).font(.caption)
                 let sampled = stats.originalWidth != stats.sampledWidth || stats.originalHeight != stats.sampledHeight
                 Text("\(sampled ? "采样估计" : "全像素统计")：\(stats.sampledWidth) × \(stats.sampledHeight)，原图 \(stats.originalWidth) × \(stats.originalHeight)")
                     .font(.caption).foregroundStyle(.secondary)
-                Text("有效样本：HDR \(stats.hdrPixelCount)，HSV \(stats.hsvPixelCount)；透明排除 \(channel.usesHDR ? stats.transparentHDRCount : stats.transparentSDRCount)")
+                Text("有效样本：HDR \(stats.hdrPixelCount)，HSV \(stats.hsvPixelCount)；透明排除 \(showRGBY || channel.usesHDR ? stats.transparentHDRCount : stats.transparentSDRCount)")
                     .font(.caption).foregroundStyle(.secondary)
-                if distribution.undefinedCount > 0 {
+                if !showRGBY && distribution.undefinedCount > 0 {
                     Text("无定义色相：\(distribution.undefinedCount)（无彩色，包括黑白灰，不记入 H 分箱）")
                         .font(.caption).foregroundStyle(.secondary)
                 }
-                if distribution.underflowCount + distribution.overflowCount > 0 {
+                if showRGBY {
+                    ForEach(rgbChannels, id: \.self) { item in
+                        let data = stats.channels[item.rawValue]!
+                        if data.underflowCount + data.overflowCount > 0 {
+                            Text("\(item.rawValue)范围外样本：下界 \(data.underflowCount)，上界 \(data.overflowCount)")
+                                .font(.caption).foregroundStyle(.secondary)
+                        }
+                    }
+                } else if distribution.underflowCount + distribution.overflowCount > 0 {
                     Text("范围外样本：下界 \(distribution.underflowCount)，上界 \(distribution.overflowCount)")
                         .font(.caption).foregroundStyle(.secondary)
                 }
@@ -834,5 +1281,210 @@ private struct HistogramPanel: View {
                 }
             }
         }
+    }
+}
+
+private struct ExportTab: View {
+    @ObservedObject var model: ImageModel
+    let peak: Double
+    @Binding var format: ExportFormat
+    @Binding var sdrFormat: SDRFormat
+    @Binding var quality: Double
+    @Binding var dpiText: String
+    @Binding var sizeAxis: String
+    @Binding var pixelsText: String
+    @Binding var targetKiBText: String
+    @Binding var hdrColorSpace: HDRColorSpace
+    @Binding var sdrColorSpace: SDRColorSpace
+    @Binding var sdrMapping: SDRMapping
+    @State private var kind = ExportKind.hdr
+
+    private func exportOptions() throws -> ExportOptions {
+        func integer(_ text: String) throws -> Int? {
+            let value = text.trimmingCharacters(in: .whitespacesAndNewlines)
+            if value.isEmpty { return nil }
+            guard let result = Int(value), result > 0 else { throw ImageFailure.invalidOptions }
+            return result
+        }
+        let pixels = sizeAxis == "原尺寸" ? nil : try integer(pixelsText)
+        guard sizeAxis == "原尺寸" || pixels != nil else { throw ImageFailure.invalidOptions }
+        let kib = try integer(targetKiBText)
+        guard kib.map({ $0 <= Int.max / 1024 }) ?? true else { throw ImageFailure.invalidOptions }
+        return ExportOptions(quality: quality, dpi: try integer(dpiText),
+            width: sizeAxis == "宽度" ? pixels : nil, height: sizeAxis == "高度" ? pixels : nil,
+            targetBytes: kib.map { $0 * 1024 }, hdrColorSpace: hdrColorSpace,
+            sdrColorSpace: sdrColorSpace, sdrMapping: sdrMapping)
+    }
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                if let info = model.info {
+                    Picker("导出类型", selection: $kind) {
+                        ForEach(ExportKind.allCases) { item in
+                            Text(item.rawValue).tag(item)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .disabled(model.busy)
+
+                    switch kind {
+                    case .hdr:
+                        HDRExportPanel(model: model, peak: peak, info: info,
+                                       format: $format, hdrColorSpace: $hdrColorSpace,
+                                       exportOptions: exportOptions)
+                    case .sdr:
+                        SDRExportPanel(model: model, info: info, sdrFormat: $sdrFormat,
+                                       sdrColorSpace: $sdrColorSpace, sdrMapping: $sdrMapping,
+                                       exportOptions: exportOptions)
+                    }
+
+                    ExportSettingsPanel(quality: $quality, dpiText: $dpiText,
+                                        sizeAxis: $sizeAxis, pixelsText: $pixelsText,
+                                        targetKiBText: $targetKiBText, busy: model.busy)
+
+                    Text("导出使用当前\(kind == .hdr ? "HDR" : "SDR")结果；处理中按钮已禁用。实际屏幕亮度由系统管理。")
+                        .font(.footnote).foregroundStyle(.secondary)
+                } else {
+                    ContentUnavailableView("导入图像后导出", systemImage: "square.and.arrow.up",
+                        description: Text("先导入一张原始图片，再选择 HDR 或 SDR 导出格式。"))
+                }
+            }
+            .padding(20)
+        }
+        .scrollDismissesKeyboard(.interactively)
+    }
+}
+
+private struct HDRExportPanel: View {
+    @ObservedObject var model: ImageModel
+    let peak: Double
+    let info: ImageInfo
+    @Binding var format: ExportFormat
+    @Binding var hdrColorSpace: HDRColorSpace
+    let exportOptions: () throws -> ExportOptions
+
+    var body: some View {
+        GroupBox("导出 HDR 结果") {
+            VStack(alignment: .leading, spacing: 12) {
+                Picker("文件格式", selection: $format) {
+                    ForEach(ExportFormat.allCases, id: \.self) { item in
+                        Text(item.rawValue).tag(item)
+                    }
+                }.pickerStyle(.menu)
+                Picker("HDR 色域", selection: $hdrColorSpace) {
+                    ForEach(HDRColorSpace.allCases, id: \.self) { Text($0.rawValue).tag($0) }
+                }.pickerStyle(.segmented)
+                Text(format.isGainMap ? "SDR 基图 + ISO GainMap · 透明铺白底" : "16 位 · \(hdrColorSpace.rawValue) 原色 · PQ")
+                    .font(.caption).foregroundStyle(.secondary)
+                if format.isGainMap {
+                    Text("结果需超过 SDR 参考白，系统才会写出 GainMap；无增益时可导出普通 SDR 或 PQ。")
+                        .font(.caption).foregroundStyle(.secondary)
+                }
+                if Double(info.sourceHeadroom) * 203 > 10000.1 {
+                    Text("系统解码的 RGB 分量超出 PQ 范围，导出将按 0～10000 nit 的编码边界裁切。")
+                        .font(.caption).foregroundStyle(.orange)
+                }
+                Button("生成 \(format.isGainMap ? "" : "PQ ")\(format.rawValue)") {
+                    Task {
+                        do { await model.export(peak: peak, format: format, options: try exportOptions()) }
+                        catch { model.report(error) }
+                    }
+                }.buttonStyle(.borderedProminent).disabled(model.busy)
+                if let url = model.exportURL {
+                    ShareLink(item: url) {
+                        Label("保存或分享已生成文件", systemImage: "square.and.arrow.up")
+                    }
+                }
+            }.disabled(model.busy)
+        }
+    }
+}
+
+private struct SDRExportPanel: View {
+    @ObservedObject var model: ImageModel
+    let info: ImageInfo
+    @Binding var sdrFormat: SDRFormat
+    @Binding var sdrColorSpace: SDRColorSpace
+    @Binding var sdrMapping: SDRMapping
+    let exportOptions: () throws -> ExportOptions
+
+    var body: some View {
+        GroupBox("普通格式转换（SDR）") {
+            VStack(alignment: .leading, spacing: 12) {
+                Picker("输出格式", selection: $sdrFormat) {
+                    ForEach(SDRFormat.supported, id: \.self) { item in
+                        Text(item.rawValue).tag(item)
+                    }
+                }.pickerStyle(.segmented).disabled(model.busy)
+                Picker("SDR 色域", selection: $sdrColorSpace) {
+                    ForEach(SDRColorSpace.allCases.filter { sdrFormat != .bmp || $0 == .sRGB }, id: \.self) { Text($0.rawValue).tag($0) }
+                }.pickerStyle(.segmented)
+                if sdrFormat == .bmp {
+                    Text("系统 BMP 编解码器不保留宽色域 ICC；BMP 仅提供 sRGB，P3/Adobe RGB 请选 PNG、JPEG 或 HEIC。")
+                        .font(.caption).foregroundStyle(.secondary)
+                }
+                Picker("色域映射", selection: $sdrMapping) {
+                    ForEach(SDRMapping.allCases, id: \.self) { Text($0.rawValue).tag($0) }
+                }.pickerStyle(.segmented)
+                Text(sdrMapping == .xyz ? "等 XYZ：保持色度转换，目标范围外裁切。" : "RGB 直通：保留源 SDR 编码值，更换色彩空间解释，颜色外观会改变。")
+                    .font(.caption).foregroundStyle(.secondary)
+                Text("8 位 \(sdrColorSpace.rawValue) · \(info.isLUT ? "LUT增强SDR表观" : "源图SDR表观") · 使用下方导出参数")
+                    .font(.caption).foregroundStyle(.secondary)
+                Text(sdrFormat.keepsAlpha ? "PNG 保留透明区域。" : "透明区域铺白底。")
+                    .font(.caption).foregroundStyle(.secondary)
+                if info.isHDR {
+                    Text("转换为 SDR；保留 HDR 请使用上方 HDR 导出。")
+                        .font(.caption).foregroundStyle(.secondary)
+                }
+                Button("生成 SDR \(sdrFormat.rawValue)") {
+                    Task {
+                        do { await model.exportSDR(format: sdrFormat, options: try exportOptions()) }
+                        catch { model.report(error) }
+                    }
+                }.buttonStyle(.borderedProminent).disabled(model.busy)
+                if let url = model.sdrExportURL {
+                    ShareLink(item: url) {
+                        Label("保存或分享 SDR 文件", systemImage: "square.and.arrow.up")
+                    }
+                }
+            }.disabled(model.busy)
+        }
+    }
+}
+
+private struct ExportSettingsPanel: View {
+    @Binding var quality: Double
+    @Binding var dpiText: String
+    @Binding var sizeAxis: String
+    @Binding var pixelsText: String
+    @Binding var targetKiBText: String
+    let busy: Bool
+
+    var body: some View {
+        DisclosureGroup {
+            VStack(alignment: .leading, spacing: 12) {
+                Text("JPEG / HEIC 质量上限：\(Int(quality * 100))%")
+                Slider(value: $quality, in: 0...1, step: 0.01)
+                    .accessibilityLabel("压缩质量上限")
+                TextField("DPI（可选，1～2400）", text: $dpiText).keyboardType(.numberPad)
+                    .accessibilityLabel("导出 DPI")
+                Picker("像素尺寸", selection: $sizeAxis) {
+                    ForEach(["原尺寸", "宽度", "高度"], id: \.self) { Text($0).tag($0) }
+                }.pickerStyle(.segmented)
+                if sizeAxis != "原尺寸" {
+                    TextField("目标\(sizeAxis)（像素）", text: $pixelsText).keyboardType(.numberPad)
+                }
+                TextField("文件上限 KiB（可选）", text: $targetKiBText).keyboardType(.numberPad)
+                    .accessibilityLabel("目标文件大小 KiB")
+                Text("尺寸保持比例；DPI 只修改密度。目标体积仅搜索质量，不自动缩小像素；无损格式只校验体积上限。")
+                    .font(.caption).foregroundStyle(.secondary)
+            }
+            .textFieldStyle(.roundedBorder)
+        } label: {
+            Label("导出参数（质量 / DPI / 尺寸 / 体积）", systemImage: "gearshape")
+                .font(.subheadline.weight(.medium))
+        }
+        .disabled(busy)
     }
 }

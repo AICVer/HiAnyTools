@@ -1,14 +1,22 @@
 #if os(iOS)
 import SwiftUI
 
+enum PixelVisualizationMode: Equatable {
+    case both
+    case chromaticity
+    case volume
+}
+
 struct PixelVisualizationPanel: View {
     let distribution: PixelDistribution
     let enhancedDistribution: PixelDistribution?
     let analysisID: String
-    init(distribution: PixelDistribution, enhancedDistribution: PixelDistribution? = nil, analysisID: String = "") {
+    let displayMode: PixelVisualizationMode
+    init(distribution: PixelDistribution, enhancedDistribution: PixelDistribution? = nil, analysisID: String = "", displayMode: PixelVisualizationMode = .both) {
         self.distribution = distribution
         self.enhancedDistribution = enhancedDistribution
         self.analysisID = analysisID
+        self.displayMode = displayMode
     }
     @State private var showOriginalPoints = true
     @State private var showEnhancedPoints = true
@@ -38,6 +46,14 @@ struct PixelVisualizationPanel: View {
     @State private var rotationStarted = Date()
     @GestureState private var drag = CGSize.zero
     @GestureState private var magnification = 1.0
+
+    private var showsChromaticity: Bool {
+        displayMode == .both || displayMode == .chromaticity
+    }
+
+    private var showsVolume: Bool {
+        displayMode == .both || displayMode == .volume
+    }
 
     private func chromaticity(_ xy: [Double]) -> [Double] {
         guard useUV else { return xy }
@@ -86,6 +102,20 @@ struct PixelVisualizationPanel: View {
                     Text("LUT增强图：同位置\(enhancedDistribution.points.count)点，负值修正\(enhancedDistribution.negativeClampedCount)个；增强前后采用相同峰值与坐标条件。")
                         .font(.caption).foregroundStyle(.secondary)
                 }
+                layerSection
+                if showsChromaticity {
+                    chromaticitySection
+                }
+                if showsVolume {
+                    volumeSection
+                }
+            }
+        }
+    }
+
+    private var layerSection: some View {
+        DisclosureGroup {
+            VStack(alignment: .leading, spacing: 8) {
                 HStack {
                     Toggle(enhancedDistribution == nil ? "当前图散点" : "原图散点", isOn: $showOriginalPoints)
                     if enhancedDistribution != nil { Toggle("LUT增强散点", isOn: $showEnhancedPoints) }
@@ -96,65 +126,78 @@ struct PixelVisualizationPanel: View {
                 }.font(.caption).toggleStyle(.button)
                 Text("散点和凸包开关同时作用于二维与三维；凸包会填平凹陷，仅描述采样范围，不是设备色域。原图凸包为青色，LUT凸包为粉色。")
                     .font(.caption).foregroundStyle(.secondary)
-                Picker("色度图", selection: $useUV) {
-                    Text("CIE 1931 xy").tag(false)
-                    Text("CIE 1976 u′v′").tag(true)
-                }.pickerStyle(.segmented)
-                HStack {
-                    Toggle("sRGB", isOn: $showSRGB).tint(.blue)
-                    Toggle("Display P3", isOn: $showP3).tint(.orange)
-                    Toggle("BT.2020", isOn: $show2020).tint(.purple)
-                }.font(.caption).toggleStyle(.button).lineLimit(1)
-                chromaticityChart
-                let noChromaticity = distribution.points.filter { (useUV ? $0.uv : $0.xy) == nil }.count
-                Text("\(useUV ? "u′ / v′" : "x / y") · 黑色等无定义色度：\(noChromaticity)；轨迹为 CIE 1931 2°，380～780 nm。")
+            }
+        } label: {
+            Label("图层设置", systemImage: "square.3.layers.3d")
+                .font(.subheadline.weight(.medium))
+        }
+    }
+
+    private var chromaticitySection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Picker("色度图", selection: $useUV) {
+                Text("CIE 1931 xy").tag(false)
+                Text("CIE 1976 u′v′").tag(true)
+            }.pickerStyle(.segmented)
+            HStack {
+                Toggle("sRGB", isOn: $showSRGB).tint(.blue)
+                Toggle("Display P3", isOn: $showP3).tint(.orange)
+                Toggle("BT.2020", isOn: $show2020).tint(.purple)
+            }.font(.caption).toggleStyle(.button).lineLimit(1)
+            chromaticityChart
+            let noChromaticity = distribution.points.filter { (useUV ? $0.uv : $0.xy) == nil }.count
+            Text("\(useUV ? "u′ / v′" : "x / y") · 黑色等无定义色度：\(noChromaticity)；轨迹为 CIE 1931 2°，380～780 nm。")
+                .font(.caption).foregroundStyle(.secondary)
+            if let enhancedDistribution {
+                Text("LUT增强图无定义色度：\(enhancedDistribution.points.filter { (useUV ? $0.uv : $0.xy) == nil }.count)")
                     .font(.caption).foregroundStyle(.secondary)
-                if let enhancedDistribution {
-                    Text("LUT增强图无定义色度：\(enhancedDistribution.points.filter { (useUV ? $0.uv : $0.xy) == nil }.count)")
-                        .font(.caption).foregroundStyle(.secondary)
-                }
-                Picker("立体色域", selection: $volumeSpace) {
-                    ForEach(GamutVolumeSpace.allCases, id: \.self) { Text($0.rawValue).tag($0) }
-                }.pickerStyle(.segmented)
-                Text("三维参考外包络").font(.subheadline.weight(.semibold))
-                HStack {
-                    Toggle("sRGB", isOn: $showReferenceSRGB).tint(.blue)
-                        .accessibilityLabel("三维 sRGB 外包络")
-                    Toggle("Display P3", isOn: $showReferenceP3).tint(.orange)
-                        .accessibilityLabel("三维 Display P3 外包络")
-                    Toggle("BT.2020", isOn: $showReference2020).tint(.purple)
-                        .accessibilityLabel("三维 BT.2020 外包络")
-                }.font(.caption).toggleStyle(.button).lineLimit(1)
-                Picker("包络参考峰值", selection: $referencePeak) {
-                    ForEach([203,600,1000,10000], id: \.self) { Text("\($0) nit").tag($0) }
-                }.pickerStyle(.menu)
-                if loadedReferencePeak != referencePeak {
-                    if let referenceError { Text("参考包络暂不可用：\(referenceError)").font(.caption) }
-                    else { ProgressView("正在计算参考包络…") }
-                }
-                volumeChart
-                if (showOriginalHull || showEnhancedHull) && (loadedHullSpace != volumeSpace || loadedHullID != analysisID) {
-                    if let hullError { Text("像素凸包暂不可用：\(hullError)").font(.caption) }
-                    else { ProgressView("正在计算像素凸包…") }
-                }
-                Text("参考包络：D65，黑位0，三种原色共用峰值\(referencePeak) nit；半透明六面采样网格。超过203 nit时表示该原色的HDR参考范围，不是标准SDR显示器实测能力。")
+            }
+        }
+    }
+
+    private var volumeSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Picker("立体色域", selection: $volumeSpace) {
+                ForEach(GamutVolumeSpace.allCases, id: \.self) { Text($0.rawValue).tag($0) }
+            }.pickerStyle(.segmented)
+            Text("三维参考外包络").font(.subheadline.weight(.semibold))
+            HStack {
+                Toggle("sRGB", isOn: $showReferenceSRGB).tint(.blue)
+                    .accessibilityLabel("三维 sRGB 外包络")
+                Toggle("Display P3", isOn: $showReferenceP3).tint(.orange)
+                    .accessibilityLabel("三维 Display P3 外包络")
+                Toggle("BT.2020", isOn: $showReference2020).tint(.purple)
+                    .accessibilityLabel("三维 BT.2020 外包络")
+            }.font(.caption).toggleStyle(.button).lineLimit(1)
+            Picker("包络参考峰值", selection: $referencePeak) {
+                ForEach([203,600,1000,10000], id: \.self) { Text("\($0) nit").tag($0) }
+            }.pickerStyle(.menu)
+            if loadedReferencePeak != referencePeak {
+                if let referenceError { Text("参考包络暂不可用：\(referenceError)").font(.caption) }
+                else { ProgressView("正在计算参考包络…") }
+            }
+            volumeChart
+            if (showOriginalHull || showEnhancedHull) && (loadedHullSpace != volumeSpace || loadedHullID != analysisID) {
+                if let hullError { Text("像素凸包暂不可用：\(hullError)").font(.caption) }
+                else { ProgressView("正在计算像素凸包…") }
+            }
+            Text("参考包络：D65，黑位0，三种原色共用峰值\(referencePeak) nit；半透明六面采样网格。超过203 nit时表示该原色的HDR参考范围，不是标准SDR显示器实测能力。")
+                .font(.caption).foregroundStyle(.secondary)
+            HStack {
+                Toggle("自动旋转", isOn: Binding(get: { automaticRotation }, set: setRotation))
+                Button("重置视角") { setRotation(false); yaw = 0.6; pitch = -0.25; zoom = 1 }
+            }.font(.caption)
+            Text("拖动旋转，双指缩放；亮度轴朝上，三轴等比例缩放。\(volumeSpace.axes.joined(separator: " / "))")
+                .font(.caption).foregroundStyle(.secondary)
+            Text(volumeSpace == .ictcp
+                 ? "ICtCp：BT.2100 PQ，1倍线性参考白=203 nit；坐标未经JND缩放，超出PQ定义域的点不绘制。"
+                 : "D65，参考白203 nit；Lab保留L*>100。CAM16-UCS：LA=100 cd/m²，Yb=20，平均环绕、完全适应；超出模型有效域的点不绘制。")
+                .font(.caption).foregroundStyle(.secondary)
+            Text("三维有效点 \(distribution.points.filter { $0.scene(volumeSpace) != nil }.count) / \(distribution.points.count)；采样点云，不表示设备色域体积。")
+                .font(.caption).foregroundStyle(.secondary)
+            if let enhancedDistribution {
+                Text("LUT增强三维有效点 \(enhancedDistribution.points.filter { $0.scene(volumeSpace) != nil }.count) / \(enhancedDistribution.points.count)")
                     .font(.caption).foregroundStyle(.secondary)
-                HStack {
-                    Toggle("自动旋转", isOn: Binding(get: { automaticRotation }, set: setRotation))
-                    Button("重置视角") { setRotation(false); yaw = 0.6; pitch = -0.25; zoom = 1 }
-                }.font(.caption)
-                Text("拖动旋转，双指缩放；亮度轴朝上，三轴等比例缩放。\(volumeSpace.axes.joined(separator: " / "))")
-                    .font(.caption).foregroundStyle(.secondary)
-                Text(volumeSpace == .ictcp
-                     ? "ICtCp：BT.2100 PQ，1倍线性参考白=203 nit；坐标未经JND缩放，超出PQ定义域的点不绘制。"
-                     : "D65，参考白203 nit；Lab保留L*>100。CAM16-UCS：LA=100 cd/m²，Yb=20，平均环绕、完全适应；超出模型有效域的点不绘制。")
-                    .font(.caption).foregroundStyle(.secondary)
-                Text("三维有效点 \(distribution.points.filter { $0.scene(volumeSpace) != nil }.count) / \(distribution.points.count)；采样点云，不表示设备色域体积。")
-                    .font(.caption).foregroundStyle(.secondary)
-                if let enhancedDistribution {
-                    Text("LUT增强三维有效点 \(enhancedDistribution.points.filter { $0.scene(volumeSpace) != nil }.count) / \(enhancedDistribution.points.count)")
-                        .font(.caption).foregroundStyle(.secondary)
-                }
             }
         }
         .task(id: referencePeak) {

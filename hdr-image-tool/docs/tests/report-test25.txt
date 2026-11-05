@@ -1,0 +1,66 @@
+test25 — 2026-11-04至11-05 四页工作台（软件交付完成）
+
+基线：main / 1e12a24；独立分支 ui-workspace/root。
+范围：方案 B 查看/调整/分析/导出，DeepSeek-v4-Pro 经 Coze 生成 Swift 修改稿，本机验证。
+
+环境：Miniforge base Python 3.12.12，pytest 9.0.2，Xcode 27.0 / 27A266a。
+模拟器：iPhone17 / iOS27.0 / 5FDCC8BC-F830-4FAA-9712-60350967B070。
+
+基线模块：28 passed in 12.38s。
+命令：conda run --no-capture-output -n base python -m pytest -q tests/test_hdr_engine.py。
+日志：output/coze-ui/baseline-core-tests.txt。
+基线模拟器构建：BUILD SUCCEEDED；日志 output/coze-ui/baseline-build.txt。
+
+新增 UI 导航测试首轮：1 failed in 51.60s。
+pytest 驱动临时 Xcode 工程的真实 XCUITest，启动 App 后查找并切换四页。
+失败原因为旧版无 TabBar/查看按钮（尚未应用 Coze 修改稿），非构建或测试框架失败。
+日志：output/coze-ui/navigation-red.txt；output/workspace-ui/412fad7f0c134cb1a025de313e755604/xcodebuild.txt。
+UI 源码：tests/WorkspaceUITests.swift；编排：tests/test_workspace_ui.py。
+
+Coze交付与本机集成：
+有效Agent项目7704274349251133475，会话443467012360194，DeepSeek-v4-Pro / deepseek-v4-pro-0813已核实enable=true。
+首次大上下文创建502；简短Ask初始化后不能写文件；改Agent任务后异步请求无开发结果，最终通过同项目--wait持久流式请求取得实际工具操作与交付。没有将sent/done空状态算作完成。
+Coze生成两份Swift及ZIP，ZIP的base64工具输出被截断，因此通过成功文件写入/编辑事件安全重放取回源码，并与远端实际文件SHA256逐份一致核对：
+HDRImageLabApp.swift aef17eabc0cf60c55ea1e1e9b3350952908eeb815ec1969805490df17598c2e3
+PixelVisualizationView.swift 0a880007a53a0716563a31d42d23700f20c4cab07916d9f629a3ee9c7c6c1d70
+原稿output/coze-ui/draft/，最终回复stream-answer.md，流式证据agent-stream.ndjson。
+本机补齐共用导入、分析视图身份保持、调整预览模式控制；保留ContentView原类型。模拟器测试入口仅在targetEnvironment(simulator)编译，用于复用真实文件加载路径。
+
+最终模块回归：238 passed, 2 skipped in 98.12s。
+命令：conda run --no-capture-output -n base python -m pytest -q tests --ignore=tests/test_workspace_ui.py。
+日志：output/coze-ui/final-core-tests.txt。
+两项跳过为test_real_user_lut_matches_hi_enhance_trilinear与test_real_image_lut_hulls_cover_both_point_clouds；外部HiEnhance/results/bt709_to_bt2020_catd65_linear.cube当前不存在。未改写参考目录或伪造样本。应用内置LUT与本机IMG_3920仍保留，其他相应合成/真实JPEG用例通过。
+
+最终真实UI回归：pytest编排1 passed in 96.15s，内部XCTest两项通过、零跳过。
+命令：conda run --no-capture-output -n base python -m pytest -q tests/test_workspace_ui.py。
+日志：output/coze-ui/fixture-workflow.txt。
+结果：output/workspace-ui/e5bde8ece3314ddf8d17fb76a108f8ae/result.xcresult。
+- testEmptyWorkspaceNavigation：四页空状态切换、选择状态、共用导入入口可达。
+- testImageImportAndWorkspaceState：128x96本地人工RGB夹具经真实ImageModel.load解码；相册选择器打开/取消后图像保留；GainMap最大增益和SDR质量跨页保留；二维/三维及跨页后散点图层保持关闭；SDR JPEG与HDR PQ PNG生成后出现各自分享入口，有效结果跨页保留，切换导出类型不串用分享结果。
+系统相册服务未返回测试图，前一轮加载流程因此明确跳过（loaded-workflow.txt）；最终改为仅模拟器专用启动参数加载夹具，未假称完成相册实际选图回调。
+
+最终覆盖率（分开统计，不混成一个跨平台数字）：
+- 238项常规回归的474份本轮profraw，共享Swift核心行1294/1356=95.43%，区域603/700=86.14%，函数196/213=92.02%。不含SwiftUI、测试探针和静态光谱表；core-coverage-summary.json。
+- 两项iOS UI用例：HDRImageLabApp.swift行1844/2293=80.42%，PixelVisualizationView.swift行739/824=89.68%，均达80%文件目标；final-ui-coverage.json。
+- 同一UI用例下iOS App全目标为76.17%，它没有合并Mac核心探针的覆盖，不能当成全平台总覆盖率。未提供分支指标。
+
+最终构建：
+- 模拟器：最后UI回归构建成功，TEST SUCCEEDED；含全部最终Swift代码。
+- 普通Debug模拟器包：final-simulator-build.txt，BUILD SUCCEEDED；已安装并启动PID30952，无测试启动参数。
+- iOS设备目标：output/coze-ui/final-device-build.txt，BUILD SUCCEEDED，CODE_SIGNING_ALLOWED=NO。
+- 先前workspace-build.txt亦通过；最终证据以上述两条为准。
+测试完成后未改生产Swift代码，仅补文档与导出截图。源文件/测试SHA256见output/coze-ui/scope-audit.json。
+
+范围与视觉核对：
+其他12份Swift文件SHA不变；ImageSession、ImageInfo、ImageModel、HDRPreview逐段保持原文；二维/三维图表数值和绘制函数逐字保持。未删除既有函数或类型。
+最终XCTest截图已导出至output/coze-ui/screenshots/，view.png/adjust.png/analysis.png/export.png逐张核对：查看主图与四页导航、调整紧凑预览与单工具、分析单主图及图层、SDR生成结果与可折叠参数均正常显示。展开参数/图层后按内容滚动，默认不把所有工具堆成同一长页。
+无新增依赖、无.env变更、未上传图像或签名资料、未部署或更新真机、未本地提交/合并/推送。
+
+未验证：
+相册实际选择图像与外部Files完整选图回调、真实iPhone新界面/XDR物理表现、手动双指缩放/旋转及全部工具组合。Mac锁屏导致直接屏幕操作受限；自动UI及导出截图证据不冒充真实设备验收。
+独立红军105项未在本轮重跑；本轮常规238项及两项真实UI测试为新证据，不使用旧345项或95.65%代替。
+
+重要文件：Sources/HDRImageLabApp.swift、Sources/PixelVisualizationView.swift、tests/WorkspaceUITests.swift、tests/test_workspace_ui.py、README.md、docs/requirements.md、docs/agent/context.md、docs/changelog.md及本任务目录。
+知识自检：knowledge-review.md复用K06，不建议新增入库；无正式知识或私有记忆写入。
+
+Coze最终同步：经原始补丁附件成功应用本机最小集成修正，回传FINAL_SYNC_OK；云端两份源码SHA256与本机scope-audit.json一致（5ab035a9… / ccb4af67…）。最初文本/base64补丁传递损坏被git apply --check拒绝，未覆盖云端源码；使用本机实际应用验证的git diff附件重试后通过。最终同步未改变本机已测试源码，不需重跑相同测试。旧云端ZIP仍为原稿，不作为最终包交付；最终代码以本机worktree及同步后两份Swift为准。

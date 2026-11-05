@@ -12,6 +12,24 @@ struct Probe {
             let engine = ImageEngine()
             var result: [String: Any] = [:]
             switch args[1] {
+            case "color-description":
+                let spaces: [String: CGColorSpace] = [
+                    "srgb": SDRColorSpace.sRGB.space, "p3": SDRColorSpace.displayP3.space,
+                    "pq": HDRColorSpace.bt2020.pq, "p3-pq": HDRColorSpace.displayP3.pq,
+                    "hlg": CGColorSpace(name: CGColorSpace.itur_2100_HLG)!,
+                    "linear": engine.linearSpace,
+                    "gray": CGColorSpace(name: CGColorSpace.genericGrayGamma2_2)!,
+                    "device-rgb": CGColorSpaceCreateDeviceRGB()]
+                result["label"] = ImageColorInfo.spaceLabel(spaces[args[2]])
+            case "color-info":
+                let loaded = try engine.load(URL(fileURLWithPath: args[2]))
+                result = try JSONSerialization.jsonObject(with: JSONEncoder().encode(loaded.colorInfo())) as! [String: Any]
+                result["rawSDRSpace"] = (loaded.sdrColorSpace ?? loaded.sdr.colorSpace)?.name as String? ?? ""
+                result["rawHDRSpace"] = loaded.hdr.colorSpace?.name as String? ?? ""
+            case "composed-color-info":
+                let loaded = try engine.load(URL(fileURLWithPath: args[2]))
+                let composed = try engine.compose(loaded, graySource: nil, maximumGain: 2)
+                result = try JSONSerialization.jsonObject(with: JSONEncoder().encode(composed.colorInfo(generatedHDR: true))) as! [String: Any]
             case "pixel-hull":
                 let input = try JSONDecoder().decode([[Double]].self, from: Data(args[2].utf8))
                 let hull = try PixelHull.mesh(input)

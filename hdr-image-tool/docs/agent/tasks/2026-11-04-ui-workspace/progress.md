@@ -1,0 +1,24 @@
+# 四页工作台进度
+
+- 2026-11-04：用户确认方案 B、DeepSeek-v4-Pro；另明确允许使用 main 作为基线。
+- 基线：1e12a24；分支：ui-workspace/root；目录：.worktrees/ui-workspace/root。
+- 已完成：确认规格与基线、Coze Swift修改稿、SHA256核对、本机最小集成修正、双目标构建、常规回归、两项真实模拟器UI用例、覆盖率统计与截图视觉核对、文档与知识自检。
+- 授权补充：用户明确表示“该项目的开发自动授权，可以推送给 coze”，已批准本次必要源码及规格外发；不重复申请相同范围授权。
+- 当前：2026-11-05软件交付完成，留在独立worktree供使用/审阅，未提交/合并。有效Coze项目7704274349251133475，https://www.coze.cn/p/7704274349251133475 ，会话443467012360194；deepseek-v4-pro-0813已核实激活。Coze负责两份Swift原稿，本机负责集成和验证。结果以test25为准。
+- 模式修正：初始项目 7704289702484066358（会话 443295592957954）以 Ask 模式初始化，终态只返回设计摘要，禁止写文件而无代码；证据 output/coze-ui/answer.md。CLI 未暴露现有会话模式修改命令，因此新建上述 Agent 模式任务，源码重新发送，旧任务不作为开发完成证据。
+- 2026-11-05 回传修正：新项目异步 sent 后状态最终 done，但无 answer，history 仅有初始化回复，无开发产物。没有将该状态视为开发完成。改用同项目 --wait 流式请求，持有本机 exec session 39455；已收到实际 exec_shell 工具执行记录。日志 output/coze-ui/agent-stream.ndjson（实际为串接的格式化 JSON 对象，需 raw_decode，不能把 tool_request 的 finish=true 当最终交付）。第一次流式启动的权限审核超时未执行，按允许重试一次后成功。
+- 跟进完成：/root/coze_followup负责状态与流式产物识别，已返回最终回复；未部署。
+- 前置错误：首次完整上下文创建返回 502，核查无新项目后，改用简短初始化创建成功；之前的自动审批拒绝在用户明确授权后已解除。
+- 未验证：系统相册实际选择图像回调（服务未返回测试图）、真机新界面/XDR物理显示、直接手动拖拽/双指缩放及全工具组合。Mac锁屏阻止直接屏幕操作；已转用XCUITest与导出截图验证主要界面。用户解锁后可继续补验，不阻塞当前软件交付。
+- 提交：无；不自动提交或推送。基线工作区的同级项目及用户改动不触碰。
+- 初始准备阶段：核对worktree及基线，记录原始两份UI文件67306字节及SHA256；当时未修改源码，未用旧报告冒充新界面验证。
+- 本轮新增验证：基线核心 28 passed in 12.38s，模拟器基线 BUILD SUCCEEDED；现有 iPhone17/iOS27 模拟器已准备三张本地人工测试图。新增 pytest 驱动真实 XCUITest 导航验收：旧版 1 failed in 51.60s，原因为没有“查看”Tab，符合新增需求前基线。临时 Xcode UI 测试工程只生成于 output，不修改生产项目配置。
+- 模型：前轮已联网核实 DeepSeek-v4-Pro 对应 deepseek-v4-pro-0813；本轮 Coze HDR 项目只读检索为空。
+- 产物：Coze成功写出两份Swift并生成18241字节ZIP。工具回传ZIP的base64被截断，未将其作为有效下载包；通过成功write_file/edit_file事件取回源码，并与远端实际SHA256逐份核对一致（原稿aef17e…/0a8800…）。原稿与流式证据保存output/coze-ui/，不执行云端脚本。
+- 集成修正：保留ContentView原类型；把导入入口提升为四页共用；保持单一分析子树及有效缓存，避免切换图表/功能页丢失图层与视角；调整页增加已有HDR/SDR/GainMap模式控制；仅模拟器编译的测试图片入口复用ImageModel.load，设备版本无此入口。图像会话/模型/HDRPreview逐段原样，图表数值与绘制函数原样，其他12份Swift指纹不变。
+- 最终验证：238 passed / 2 skipped in 98.12s，外部HiEnhance LUT路径缺失触发两项跳过；pytest UI编排1 passed in 96.15s，内部XCTest两项通过且无跳过，覆盖空状态、相册打开取消、真实文件加载后的增益/质量跨页保留、二维三维图层保留、HDR/SDR生成与分享结果隔离。最终设备与模拟器构建通过；核心行95.43%，主UI行80.42%，像素视图行89.68%。
+- 最终证据：docs/tests/report-test25.txt；output/coze-ui/scope-audit.json含冻结SHA；output/coze-ui/screenshots/含四页截图，已逐张检查。知识自检“不建议入库”，未写正式知识或私有memory。
+- 最终普通模拟器Debug构建BUILD SUCCEEDED，已安装并启动PID30952；日志final-simulator-build.txt。未携带测试启动参数，不预载夹具。
+- Coze最终同步完成：最初文本/base64补丁传递损坏，在git apply --check阶段停止且未改云端源码；改用本机git diff生成、已在隔离副本实际应用核对过的原始补丁附件，同项目回传FINAL_SYNC_OK。两份最终源码SHA256与本机一致：5ab035a98fa08305f82fa6a91ff1bf3790865ce49a9a693cfbce8027c5a798e5 / ccb4af6782c69d2eef74b85920ce06c7c00efbac6bc60e1631e9be9873d680c4。证据sync-attachment-stream.ndjson、sync-answer.md。同步不涉及Git提交或部署。
+- 2026-11-05用户解锁后继续直接验收（test26）：系统相册图库已正常返回，实际选择960×640 SDR人工图后回调与预览成功；全屏进入/关闭、调整页203→600nit及刷新通过，证据manual-20261105/adjust-600nit.png。切入分析页前再次锁屏，三维手动操作和剩余导出屏幕验收待继续。没有源码变更或重新构建，不重跑已通过测试；不改变锁屏设置，等待用户可选再次解锁。
+- 2026-11-05再次解锁后（test26续）：三维拖动旋转、旋转视角跨导出页返回保留、HDR PQ PNG与SDR JPEG实际生成及分享入口隔离通过；只读sips确认960×640/16位BT.2100 PQ与960×640/8位sRGB。后续观察到当前自动旋转开启且连续帧方向变化，未把他人切图/包络状态变化归为本Agent操作。证据export-metadata.json与continued-rotation.png。仅双指缩放因当前CUA没有直接多指手势方法仍待验，真机/XDR等原有限制保留；源码与已通过测试指纹不变，不重跑无变化测试，无提交/合并/推送。

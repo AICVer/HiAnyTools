@@ -1,0 +1,41 @@
+test27 — 2026-11-05 四页工作台真机安装
+
+授权：用户明确要求将当前项目安装到已连接真机。
+源目录：ui-workspace/root独立worktree中的hdr-image-tool，main/1e12a24基线上的四页界面。
+目标：唯一已连接物理设备iPhone16（iPhone17,3），iOS26.6.1，已配对，Developer Mode启用。
+Bundle：local.hdrimagelab；版本0.1.1，构建号5→6，既有Team BCVP74Y9F4。
+
+源码门禁：
+生产14份Swift逐项SHA256与test25对应冻结快照一致；测试源码指纹亦未变。
+本轮只改Xcode工程Debug/Release构建号及文档，不改图像算法/界面源码。
+test25的238项常规通过/2项外部LUT缺失跳过、2项UI用例通过及核心95.43%、UI80.42%/89.68%为历史验证，本轮没有重新执行或冒称真机画质验证。
+证据：output/phone-install-20261105/all-swift-sha256.json、source-sha256.json。
+
+签名构建：
+xcodebuild -project HDRImageLab.xcodeproj -scheme HDRImageLab -configuration Debug -destination id=00008140-000160EE3440801C -derivedDataPath /private/tmp/HDRImageLab-phone-20261105.rCvRaO build
+结果BUILD SUCCEEDED，日志output/phone-install-20261105/signed-build.txt。
+沿用本机已有有效Apple Development身份及描述文件，未启用ProvisioningUpdates或设备注册，不创建证书、不上传代码或图像。
+codesign --verify --deep --strict返回0；实际Info.plist核对为local.hdrimagelab/0.1.1/6。
+描述文件包含目标iPhone，Team正确，有效至2026-11-06 14:48（北京时间）；到期需重新签名安装。
+设备二进制不含--workspace-test-image字符串；内置LUT与源码资源逐字节SHA一致。
+证据：codesign.txt、package-verification.json、build-path.txt。
+
+覆盖安装与数据核对：
+devicectl device install app结果outcome=success，未卸载旧App或清理数据。
+设备应用清单确认HDR Image Lab 0.1.1 / Bundle Version 6。
+安装前后tmp/HDRImports均16份文件，相对路径和大小16/16匹配；仅查元数据，没有导出图像或计算原图内容hash。
+安装前后数据容器绝对路径不同。初始检查脚本误把绝对路径相同作为通过条件，曾断言失败；后续明确区分容器路径变化与缓存数据保留，16份文件元数据核对通过。不把该脚本断言误报为安装失败或数据丢失。
+证据：install.json、apps-before.json/apps-after.json、files-before.json/files-after.json、data-preservation.json。
+
+启动与进程核对：
+devicectl device process launch --terminate-existing local.hdrimagelab成功，outcome=success、activatedWhenStarted=true。
+PID45544；目标App过滤后的运行清单含相同PID与可执行路径，位于本次0C648590安装目录。
+没有传入测试启动参数；没有列出其他应用进程。
+证据：launch.json、processes.json、installation-summary.json。
+校验脚本最初对比整个进程字典，因启动结果额外含auditToken字段而断言失败；最终按PID和可执行路径这两个验收字段核对一致，不将字典字段差异误报为启动失败。
+
+结论：已将四页工作台0.1.1(6)签名覆盖安装到用户iPhone16，并成功启动，旧16份导入缓存元数据保留。
+未验证：本轮不进行全面真机交互、画质/物理XDR、双指缩放等功能验收；安装与启动不能代替这些结果。
+无依赖安装、无.env变更、无Git提交/合并/推送；未改同级项目。
+知识自检：复用正式K10 v1，不建议新增入库，仅保留本次设备/签名/版本运行记录。
+重要文件：HDRImageLab.xcodeproj/project.pbxproj、README.md、docs/iphone-testing.md、docs/agent/context.md、docs/changelog.md、本任务进度与知识自检、本报告。
