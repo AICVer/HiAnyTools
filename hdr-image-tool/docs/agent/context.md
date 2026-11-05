@@ -1,6 +1,6 @@
 # 项目上下文
 
-- 当前主干整合：[进度](tasks/2026-11-05-merge-main/progress.md)、[test30](../tests/report-test30.txt)。用户明确授权提交并merge到main，范围仅hdr-image-tool，不推送。源ui-workspace/root与main起点1e12a24；目标工作区含无关修改，计划使用干净整合worktree串行no-ff合并再安全快进main，保留用户改动。源代码/正式测试与test28冻结指纹一致，不重跑无变化功能；提交/合并结果以后续本任务记录为准。
+- 主干已整合：[进度](tasks/2026-11-05-merge-main/progress.md)、[test30](../tests/report-test30.txt)。用户授权提交并merge，功能提交74cf799、no-ff合并36ec99f，main已安全快进。合并无冲突，产品/正式测试指纹与test28一致，原有主干无关修改/删除/子模块状态保留；结果文档单独提交，最新hash以main日志为准。范围仅hdr-image-tool，不推送、不改写历史或删除worktree。历史调试输出仍在原ui-workspace/root的output，正式报告已纳入主干。
 
 - 构建7真机安装完成：[test29](../tests/report-test29.txt)。用户重新连接并解锁后，现有0.1.1(7)签名/源码指纹复核通过，已覆盖更新iPhone16并激活启动PID47369，设备版本与本次安装目录进程核验一致；旧21份导入缓存相对路径/大小均保留。源码/正式测试不变，不重跑test28；本轮只证实安装启动，不替代真机手势/XDR实测。现有开发签名有效至2026-11-06 14:48北京时间。无提交/合并/推送。
 

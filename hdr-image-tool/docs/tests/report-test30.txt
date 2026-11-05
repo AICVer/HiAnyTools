@@ -1,4 +1,4 @@
-test30 — 2026-11-05 构建7主干合并（进行中）
+test30 — 2026-11-05 构建7主干合并
 
 用户明确授权提交并merge主干，不推送远程。
 初始main与ui-workspace/root均1e12a24；交付改动只在源worktree的hdr-image-tool。
@@ -7,4 +7,23 @@ main含无关未提交修改/删除及目录，已保存状态与文件摘要至
 
 预检：git diff --check通过，源/目标暂存区均为空；最终生产代码/测试与test28冻结指纹一致，test29的0.1.1(7)真机安装启动结果存在。
 本轮新执行的是Git范围、源树、合并与工作区保留核验；不冒称重新执行251项常规或6项UI测试。
-待记录：实际功能提交号、整合合并号、冲突结果、main快进及最终文档提交号。
+功能提交：74cf79999641b81c43c1f3d124a91d386177fff9。
+标题：feat(hdr-image-tool): deliver HDR workbench 0.1.1(7)；正文记录实际功能、251项常规/2跳过、6项UI、覆盖率、真机安装/21份缓存元数据和未测物理XDR，包含Task: hdr-workbench-v7。
+32个文件，均属于hdr-image-tool；output、签名/证书、图像调试数据、.env及同级项目没有进入暂存或提交。
+
+整合分支：feature/merge-hdr-v7/root；独立干净worktree从1e12a24创建。
+合并命令：git merge --no-ff ui-workspace/root -F /private/tmp/hdr-v7-merge-commit.txt。
+合并提交：36ec99ff570a42d9856252d5cf4a87983131f877，两个父提交为原main与74cf799。
+实际结果：ort合并成功，无冲突；合并树与功能提交树完全相同，不存在需求取舍或产品调整。
+随后main执行git merge --ff-only feature/merge-hdr-v7/root成功，已纳入该no-ff合并历史。
+
+本轮新核验通过：
+- 源/目标暂存范围、git diff --check、干净整合worktree检查。
+- 合并父关系、完整树与功能提交一致、改动路径仅hdr-image-tool。
+- main中的生产代码/正式测试与已验收冻结指纹一致。
+- main的原有无关status逐字一致；.DS_Store等受检文件SHA、AGENTS/根README删除状态、wechat-miniprogram状态不变；不stash或覆盖用户改动。
+- 无冲突、无产品代码变化，因此不为Git合并重复执行test28已通过的251项常规与6项UI；历史2项外部LUT缺失跳过及物理XDR/全面手势限制保留。
+
+合并后再单独提交结果文档，记录上述真实提交号；当前文档提交的hash以main最新Git日志为准，避免提交正文/文件自引用自身hash。实际完整摘要另存main的output/merge-main-20261105/summary.json。
+开发阶段历史构建/截图/签名证据仍位于.worktrees/ui-workspace/root/hdr-image-tool/output，不在Git中；正式test25-test30与源码/测试均已提交。
+无远程推送、无删除分支/worktree、无历史改写。知识自检不建议新增入库，结果留任务报告。
